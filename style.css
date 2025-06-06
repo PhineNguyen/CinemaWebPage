@@ -91,43 +91,30 @@ h2{
     padding-top: 10px;
 }
 .movie{
-    position: relative;     
-    text-align: center;
-    padding: 20px;
-    color: white;
+    display: flex;
+    justify-content: space-around; /* căn đều các phần tử con */
+    gap: 5px; /* khoảng cách giữa các phim */
     background-color: #121212;
-    display: inline-block;
 }
-.movie img{
-    border-radius: 10px;
-    overflow: hidden;
+.movie1 img, .movie2 img, .movie3 img{
     width: 200px;
-    display: block;
-    margin: 10px;
+    height: 300px;
+    border-radius: 10px;
 }
-.movie a{
-    text-decoration: none;
+.movie1 .button, .movie2 .button, .movie3 .button{
+    display: flex;
+    justify-content: center;
+    gap: 5px; /* khoảng cách giữa 2 ô */
+}
+.movie1 .button div, .movie2 .button div, .movie3 .button  div{
+    background-color: rgb(242, 193, 33);
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+.movie1 a, .movie2 a, .movie3 a{
     color: white;
-    font-weight: bold;
+    text-decoration: none;
     font-size: 12px;
 }
-.movie1{
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    display: flex;
-    gap: 10px;
-}
-.movie1 div{
-    background-color: rgb(242, 193, 33);
-    padding: 5px 10px;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-
-}
-.movie1 div:hover{
-    background-color:rgb(244, 211, 103)
-}
-
 
 
