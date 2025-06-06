@@ -1,0 +1,133 @@
+body{
+    background-color: white;
+    margin: auto;
+}
+header{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #121212;
+    gap: 10px;
+}
+header a{
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    background-color: #5a5959;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 550; /*độ đậm*/
+    transition: 0.5s; /* chuyển màu khi hover lên button */
+}
+header a:hover{ background-color: rgb(242, 193, 33);}
+nav{
+    display: flex;
+    justify-content: center;
+    background-color: #121212;
+    margin-top: 2px;
+    gap: 20px;
+}
+nav a{
+    color: white;
+    text-decoration: none;
+    padding: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    transition: 0.5s;
+}
+nav a:hover{color: rgb(242, 193, 33);}
+section{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 2px;
+  background-color: #121212;
+}
+section img{
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+section .khungtron{
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 100px;
+}
+section .khungtron div{
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  opacity: 0.5; /*chỉnh độ mờ*/
+  border-radius: 50%;
+}
+section .muitentrai, .muitenphai{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+section .muitentrai{
+    left: 10px;
+}
+section .muitenphai{
+    right: 10px;
+}
+h2{
+    color: white;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    background-color: #121212;
+    margin: auto;
+    padding-top: 10px;
+}
+.movie{
+    position: relative;     
+    text-align: center;
+    padding: 20px;
+    color: white;
+    background-color: #121212;
+    display: inline-block;
+}
+.movie img{
+    border-radius: 10px;
+    overflow: hidden;
+    width: 200px;
+    display: block;
+    margin: 10px;
+}
+.movie a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+}
+.movie1{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 10px;
+}
+.movie1 div{
+    background-color: rgb(242, 193, 33);
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+
+}
+.movie1 div:hover{
+    background-color:rgb(244, 211, 103)
+}
+
+
+
