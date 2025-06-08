@@ -1,0 +1,19 @@
+body{
+        background-color: #121212;
+    }
+    .d1{
+        background-color: blanchedalmond;
+        width: 15%;
+        height: 640px;
+        float: left;
+    }
+    ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .d2{
+        background-color: brown;
+        height: 50px;
+        text-align: right;
+    }
