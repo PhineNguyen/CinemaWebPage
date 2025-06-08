@@ -116,5 +116,18 @@ h2{
     text-decoration: none;
     font-size: 12px;
 }
-
-
+footer{
+    background-color: #121212;
+    color: white;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.f1, .f2, .f3,.f4, .f5{
+    width: 20%;
+    float: left;
+}
+footer ul, li{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
