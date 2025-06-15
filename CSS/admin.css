@@ -1,19 +1,122 @@
-body{
-        background-color: #121212;
-    }
-    .d1{
-        background-color: blanchedalmond;
-        width: 15%;
-        height: 640px;
-        float: left;
-    }
-    ul{
-        list-style: none;
+body {
+        font-family: Arial, sans-serif;
         margin: 0;
-        padding: 0;
+        background-color: #1a1a1a; 
+        color: #e0e0e0; 
+        display: flex; 
+        min-height: 100vh; 
     }
-    .d2{
-        background-color: brown;
-        height: 50px;
-        text-align: right;
+
+    /* Thanh trên cùng */
+    .header {
+        background-color: #333; 
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed; /* Giữ header cố định */
+        top: 0;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box; /* Tính cả padding vào kích thước */
+        height: 60px;
+        z-index: 100; /* Đảm bảo header nằm trên */
+    }
+
+    .header .logo img {
+        height: 35px; 
+        margin-right: 10px;
+    }
+
+    .header .admin-profile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .header .admin-profile .admin-icon {
+        background-color: #555;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Menu Dropdown Admin (Ẩn/hiện khi click) */
+    .mucluc {
+        position: absolute;
+        top: 50px;
+        right: 0;
+        width: 150px;
+        background-color: #ffc107;
+        border-radius: 5px;
+        z-index: 101; /* Nằm trên header */
+    }
+
+    .mucluc a {
+        color: black;
+        padding: 10px 15px;
+        text-decoration: none;
+        display: block;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .mucluc a:last-child {
+        border-bottom: none;
+    }
+
+    .mucluc a:hover {
+        background-color: rgba(255, 255, 255, 0.2); /* Hiệu ứng hover đơn giản */
+    }
+
+    .mucluc a i {
+        margin-right: 8px;
+    }
+
+    /* Menu bên trái */
+    .sidebar {
+        background-color: #2b2b2b; 
+        width: 200px; 
+        padding-top: 60px; 
+        position: fixed; /* Giữ sidebar cố định */
+        top: 0;
+        left: 0;
+        height: 100vh;
+        box-sizing: border-box;
+        z-index: 99; /* Đảm bảo sidebar nằm dưới header */
+    }
+
+    .sidebar-item {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        color: #e0e0e0;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar-item.active,
+    .sidebar-item:hover {
+        background-color: #ffc107; 
+        color: black; 
+    }
+
+    .sidebar-item i {
+        margin-right: 10px;
+    }
+
+    .sidebar-item span {
+        flex-grow: 1;
+    }
+    /* Main content */
+    .main-content {
+        flex-grow: 1;
+        margin-left: 200px;
+        padding: 80px 30px 30px 30px;
+        box-sizing: border-box;
     }
