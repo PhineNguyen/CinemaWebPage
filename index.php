@@ -7,30 +7,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Trang chủ</title>
-  <link rel="stylesheet" href="CSS/style.css" 
-        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" href="CSS/style.css" />
 
 </head>
 <body> 
   <header>
     <div class="logo-item">
-      <img class="logo" src="pic/logo.png" alt="logo">
+      <img class="logo" src="pic/LOGO.png" alt="logo">
     </div>
 
     <div class="header-item">
       <a href="#">Login/Sign up</a>
-      <a href="#">EN</a>
-      <a href="#">VN</a>
     </div>
   </header>
 
   <nav class="nav-item">
-    <a href="#">LỊCH CHIẾU THEO RẠP</a>
     <a href="#">PHIM</a>
-    <a href="#">RẠP</a>
+    <a href="#">RẠP CINETIX</a>
     <a href="#">GIÁ VÉ</a>
-    <a href="#">THÀNH VIÊN</a>
-    <a href="#">TIN MỚI VÀ ƯU ĐÃI</a>
+    <a href="#">LIÊN HỆ</a>
   </nav>
 
   <?php
@@ -106,12 +101,16 @@ if ($result && $result->num_rows > 0) {
     <div class="f3">
       <h3>Kết nối với chúng tôi</h3>
       <ul>
-        <li><img src="pic/facebook.png" alt="Facebook" />Facebook</li>
-        <li><img src="pic/youtube.png" alt="YouTube" />Youtube</li>
-        <li><img src="pic/twitter.png" alt="Twitter" />Twitter</li>
-        <li><img src="pic/instagram.png" alt="Instagram" />Instagram</li>
+        <li><img src="https://cdn.simpleicons.org/facebook" alt="Facebook" />Facebook</li>
+        <li><img src="https://cdn.simpleicons.org/youtube" alt="YouTube" />Youtube</li>
+        <li><img src="https://cdn.simpleicons.org/instagram" alt="Instagram" />Instagram</li>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m11.99 16.5 3.75 3.75m0 0 3.75-3.75m-3.75 3.75V3.75H4.49" />
+</svg>
+
+             <li><img src="" alt="Instagram" />Instagram</li>
       </ul>
-    </div>
+</div>
 
     <div class="f4">
       <h3>Chăm sóc khách hàng</h3>
@@ -124,12 +123,11 @@ if ($result && $result->num_rows > 0) {
 
     <div class="f5">
       <p style="font-size: large;">CÔNG TY TNHH SKIBIDI VIỆT NAM</p>
-      <img src="pic/logo.png" alt="Logo công ty" />
+      <img src="pic/LOGO.png" alt="Logo công ty" />
     </div>
   </footer>
 
    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 </body>
 </html>
