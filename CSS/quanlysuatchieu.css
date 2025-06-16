@@ -1,0 +1,77 @@
+/* Main-content */
+    .main-content {
+        flex-grow: 1;
+        margin-left: 200px;
+        padding: 80px 30px 30px 30px;
+        box-sizing: border-box;
+    }
+
+    .main-box {
+        background-color: #2e2e2e;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    /* Chức năng */
+    .actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .actions button, input{
+        border: none;
+        border-radius: 10px;
+        padding: 5px;
+    }
+    /* Bảng */
+    .movie-table {
+        background-color: #1e1e1e;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .movie-table thead {
+        background-color: #ffc107;
+        color: #000;
+    }
+
+    .movie-table th,
+    .movie-table td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #444;
+    }
+
+    .movie-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+    /* Phân trang */
+    .pagination {
+        display: flex;
+        justify-content: flex-end;
+        padding: 10px 15px;
+        border-top: 1px solid #444;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        gap: 5px;
+    }
+
+    .pagination-button {
+        background-color: #444;
+        color: white;
+        border: 1px solid #555;
+        padding: 6px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .pagination-button.active {
+        background-color: #ffc107;
+        border-color: #ffc107;
+        font-weight: bold;
+    }
+
+    .pagination-button:hover {
+        background-color:  #ffc107
+    }
