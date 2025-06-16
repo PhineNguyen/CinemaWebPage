@@ -75,7 +75,7 @@ include("connect.php");
 
   <!-- JS -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="Home.js"></script>
+  <script src="js/Home.js"></script>
 </body>
 
 </html>
