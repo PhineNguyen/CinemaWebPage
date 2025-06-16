@@ -16,7 +16,7 @@
 <script src="js/admin.js"></script>
 <script src="js/addfilm.js"></script>
 <body>
-    <div class="header"> <!--include footer here-->
+    <div class="header"> <!--include header here-->
         <div class="logo">
             <img src="pic/LOGO.png"> 
         </div>
