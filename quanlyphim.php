@@ -16,9 +16,9 @@
 <script src="js/admin.js"></script>
 <script src="js/addfilm.js"></script>
 <body>
-    <div class="header">
+    <div class="header"> <!--include footer here-->
         <div class="logo">
-            <img src="pic/logo.png"> <img src="pic/CINETIX.png" alt="CineTix Logo">
+            <img src="pic/LOGO.png"> 
         </div>
         <div class="admin-profile">
             <div class="admin-text">Admin</div>
