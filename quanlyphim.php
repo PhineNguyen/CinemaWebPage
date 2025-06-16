@@ -18,7 +18,7 @@
 <body>
     <div class="header"> <!--include header here-->
         <div class="logo">
-            <img src="pic/LOGO.png"> 
+            <img src="pic/logo.png"> <img src="pic/CINETIX.png" alt="CineTix Logo">
         </div>
         <div class="admin-profile">
             <div class="admin-text">Admin</div>
@@ -76,7 +76,7 @@
                 $limit = 5;
                 $offset = ($page - 1) * $limit;
 
-                $sql = "SELECT title, image_url, release_date, genre, director, actor, age_rating, status FROM movies LIMIT $limit OFFSET $offset";
+                $sql = "SELECT * FROM movies LIMIT $limit OFFSET $offset";
                 $result = mysqli_query($conn, $sql);
             ?>
 
@@ -189,6 +189,30 @@
         <button id="confirmDeleteBtn" class="btn-delete">Xóa</button>
         <button onclick="closeDeleteModal()" class="btn-cancel">Hủy</button>
         </div>
+    </div>
+    </div>
+
+    <!-- Form sửa phim -->
+    <div id="editFormModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditForm()">&times;</span>
+        <h2>Sửa phim</h2>
+        <form action="suaphim.php" method="POST">
+        <input type="hidden" name="id" id="edit-id">
+        <input type="text" name="title_vi" id="edit-title" placeholder="Tên phim" required>
+        <input type="text" name="image_url" id="edit-image" placeholder="Link poster" required>
+        <input type="number" name="release_date" id="edit-release" placeholder="Năm phát hành" required>
+        <input type="text" name="genre_vi" id="edit-genre" placeholder="Thể loại" required>
+        <input type="text" name="director_vi" id="edit-director" placeholder="Đạo diễn" required>
+        <input type="text" name="actor_vi" id="edit-actor" placeholder="Diễn viên" required>
+        <input type="text" name="age_rating_vi" id="edit-age" placeholder="Giới hạn độ tuổi" required>
+        <select name="status" id="edit-status">
+            <option value="Đang chiếu">Đang chiếu</option>
+            <option value="Sắp chiếu">Sắp chiếu</option>
+            <option value="Ngừng chiếu">Ngừng chiếu</option>
+        </select>
+        <button type="submit" class="btn-add">Lưu thay đổi</button>
+        </form>
     </div>
     </div>
 
