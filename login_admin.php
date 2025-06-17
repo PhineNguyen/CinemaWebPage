@@ -4,84 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin</title>
+    <link rel="stylesheet" href="CSS/login_admin.css">
 </head>
-<style>
-    body{
-        color: black;
-        font-family:Arial, Helvetica, sans-serif;
-        height: 100vh;
-        margin: 0;
-        /* khunglogin căn giữa */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .khunglogin{
-        background-color: #ffc107;
-        padding: 90px 10px;
-        width: 350px;
-        border-radius: 10px;
-    }
-    /* Khung tiêu đề nằm trên cùng */
-    .ktieude{
-        text-align: center;
-        font-size: 24px;
-        font-weight: bold;
-        margin-top: -80px;
-        margin-bottom: 25px;
-    }
-    form{
-        width: 100%;
-        text-align: center;
-    }
-    .knhap input{
-        margin-bottom: 15px;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 10px;
-        font-size: 14px;
-        width: 100%;
-        box-sizing: border-box; /*Tránh tràn width ra ngoài*/
-    }
-    .kchucnang{
-        display:flex;
-        justify-content: space-between;
-        margin-bottom: 40px;
-    }
-    .kchucnang a{
-        text-decoration: none;
-        color: black;
-    }
-    .ksubmit{
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-    }
-    .ksubmit button{
-        background-color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 5px 10px;
-        font-size: 14px;
-        cursor: pointer;
-    }
-</style>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script>
-    //khi đăng nhập chuyển sang page_admin
-    function signin(){
-        window.location.href = "admin.php";
-    }
-    //Di chuyển chuột vào sign_in
-    $(document).ready(function(){
-        $("button").mouseover(function(){ 
-            $("button").css({"background-color":"lightgrey"})
-        });
-        $("button").mouseleave(function(){ 
-            $("button").css({"color":"black", "background-color":"white"})
-        });
-    });
-</script>
 <body>
     <div class="khunglogin">
          <!--Khung tiêu đề-->
@@ -116,5 +40,7 @@
             
         </form>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/login_admin"></script>
 </body>
 </html>
