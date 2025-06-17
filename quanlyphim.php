@@ -18,7 +18,7 @@
 <body>
     <div class="header"> <!--include footer here-->
         <div class="logo">
-            <img src="pic/logo.png"> <img src="pic/CINETIX.png" alt="CineTix Logo">
+            <img src="pic/LOGO.png"> 
         </div>
         <div class="admin-profile">
             <div class="admin-text">Admin</div>
