@@ -27,7 +27,7 @@ include("connect.php");
   </nav>
 
   <?php
-  $sql = "SELECT title, image_URL FROM movies";
+  $sql = "SELECT title, image_URL, banner_url FROM movies";
   $result = mysqli_query($conn, $sql);
 
   if ($result && mysqli_num_rows($result) > 0) {
@@ -37,8 +37,12 @@ include("connect.php");
     echo '<section class="banner-slider">';
     echo '<div class="slides">';
     foreach ($movies as $movie) {
-      $image = htmlspecialchars($movie['image_URL']);
-      echo "<img src='$image' alt='Banner phim'>";
+      $banner = htmlspecialchars($movie['banner_url']);
+      echo "
+          <div class='slide-item'>
+          <img src='$banner' alt='Banner phim'>
+          </div>
+      ";
     }
     echo '</div>';
     echo '

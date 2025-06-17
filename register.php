@@ -9,6 +9,7 @@ $success = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim($_POST["name"]);
     $email = trim($_POST["email"]);
+    $phonenumber = trim($_POST["phonenumber"]);
     $password = trim($_POST["password"]);
     $confirm_password = trim($_POST["confirm_password"]);
 
@@ -27,9 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $error = "Email đã tồn tại.";
         } else {
             // Thêm tài khoản mới
-            $insertSql = "INSERT INTO users (user_name, email, pass_word) VALUES (?, ?, ?)";
+            $insertSql = "INSERT INTO users (user_name, email,phone_number, pass_word) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($insertSql);
-            $stmt->bind_param("sss", $name, $email, $password); // Gợi ý: nên mã hóa mật khẩu
+            $stmt->bind_param("ssss", $name, $email,$phonenumber, $password); // Gợi ý: nên mã hóa mật khẩu
 
             if ($stmt->execute()) {
                 $success = "Đăng ký thành công! Bạn có thể <a href='login.php' style='color: lightgreen;'>đăng nhập</a>.";
@@ -66,6 +67,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <label for="email">Email</label>
       <input type="email" id="email" name="email" required>
+
+      <label for="phonenumber">Số điện thoại</label>
+      <input type="text" id ="phonenumber" name="phonenumber" required>
 
       <label for="password">Mật khẩu</label>
       <input type="password" id="password" name="password" required>

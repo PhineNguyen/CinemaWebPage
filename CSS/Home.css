@@ -1,116 +1,17 @@
-/*Biến toàn cục CSS*/
 :root {
-  --bg-dark: #292929; /*Màu nền chính của web*/
-  --bg-footer: #222; /*Màu nền cho footer*/
-  --highlight: #EBB802; /*Màu vàng của button và đường kẻ*/
-  --text-light: white; /*Màu chữ sáng*/
-  --poster-hover-opacity: 0.3; /*Độ mờ khi di chuột vào*/
-  --scrollbar-thumb: rgba(255, 255, 255, 0.2); /*Màu thanh cuộn ngang*/
+  --bg-dark: #292929;
+  --bg-footer: #222;
+  --highlight: #EBB802;
+  --text-light: white;
+  --poster-hover-opacity: 0.3;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.2);
 }
-/*cài đặt chung cho body*/
+
 body {
   background-color: var(--bg-dark);
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-}
-
-/* Header và thanh điều hướng  */
-header, nav {
-  background-color: var(--bg-dark);
-  padding: 10px 20px;
-}
-
-.logo {
-  display: flex;
-  justify-content: left;
-  width: 250px;
-}
-/*nút đăng nhập, đăng ký*/
-.header-item {
-  display: flex;
-  justify-content: right;
-  gap: 20px;
-}
-/*toàn bộ header: logo+ đăng nhập*/
-.header-container { /*căn chỉnh dòng logo và login*/
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-}
-
-/* Menu ngang chưa các mục như phim, rap,... */
-.nav-item {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  padding: 0px;
-  background-color: var(--bg-dark);
-  flex-wrap: wrap;
-  border-top: solid 1px var(--text-light);
-  border-bottom: solid 1px var(--text-light);
-}
-/*Các liên kết trong menu nav*/
-.nav-item a {
-  text-decoration: none;
-  color: var(--text-light);
-  padding: 10px 15px;
-  position: relative;
-  display: inline-block;
-  font-weight: bold;
-}
-/*tạo hiệu ứng highlight dưới link khi active hoặc hover*/
-.nav-item a.active::after,
-.nav-item a:hover::after,
-.nav-item a:focus::after {
-  content: "";
-  position: absolute;
-  bottom:0;
-  left: 15px;
-  right: 15px;
-  height: 5px;
-  background-color: var(--highlight);
-  border-radius: 2px;
-}
-
-/* Bọc nút "Đăng nhập", "Đăng ký" */
-.button-group {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  padding: 10px;
-  border-radius: 50px;
-  flex-wrap: wrap;
-}
-/*Giao diện cho từng nút*/
-.button-group a {
-  text-decoration: none;
-  padding: 20px 20px;
-  background-color: var(--highlight);
-  color: black;
-  font-weight: bold;
-  transition: all 0.2s ease;
-  border: none;
-  display: inline-block;
-  white-space: nowrap;
-}
-/*nút đầu tiên*/
-.button-group a:first-child {
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
-}
-/*nút cuối*/
-.button-group a:last-child {
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
-  background-color: var(--bg-dark);
-  color: var(--text-light);
-}
-/*hiệu ứng khi nhấn nút*/
-.button-group a:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* hero-banner */
@@ -126,7 +27,7 @@ section {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   margin: 5px auto;
 }
-/*banner trong section*/
+
 section img {
   width: 100%;
   height: 100%;
@@ -183,14 +84,15 @@ section img {
   box-shadow: 0 3px var(--text-light);
   max-width: 350px;
 }
-/*Danh sách phim*/
-/* Phần chọn phim */
+
+/* Chọn phim */
 h2 {
   color: var(--text-light);
   text-align: center;
   margin-top: 20px;
 }
-/*container chứa poster các phim */
+
+/* Container chứa poster */
 .movie {
   display: flex;
   flex-wrap: nowrap;
@@ -202,7 +104,7 @@ h2 {
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) transparent;
 }
-/*Cấu hính scrollbar cho trình duyệt*/
+
 .movie::-webkit-scrollbar {
   height: 6px;
 }
@@ -215,7 +117,7 @@ h2 {
 .movie::-webkit-scrollbar-track {
   background: transparent;
 }
-/*từng item phim*/
+
 .movie-item {
   position: relative;
   width: 200px;
@@ -227,18 +129,18 @@ h2 {
   overflow: hidden;
   flex-shrink: 0;
 }
-/*ảnh poster*/
+
 .poster-img img {
   width: 100%;
   height: 275px;
   border-radius: 8px;
   transition: opacity 0.3s ease;
 }
-/*Làm mờ ảnh*/
+
 .movie-item:hover .poster-img img {
   opacity: var(--poster-hover-opacity);
 }
-/*nút hiển thị khi hover*/
+
 .button {
   position: absolute;
   top: 50%;
@@ -255,7 +157,7 @@ h2 {
   opacity: 1;
   pointer-events: auto;
 }
-/*nút chi tiết và đặt vé*/
+
 .button a {
   flex: 1;
   text-align: center;
@@ -308,6 +210,7 @@ footer img {
   height: 30px;
   margin-right: 5px;
 }
+
 /*Tên công ty và logo*/
 .company-name {
   font-size: large;
@@ -320,7 +223,8 @@ footer img {
   max-width: 250px;
   height: auto;
 }
-/*Hiệu ứng trượt cho banner*/
+
+/* Hiệu ứng trượt banner */
 .banner-slider {
   position: relative;
   width: 900px;
@@ -330,7 +234,7 @@ footer img {
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-/*Khối chứa nhiều ảnh slide*/
+
 .slides {
   display: flex;
   width: 100%;
@@ -345,7 +249,7 @@ footer img {
   flex-shrink: 0;
 }
 
-/* hỗ trợ giao diện nhỏ */
+/* Responsive nhỏ */
 @media (max-width: 768px) {
   .movie {
     flex-direction: column;
@@ -359,13 +263,5 @@ footer img {
 
   .muitentrai, .muitenphai {
     display: none;
-  }
-
-  .nav-item {
-    gap: 20px;
-  }
-
-  .button-group {
-    justify-content: center;
   }
 }

@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Kiểm tra mật khẩu (có thể dùng password_verify nếu có hash)
         if ($password === $user['pass_word']) {
             $_SESSION["user"] = $user;
-            header("Location: index.php");
+            header("Location: Home.php");
             exit();
         } else {
             $error = "Mật khẩu không đúng.";
