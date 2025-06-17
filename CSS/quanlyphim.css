@@ -1,4 +1,4 @@
-/* Main-content */
+  /* Main-content */
     .main-content {
         flex-grow: 1;
         margin-left: 200px;
@@ -86,79 +86,79 @@
 
     /* addfilm */
     .modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color:black;
-}
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color:black;
+    }
 
-.modal-content {
-  margin: auto;
-  padding: 20px;
-  width: 50%;
-  background: black;
-  color: #ffc107;
-  border-radius: 8px;
-  position: relative;
-}
+  .modal-content {
+    margin: auto;
+    padding: 20px;
+    width: 50%;
+    background: black;
+    color: #ffc107;
+    border-radius: 8px;
+    position: relative;
+  }
 
-.modal-content input {
+  .modal-content input {
   width: 100%;
   padding: 10px;
   margin: 6px 0;
-}
+  }
 
-.modal-content .btn-add {
+  .modal-content .btn-add {
   padding: 10px 20px;
   background-color: #ffc107;
   color: white;
   border: none;
   border-radius: 5px;
-}
+  }
 
-.modal-content label[for="status"] {
+  .modal-content label[for="status"] {
   color: black;
   display: flex;
   justify-content: left;
   margin-top: 10px;
   font-weight: bold;
-}
+  }
 
 
-.modal-content select {
+  .modal-content select {
   width: 100%;
   padding: 10px;
   margin: 6px 0;
   border-radius: 4px;
-}
+  }
 
-.close {
+  .close {
   position: absolute;
   top: 10px;
   right: 20px;
   font-size: 24px;
   cursor: pointer;
-}
+  }
 
 
 
-/* deletect */
-.modal {
+  /* deletect */
+  .modal {
   display: none;
   position: fixed;
   z-index: 1000;
   left: 0; top: 0;
   width: 100%; height: 100%;
   background-color: rgba(0,0,0,0.4);
-}
+  }
 
-.modal-content {
+  .modal-content {
   background-color: #fff;
   margin: 10% auto;
   padding: 20px;
@@ -167,29 +167,25 @@
   text-align: center;
   max-height: 80vh;        /* Giới hạn chiều cao modal */
   overflow-y: auto;
-}
+  }
 
-.modal-buttons {
+  .modal-buttons {
   margin-top: 20px;
-}
+  }
 
-.modal-buttons button {
+  .modal-buttons button {
   padding: 10px 20px;
   margin: 0 10px;
-}
+  }
 
-.btn-delete {
+  .btn-delete {
   background-color: red;
   color: white;
   border: none;
-}
+  }
 
-.btn-cancel {
+  .btn-cancel {
   background-color: gray;
   color: white;
   border: none;
 }
-
-/* Sửa film */
-
-

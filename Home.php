@@ -1,66 +1,63 @@
 <?php
-  include("connect.php");
+session_start();
+include("connect.php");
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trang chủ</title>
-  <link rel="stylesheet" href="CSS/style.css" />
 
+  <!-- CSS -->
+  <link rel="stylesheet" href="CSS/Home.css" />
 </head>
-<body> 
-  <header>
-    <div class="logo-item">
-      <img class="logo" src="pic/LOGO.png" alt="logo">
-    </div>
 
-    <div class="header-item">
-      <a href="#">Login/Sign up</a>
-    </div>
-  </header>
+<body>
+  <?php include("header.php"); ?>
 
+  <!-- Menu điều hướng -->
   <nav class="nav-item">
-    <a href="#">PHIM</a>
+    <a href="#" class="active">PHIM</a>
     <a href="#">RẠP CINETIX</a>
     <a href="#">GIÁ VÉ</a>
     <a href="#">LIÊN HỆ</a>
   </nav>
 
   <?php
-$sql = "SELECT image_URL FROM movies";
-$result = mysqli_query($conn, $sql);
+  $sql = "SELECT title, image_URL FROM movies";
+  $result = mysqli_query($conn, $sql);
 
-if ($result && $result->num_rows > 0) {
-  echo '<section>';
-  echo '<div class="slider">';
+  if ($result && mysqli_num_rows($result) > 0) {
+    $movies = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-  while ($row = mysqli_fetch_assoc($result)) {
-    echo '<div><img src="' . $row['image_URL'] . '" alt="Banner phim" /></div>';
-  }
+    // Banner Slider
+    echo '<section class="banner-slider">';
+    echo '<div class="slides">';
+    foreach ($movies as $movie) {
+      $image = htmlspecialchars($movie['image_URL']);
+      echo "<img src='$image' alt='Banner phim'>";
+    }
+    echo '</div>';
+    echo '
+      <button class="muitentrai" onclick="prevSlide()">&#10094;</button>
+      <button class="muitenphai" onclick="nextSlide()">&#10095;</button>
+    ';
+    echo '</section>';
 
-  echo '</div>';
-  echo '
-    <div class="muitentrai">&#10094;</div>
-    <div class="muitenphai">&#10095;</div>
-  ';
-  echo '</section>';
-}
-?>
-
-
-  <h2>MOVIE SELECTION</h2>
-
-  <?php
-  $sql = "SELECT title_vi, image_URL FROM movies LIMIT 3";
-  $result = $conn->query($sql);
-  if ($result->num_rows > 0) {
+    // Movie Poster
+    echo '<div class="double-line-heading"><span>MOVIE SELECTION</span></div>';
     echo '<div class="movie">';
-    while ($row = $result->fetch_assoc()) {
+    foreach ($movies as $movie) {
+      $title = htmlspecialchars($movie['title']);
+      $image = htmlspecialchars($movie['image_URL']);
       echo <<<HTML
       <div class="movie-item">
-        <img src="{$row['image_URL']}" alt="poster film {$row['title_vi']}" />
+        <div class="poster-img">
+          <img src="$image" alt="Poster phim $title" />
+        </div>
         <div class="button">
           <div><a href="#">XEM CHI TIẾT</a></div>
           <div><a href="#">ĐẶT VÉ</a></div>
@@ -70,64 +67,15 @@ if ($result && $result->num_rows > 0) {
     }
     echo '</div>';
   } else {
-    echo "Không có phim nào.";
+    echo "<p style='text-align:center; color:white;'>Không có phim nào để hiển thị.</p>";
   }
   ?>
 
-  <footer>
-    <div class="f1">
-      <h3>Skibidi Việt Nam</h3>
-      <ul>
-        <li>Giới thiệu</li>
-        <li>Tiện ích Online</li>
-        <li>Thẻ quà tặng</li>
-        <li>Tuyển dụng</li>
-        <li>Liên hệ quảng cáo</li>
-        <li>Dành cho đối tác</li>
-      </ul>
-    </div>
+  <?php include("footer.php"); ?>
 
-    <div class="f2">
-      <h3>Điều khoản sử dụng</h3>
-      <ul>
-        <li>Điều khoản chung</li>
-        <li>Điều khoản giao dịch</li>
-        <li>Chính sách thanh toán</li>
-        <li>Chính sách bảo mật</li>
-        <li>Câu hỏi thường gặp</li>
-      </ul>
-    </div>
-
-    <div class="f3">
-      <h3>Kết nối với chúng tôi</h3>
-      <ul>
-        <li><img src="https://cdn.simpleicons.org/facebook" alt="Facebook" />Facebook</li>
-        <li><img src="https://cdn.simpleicons.org/youtube" alt="YouTube" />Youtube</li>
-        <li><img src="https://cdn.simpleicons.org/instagram" alt="Instagram" />Instagram</li>
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m11.99 16.5 3.75 3.75m0 0 3.75-3.75m-3.75 3.75V3.75H4.49" />
-</svg>
-
-             <li><img src="" alt="Instagram" />Instagram</li>
-      </ul>
-</div>
-
-    <div class="f4">
-      <h3>Chăm sóc khách hàng</h3>
-      <ul>
-        <li>Hotline: 1900 1357</li>
-        <li>Giờ làm việc: 8:00 - 22:00</li>
-        <li>Email hỗ trợ: hoidap@skibidi.vn</li>
-      </ul>
-    </div>
-
-    <div class="f5">
-      <p style="font-size: large;">CÔNG TY TNHH SKIBIDI VIỆT NAM</p>
-      <img src="pic/LOGO.png" alt="Logo công ty" />
-    </div>
-  </footer>
-
-   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/Home.js"></script>
 </body>
+
 </html>
