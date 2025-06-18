@@ -23,6 +23,7 @@ CREATE TABLE movies (
     release_date DATE,
     lgs VARCHAR(50),
     age_rating VARCHAR(255),
+    banner_url VARCHAR(255),
     image_url VARCHAR(255),
     trailer_url VARCHAR(255),
     status ENUM('Sắp chiếu', 'Đang chiếu','Ngừng chiếu','Đang cập nhật','Tạm ẩn','Lưu trữ') default 'Đang chiếu'

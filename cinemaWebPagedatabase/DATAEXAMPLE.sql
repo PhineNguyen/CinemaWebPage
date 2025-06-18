@@ -17,7 +17,7 @@ INSERT INTO movies (
     descript,genre, 
     director,actor, 
     duration, release_date, 
-    lgs,age_rating,status,
+    lgs,age_rating,status,banner_url,
     image_url, trailer_url
 ) VALUES
 (
@@ -30,7 +30,7 @@ INSERT INTO movies (
     125, '2025-06-06',
     'Tiếng Anh – Phụ đề Tiếng Việt',
     'T18 - Phim được phổ biến đến người xem từ đủ 18 tuổi trở lên (18+)', 
-    'Đang chiếu',
+    'Đang chiếu','https://i.postimg.cc/ryn0bJND/cover.jpg',
     'https://image.tmdb.org/t/p/w500/2VUmvqsHb6cEtdfscEA6fqqVzLg.jpg', 
     'https://www.youtube.com/watch?v=P_urL6YPSvs'
 ),
@@ -44,7 +44,7 @@ INSERT INTO movies (
     119, '2025-07-13',
     'Tiếng Hàn – Phụ đề Tiếng Việt và Lồng Tiếng',
     'T16 - Phim được phổ biến đến người xem từ đủ 16 tuổi trở lên (16+)', 
-    'Sắp chiếu',
+    'Sắp chiếu','https://i.postimg.cc/Y25khLpX/hi5-750-1747888779482.jpg',
     'https://image.tmdb.org/t/p/w500/3vRgeb0cARTebM8cbDXogGhOyit.jpg', 
     'https://www.youtube.com/watch?v=QLv_ARaBAH4'
 ),
@@ -58,7 +58,7 @@ INSERT INTO movies (
     107, '2025-05-23',
     'Tiếng Anh - Phụ đề Tiếng Việt; Lồng tiếng Việt',
     'P - Phim được phép phổ biến đến người xem ở mọi độ tuổi.', 
-    'Ngừng chiếu',
+    'Ngừng chiếu','https://i.postimg.cc/MTBBm8V1/banner-Stich.png',
     'https://image.tmdb.org/t/p/w500/Y6pjszkKQUZ5uBbiGg7KWiCksJ.jpg', 
     'https://www.youtube.com/watch?v=ePezbqx6VqU'
 ),
@@ -72,7 +72,7 @@ INSERT INTO movies (
     98, '2025-06-06',
     'Tiếng Việt và phụ đề tiếng Anh',
     'T18 - Phim được phổ biến đến người xem từ đủ 18 tuổi trở lên (18+)',
-    'Đang chiếu',
+    'Đang chiếu','https://i.postimg.cc/63n18q6Z/hq720.jpg',
     'https://image.tmdb.org/t/p/w500/tN3WWhiklSI8NErftXqyfkR9GJ.jpg', 
     'https://www.youtube.com/watch?v=N7IcsG_hM4s'
 ),
@@ -86,7 +86,7 @@ INSERT INTO movies (
     169, '2025-07-30',
     'Tiếng Anh - Phụ đề Tiếng Việt, tiếng Hàn',
     'T16 - Phim được phổ biến đến người xem từ đủ 16 tuổi trở lên (16+)', 
-    'Sắp chiếu',
+    'Sắp chiếu',' https://i.postimg.cc/636xxCf3/mi8-poster-1800x1200.jpg',
     'https://image.tmdb.org/t/p/w500/geEjCGfdmRAA1skBPwojcdvnZ8A.jpg', 
     'https://www.youtube.com/watch?v=K5PP7igejMU'
 ),
@@ -100,7 +100,7 @@ INSERT INTO movies (
     101, '2025-06-06',
     'Tiếng Indonesia - Phụ đề Tiếng Anh và Tiếng Việt',
     'T16 - Phim được phổ biến đến người xem từ đủ 16 tuổi trở lên (16+)', 
-    'Đang chiếu',
+    'Đang chiếu','https://i.postimg.cc/hPNnQzcy/2048wx858h-32.jpg',
     'https://image.tmdb.org/t/p/w500/1RjwK6xD5SDo79GZJRHxiDvKI8U.jpg', 
     'https://www.youtube.com/watch?v=paQM8Lz7BRQ'
 ),
@@ -114,7 +114,7 @@ INSERT INTO movies (
     138, '2025-05-21',
     'Tiếng Anh',
     'T18 - Phim được phổ biến đến người xem từ đủ 18 tuổi trở lên (18+)',
-    'Ngừng chiếu',
+    'Ngừng chiếu','https://i.postimg.cc/nz0Pt53j/toi-do-750-1742267857580.jpg',
     'https://image.tmdb.org/t/p/w500/jYfMTSiFFK7ffbY2lay4zyvTkEk.jpg', 
     'https://www.youtube.com/watch?v=cDnngg3MTio'
 );
