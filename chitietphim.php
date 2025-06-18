@@ -5,23 +5,40 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>CINETIX | Doraemon Movie</title>
+  <title>Chi tiết phim</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="CSS/chitietphim.css">
+  <link rel="stylesheet" href="CSS/Home.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 </head>
 <body>
 <!-- header -->
-<header>
-  <div class="logo">🎬 CINET<span style="color:#fff;">IX</span></div>
-  <div class="nav">
-    <a href="#">Phim</a>
-    <a href="#">Rạp Cinetix</a>
-    <a href="#">Giá vé</a>
-    <a href="#">Liên hệ</a>
-    
-    <button class="btn-login">Đăng nhập</button>
-  </div>
-</header>
+<header class="header-container">
+    <div class="logo-item">
+      <img class="logo" src="pic/LOGO.png" alt="logo">
+    </div>
+
+    <?php
+    if (isset($_SESSION['user'])) {
+      echo '
+          <div class="admin-profile">
+              <div class="admin-text">' . $_SESSION['user'] . '</div>
+              <div class="admin-icon"><i class="fa-solid fa-user"></i></div>
+              <div class="mucluc">
+                  <a href="infor_admin.php"><i class="fa-solid fa-circle-user"></i> Tài khoản</a>
+                  <a href="#"><i class="fa-solid fa-gear"></i> Cài đặt</a>
+                  <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+              </div>
+          </div>';
+    } else {
+      echo '
+          <div class="button-group">
+              <a href="login.php">Đăng nhập</a>
+              <a href="register.php">Đăng ký</a>
+          </div>';
+    }
+    ?>
+  </header>
 <!-- đường dẫn các trang -->
 <div class="breadcrumb">
   <a href="#"></a>
@@ -38,7 +55,7 @@
     <div class="movie-info">
         <img src="<?php echo $phim['image_url']; ?>" alt="Poster <?php echo $phim['title']; ?>">
         <div class="movie-detail">
-            <h2><?php echo strtoupper($phim['title']); ?></h2>
+            <h3 style="color: #ffc107;"><?php echo strtoupper($phim['title']); ?></h3>
             <p><strong>Đạo diễn:</strong> <?php echo $phim['director']; ?></p>
             <p><strong>Diễn viên:</strong> <?php echo $phim['actor']; ?></p>
             <p><strong>Thể loại:</strong> <?php echo $phim['genre']; ?></p>
@@ -49,7 +66,7 @@
             <button class="btn-buy">🎟 Mua vé</button>
         </div>
     </div>
-  <div class="movie-detail h2">Giới Thiệu</div>
+  <div class="movie-detail">Giới Thiệu</div>
   <div class="movie-detail">
       <p><?php echo $phim['descript'];?></p>
   </div>
@@ -79,44 +96,52 @@
 
 <!-- footer -->
 <footer>
-  <div class="footer-grid">
-    <div class="footer-col">
-      <h4>CINETIX Việt Nam</h4>
+    <div class="f1">
+      <h3>CINETIX Việt Nam</h3>
       <ul>
         <li>Giới thiệu</li>
-        <li>Điều khoản</li>
-        <li>Chính sách</li>
+        <li>Tiện ích Online</li>
+        <li>Thẻ quà tặng</li>
+        <li>Tuyển dụng</li>
+        <li>Liên hệ quảng cáo</li>
+        <li>Dành cho đối tác</li>
       </ul>
     </div>
-    <div class="footer-col">
-      <h4>Hỗ trợ</h4>
+
+    <div class="f2">
+      <h3>Điều khoản sử dụng</h3>
       <ul>
-        <li>Hướng dẫn đặt vé</li>
-        <li>FAQs</li>
-        <li>Liên hệ</li>
+        <li>Điều khoản chung</li>
+        <li>Điều khoản giao dịch</li>
+        <li>Chính sách thanh toán</li>
+        <li>Chính sách bảo mật</li>
+        <li>Câu hỏi thường gặp</li>
       </ul>
     </div>
-    <div class="footer-col">
-      <h4>Theo dõi chúng tôi</h4>
+
+    <div class="f3">
+      <h3>Kết nối với chúng tôi</h3>
       <ul>
-        <li><i class="fab fa-facebook"></i> Facebook</li>
-        <li><i class="fab fa-instagram"></i> Instagram</li>
-        <li><i class="fab fa-youtube"></i> YouTube</li>
+        <li><img src="https://cdn.simpleicons.org/facebook" alt="Facebook" />Facebook</li>
+        <li><img src="https://cdn.simpleicons.org/youtube" alt="YouTube" />Youtube</li>
+        <li><img src="https://cdn.simpleicons.org/instagram" alt="Instagram" />Instagram</li>
       </ul>
     </div>
-    <div class="footer-col">
-      <h4>Chi nhánh</h4>
+
+    <div class="f4">
+      <h3>Chăm sóc khách hàng</h3>
       <ul>
-        <li>Hà Nội</li>
-        <li>TP. HCM</li>
-        <li>Đà Nẵng</li>
+        <li>Hotline: 1900 1357</li>
+        <li>Giờ làm việc: 8:00 - 22:00(Tất cả các ngày bao gồm bao gồm cả lễ Tết)</li>
+        <li>Email hỗ trợ: hoidap@cinetix.vn</li>
       </ul>
     </div>
-  </div>
-  <div class="footer-bottom">
-    © 2025 Công Ty TNHH CINETIX VIỆT NAM
-  </div>
-</footer>
+
+    <div class="f5">
+      <p class="company-name">CÔNG TY TNHH CINETIX VIỆT NAM</p>
+      <img class="company-logo" src="pic/LOGO.png" alt="Logo company" />
+    </div>
+  </footer>
 
 </body>
 </html>

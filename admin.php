@@ -1,6 +1,17 @@
 <?php
     include("connect.php");
 ?>
+<?php
+session_start();
+
+// Kiểm tra xem người dùng đã đăng nhập và có phải admin không
+if (!isset($_SESSION['user_name']) || $_SESSION['ro_lo'] !== 'admin') {
+    header("Location: login_admin.php");
+    exit();
+}
+
+$adminName = $_SESSION['user_name']; // hoặc $_SESSION['full_name'] nếu có
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,16 +26,17 @@
 <body>
     <div class="header">
         <div class="logo">
-            <img src="pic/logo.png"> <img src="pic/CINETIX.png" alt="CineTix Logo">
+            <img src="pic/logo.png" alt="CineTix Logo">
         </div>
         <div class="admin-profile">
-            <div class="admin-text">Admin</div>
+            <div class="admin-text">
+                <?= htmlspecialchars($adminName) ?> <!-- Hiển thị tên admin -->
+            </div>
             <div class="admin-icon">
                 <i class="fa-solid fa-user"></i>
             </div>
             <div class="mucluc">
-                <a href="infor_admin.php"><i class="fa-solid fa-circle-user"></i> Tài khoản</a>
-                <a href="#"><i class="fa-solid fa-gear"></i> Cài đặt</a>
+                <a href="admin_prof.php"><i class="fa-solid fa-circle-user"></i> Tài khoản</a>
                 <a href="login_admin.php"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
             </div>
         </div>
