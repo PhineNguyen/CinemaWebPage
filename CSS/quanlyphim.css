@@ -22,6 +22,10 @@
     .actions button{
         cursor: pointer;
     }
+    .button-hover {
+    background-color: #ffc107;
+    color: white;
+    }
     .actions button, input{
         border: none;
         border-radius: 10px;
@@ -98,53 +102,53 @@
       background-color:black;
     }
 
-    .modal-content {
-        margin: auto;
-        padding: 20px;
-        width: 50%;
-        background: black;
-        color: #ffc107;
-        border-radius: 8px;
-        position: relative;
-    }
+  .modal-content {
+    margin: auto;
+    padding: 20px;
+    width: 50%;
+    background: black;
+    color: #ffc107;
+    border-radius: 8px;
+    position: relative;
+  }
 
-    .modal-content input {
-    width: 100%;
-    padding: 10px;
-    margin: 6px 0;
-    }
+  .modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  }
 
-    .modal-content .btn-add {
-    padding: 10px 20px;
-    background-color: #ffc107;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    }
+  .modal-content .btn-add {
+  padding: 10px 20px;
+  background-color: #ffc107;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  }
 
-    .modal-content label[for="status"] {
-    color: black;
-    display: flex;
-    justify-content: left;
-    margin-top: 10px;
-    font-weight: bold;
-    }
+  .modal-content label[for="status"] {
+  color: black;
+  display: flex;
+  justify-content: left;
+  margin-top: 10px;
+  font-weight: bold;
+  }
 
 
-    .modal-content select {
-    width: 100%;
-    padding: 10px;
-    margin: 6px 0;
-    border-radius: 4px;
-    }
+  .modal-content select {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 4px;
+  }
 
-    .close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 24px;
-    cursor: pointer;
-    }
+  .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  }
 
 
 
@@ -158,16 +162,16 @@
     background-color: rgba(0,0,0,0.4);
     }
 
-    .modal-content {
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 8px;
-    width: 400px;
-    text-align: center;
-    max-height: 80vh;        /* Giới hạn chiều cao modal */
-    overflow-y: auto;
-    }
+  .modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  text-align: center;
+  max-height: 80vh;        /* Giới hạn chiều cao modal */
+  overflow-y: auto;
+  }
 
     .modal-buttons {
     margin-top: 20px;
@@ -178,14 +182,14 @@
     margin: 0 10px;
     }
 
-    .btn-delete {
-    background-color: red;
-    color: white;
-    border: none;
-    }
+  .btn-delete {
+  background-color: red;
+  color: white;
+  border: none;
+  }
 
-    .btn-cancel {
-    background-color: gray;
-    color: white;
-    border: none;
-    }
+  .btn-cancel {
+  background-color: gray;
+  color: white;
+  border: none;
+}

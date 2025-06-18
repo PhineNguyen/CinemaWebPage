@@ -1,3 +1,25 @@
+<?php
+include("connect.php");
+?>
+<?php
+session_start(); // Bắt đầu session
+
+// Kiểm tra nếu chưa đăng nhập thì chuyển hướng về trang đăng nhập
+if (!isset($_SESSION["user_name"])) {
+    header("Location: login_admin.php");
+    exit();
+}
+
+$_SESSION["last_login"] = date("d/m/Y - H:i");
+
+// Gán biến từ session (bạn phải chắc rằng các session này đã được gán sau khi đăng nhập)
+$user_name = $_SESSION["user_name"];
+$email = $_SESSION["email"];
+$phone_number = $_SESSION["phone_number"];
+$ro_lo = $_SESSION['ro_lo']; 
+$last_login = $_SESSION["last_login"];
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -96,26 +118,26 @@
 
 <div class="container">
   <div class="profile-header">
-    <img src="pic/z6593189037306_1068714c0926dad7b84ea3ae679570c5.jpg" alt="Avatar Admin">
-    <div class="name">Nguyễn Văn Quản Trị</div>
+    <img src="pic/avatar_default.png" alt="Avatar Admin">
+    <div class="name"><?= htmlspecialchars($user_name) ?></div>
   </div>
 
   <div class="info-group">
     <div class="info-box">
       <label><i class="fa-solid fa-user"></i> Tên đăng nhập:</label>
-      <span>admin</span>
+      <span><?= htmlspecialchars($user_name) ?></span>
     </div>
     <div class="info-box">
       <label><i class="fa-solid fa-envelope"></i> Email:</label>
-      <span>admin@cinetix.vn</span>
+      <span><?= htmlspecialchars($email) ?></span>
     </div>
     <div class="info-box">
       <label><i class="fa-solid fa-phone"></i> Số điện thoại:</label>
-      <span>0123 456 789</span>
+      <span><?= htmlspecialchars($phone_number) ?></span>
     </div>
     <div class="info-box">
       <label><i class="fa-solid fa-user-shield"></i> Vai trò:</label>
-      <span>Quản trị viên</span>
+      <span><?= htmlspecialchars($ro_lo) ?></span>
     </div>
     <div class="info-box">
       <label><i class="fa-solid fa-toggle-on"></i> Trạng thái:</label>
@@ -123,7 +145,7 @@
     </div>
     <div class="info-box">
       <label><i class="fa-solid fa-clock-rotate-left"></i> Đăng nhập gần nhất:</label>
-      <span>15/06/2025 - 17:04</span>
+      <span><?= htmlspecialchars($last_login) ?></span>
     </div>
   </div>
 
