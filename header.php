@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="vi">
-
+    
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trang chủ</title>
 <!--CSS-->
   <link rel="stylesheet" href="CSS/header.css" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 </head>
+
   <header class="header-container">
     <div class="logo-item">
-      <img class="logo" src="pic/LOGO.png" alt="logo">
+      <a href="Home.php">
+      <img class="logo active_page" src="pic/LOGO.png" alt="logo">
+      </a>
     </div>
-
+ 
    <?php
     if (isset($_SESSION['user'])) {
       $username = htmlspecialchars($_SESSION['user']['user_name']);
@@ -37,7 +39,9 @@
             <a href="register.php">Đăng ký</a>
         </div>';
     }
+ 
   ?>
   <script src="js/header.js"></script>
   </header>
 
+  <div class="separator-line"></div>

@@ -1,6 +1,7 @@
 <?php
-session_start();
-include("connect.php");
+    session_start();
+    include("connect.php");
+    include("header.php");
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -16,7 +17,7 @@ include("connect.php");
 </head>
 
 <body>
-  <?php include("header.php"); ?>
+ 
 
   <!-- Menu điều hướng -->
   <nav class="nav-item">
@@ -75,7 +76,7 @@ include("connect.php");
   }
   ?>
 
-  <?php include("footer.php"); ?>
+
 
   <!-- JS -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -83,3 +84,4 @@ include("connect.php");
 </body>
 
 </html>
+  <?php include("footer.php"); ?>
