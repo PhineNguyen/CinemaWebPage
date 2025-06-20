@@ -115,7 +115,7 @@ $adminName = $_SESSION['user_name']; // hoặc $_SESSION['full_name'] nếu có
                 if ($result && mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
-                        echo "<td><input type='checkbox' class='movie-checkbox'></td>";
+                        echo "<td><input type='checkbox' class='movie-checkbox' data-id='{$row['id']}'></td>";
                         echo "<td>" . htmlspecialchars($row['title']) . "</td>";
                         echo "<td><img src='" . htmlspecialchars($row['image_url']) . "' width='100' height='150'></td>";
                         echo "<td>" . htmlspecialchars($row['release_date']) . "</td>";
@@ -185,22 +185,15 @@ $adminName = $_SESSION['user_name']; // hoặc $_SESSION['full_name'] nếu có
             <div class="modal-content" style="background-color: black;">
                 <span class="close" onclick="closeAddForm()">&times;</span>
                 <h2>Thêm phim mới</h2>
-                <form action="themphim.php" method="POST">
-                <input type="text" name="title_vi" placeholder="Tên phim" required>
+                <form id="addfilm" action="addfilm.php" method="POST">
+                <input type="text" name="title" placeholder="Tên phim" required>
                 <input type="url" name="image_url" placeholder="Link poster" required>
                 <input type="date" name="release_date" placeholder="Năm phát hành" required>
-                <input type="text" name="genre_vi" placeholder="Thể loại" required>
-                <input type="text" name="director_vi" placeholder="Đạo diễn" required>
-                <input type="text" name="actor_vi" placeholder="Diễn viên" required>
-                <input type="text" name="age_rating_vi" placeholder="Giới hạn độ tuổi" required>
-                <!-- Select trạng thái phim -->
-                <label for="status" class="status">Trạng thái phim:</label>
-                <select name="status" required>
-                    <option value="">-- Chọn trạng thái --</option>
-                    <option value="dang_chieu">Đang chiếu</option>
-                    <option value="sap_chieu">Sắp chiếu</option>
-                    <option value="ngung_chieu">Ngừng chiếu</option>
-                </select>
+                <input type="text" name="genre" placeholder="Thể loại" required>
+                <input type="text" name="director" placeholder="Đạo diễn" required>
+                <input type="text" name="actor" placeholder="Diễn viên" required>
+                <input type="text" name="age_rating" placeholder="Giới hạn độ tuổi" required>
+                <input type="text" name="status" placeholder="Trạng thái phim" required>
                 <br/>
                 <button type="submit" class="btn-add">Thêm</button>
                 </form>
@@ -209,18 +202,19 @@ $adminName = $_SESSION['user_name']; // hoặc $_SESSION['full_name'] nếu có
 
     </div>
 
-    <!-- Modal xác nhận xóa -->
+    <!-- khung xóa film -->
     <div id="deleteConfirmModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeDeleteModal()">&times;</span>
-        <h2>Xác nhận xóa</h2>
-        <p>Bạn có chắc chắn muốn xóa các phim đã chọn không?</p>
-        <div class="modal-buttons">
-        <button id="confirmDeleteBtn" class="btn-delete">Xóa</button>
-        <button onclick="closeDeleteModal()" class="btn-cancel">Hủy</button>
+        <div class="modal-content">
+            <span class="close" onclick="closeDeleteModal()">&times;</span>
+            <h2>Xác nhận xóa</h2>
+            <p>Bạn có chắc chắn muốn xóa các phim đã chọn không?</p>
+            <div class="modal-buttons">
+                <button id="confirmDeleteBtn" class="btn-delete">Xóa</button>
+                <button onclick="closeDeleteModal()" class="btn-cancel">Hủy</button>
+            </div>
         </div>
     </div>
-    </div>
+
 
     <!-- Form sửa phim -->
     <div id="editFormModal" class="modal">
