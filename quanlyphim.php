@@ -231,7 +231,7 @@ $adminName = $_SESSION['user_name']; // hoặc $_SESSION['full_name'] nếu có
             <input type="hidden" name="id" id="edit-id">
             <input type="text" name="title_vi" id="edit-title" placeholder="Tên phim" required>
             <input type="text" name="image_url" id="edit-image" placeholder="Link poster" required>
-            <input type="number" name="release_date" id="edit-release" placeholder="Năm phát hành" required>
+            <input type="date" name="release_date" id="edit-release" placeholder="Năm phát hành" required>
             <input type="text" name="genre_vi" id="edit-genre" placeholder="Thể loại" required>
             <input type="text" name="director_vi" id="edit-director" placeholder="Đạo diễn" required>
             <input type="text" name="actor_vi" id="edit-actor" placeholder="Diễn viên" required>
