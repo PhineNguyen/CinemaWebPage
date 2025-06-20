@@ -41,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-<div class="separator-line"></div>
 
 <!DOCTYPE html>
 <html lang="vi">

@@ -50,6 +50,7 @@ CREATE TABLE seats (
     room_id INT,
     seat_row CHAR(1),
     seat_number INT,
+    status ENUM('Ghế thường','Ghế VIP','Ghế đôi') default 'Ghế thường',
     FOREIGN KEY (room_id) REFERENCES rooms(id)
 );
 

@@ -163,7 +163,13 @@ header, nav {
 .admin-profile.active .mucluc {
   display: flex;
 }
-
+.separator-line {
+  width: 100%;
+  height: 0.2px;
+  background-color: white; /* màu vàng nổi bật */
+  margin: 0 auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* đổ bóng nhẹ */
+}
 
 /* Responsive cho header */
 @media (max-width: 768px) {
