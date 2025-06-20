@@ -1,7 +1,7 @@
 <?php
     include("connect.php");
     include("header.php");
-?>
+?><!---->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
