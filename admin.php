@@ -18,7 +18,8 @@ $adminName = $_SESSION['user_name']; // hoặc $_SESSION['full_name'] nếu có
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="CSS/admin.css">
+    <link rel="stylesheet" href="CSS/admin.css"> 
+    <link rel="stylesheet" href="CSS/sidebar.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -41,7 +42,7 @@ $adminName = $_SESSION['user_name']; // hoặc $_SESSION['full_name'] nếu có
             </div>
         </div>
     </div>
-<!-- menu -->
+<!-- Menu trái -->
     <div class="sidebar">
         <a href="admin.php" class="sidebar-item active">
             <i class="fas fa-home"></i>

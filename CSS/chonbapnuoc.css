@@ -1,0 +1,98 @@
+:root {
+  --bg-dark: #292929;
+  --highlight: #EBB802;
+  --text-light: white;
+  --bg-footer: #222;
+}
+body{
+    background-color: #1e1e1e;
+}
+.main-contain {
+  background-color: #1e1e1e;
+  color: white;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.main-contain h2{
+    display: flex;
+    justify-content: center;
+}
+
+.combo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.combo-item {
+  background-color: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  padding: 12px;
+  width: 600px;
+}
+
+.combo-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-right: 16px;
+  border-radius: 10px;
+}
+
+.combo-info{
+    margin-left: 50px;
+}
+
+.combo-info h3 {
+  margin: 0;
+}
+
+.combo-info .price {
+  margin: 4px 0;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.quantity-control button {
+  width: 28px;
+  height: 28px;
+  background-color: orange;
+  border: none;
+  border-radius: 50%;
+  font-weight: bold;
+  color: black;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.quantity-control input {
+  width: 40px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.combo-footer {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.continue-btn {
+  background-color: #f9b900;
+  color: black;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}

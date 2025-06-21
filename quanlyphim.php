@@ -20,6 +20,7 @@ $adminName = $_SESSION['user_name']; // hoặc $_SESSION['full_name'] nếu có
     <title>Quản lý phim</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="CSS/admin.css">  
+     <link rel="stylesheet" href="CSS/sidebar.css"> 
     <link rel="stylesheet" href="CSS/quanlyphim.css">    
 </head>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -28,7 +29,10 @@ $adminName = $_SESSION['user_name']; // hoặc $_SESSION['full_name'] nếu có
 <body>
     <div class="header"> <!--include header here-->
         <div class="logo">
-            <img src="pic/LOGO.png"> 
+                <a href="admin.php">
+                <img src="pic/logo.png" alt="CineTix Logo">
+            </a>
+           
         </div>
         <div class="admin-profile">
             <div class="admin-text">
@@ -241,5 +245,6 @@ $adminName = $_SESSION['user_name']; // hoặc $_SESSION['full_name'] nếu có
     </div>
 
 </main>
+
 </body>
 </html>
