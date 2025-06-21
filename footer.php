@@ -52,7 +52,7 @@
       <h3>Chăm sóc khách hàng</h3>
       <ul>
         <li>Hotline: 1900 1357</li>
-        <li>Giờ làm việc: 8:00 - 22:00(Tất cả các ngày bao gồm bao gồm cả lễ Tết)</li>
+        <li>Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày bao gồm bao gồm cả lễ Tết)</li>
         <li>Email hỗ trợ: hoidap@cinetix.vn</li>
       </ul>
     </div>
