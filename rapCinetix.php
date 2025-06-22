@@ -23,8 +23,6 @@
     </div>
     <div id="cinema-detail-container"></div>
     <!-- Phần info sẽ được js tự động thêm vào dưới đây -->
-  </div>
-  <div id="cinema-box" class="cinema-box" style="display:none;"></div>
-  <script src="js/rapcinetix.js"></script>
+  </div>  <div id="cinema-box" class="cinema-box" style="display:none;"></div>
 </body>
 </html>
