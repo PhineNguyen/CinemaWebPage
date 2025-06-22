@@ -86,11 +86,14 @@
   <link rel="stylesheet" href="CSS/rapcinetix.css" />
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      const navTabs = document.querySelectorAll('.nav-item a');
       const tab = document.getElementById('rap-cinetix-tab');
       const mainContent = document.getElementById('main-content');
       const rapContent = document.getElementById('rap-cinetix-content');
       tab.addEventListener('click', function(e) {
         e.preventDefault();
+        navTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
         fetch('rapCinetix.php')
           .then(res => res.text())
           .then(html => {
@@ -102,6 +105,14 @@
             script.src = 'js/rapcinetix.js';
             document.body.appendChild(script);
           });
+      });
+      // Khi click vào tab PHIM thì trở lại giao diện chính
+      navTabs[0].addEventListener('click', function(e) {
+        e.preventDefault();
+        navTabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        rapContent.style.display = 'none';
+        mainContent.style.display = 'block';
       });
     });
   </script>
