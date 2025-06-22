@@ -76,6 +76,7 @@ include('header.php');
 
       </div>
       <div class="combo-footer">
+        <button class="continue-btn">Quay lại</button>
         <button class="continue-btn">Tiếp tục</button>
       </div>
 
