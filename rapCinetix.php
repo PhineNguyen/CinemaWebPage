@@ -22,8 +22,7 @@
       <div class="cinema-item">Nghệ An</div>
     </div>
     <div id="cinema-detail-container"></div>
-  </div>
-  <div id="cinema-box" class="cinema-box" style="display:none;"></div>
-  <script src="js/rapcinetix.js"></script>
+    <!-- Phần info sẽ được js tự động thêm vào dưới đây -->
+  </div>  <div id="cinema-box" class="cinema-box" style="display:none;"></div>
 </body>
 </html>
