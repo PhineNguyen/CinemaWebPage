@@ -96,3 +96,73 @@ body{
   font-weight: bold;
   cursor: pointer;
 }
+/* popup loại nước */
+.popup-form {
+  display: none; /* Keep as is for initial hidden state */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex; /* Changed to flex to center content */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: white; /* Changed to white as per image */
+  padding: 20px; /* Keep padding */
+  border-radius: 8px; /* Slightly less rounded than 10px in image, closer to original */
+  color: black;
+  width: 300px; /* Keep width */
+  text-align: left; /* Changed to left for label alignment */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box-shadow for depth */
+  overflow: hidden; /* Ensures header background extends correctly */
+}
+
+.popup-content h3 {
+  background-color: #FFC107; /* Yellow as per image */
+  color: black;
+  text-align: center;
+  padding: 15px 20px; /* Increased padding for better appearance */
+  margin: -20px -20px 20px -20px; /* Extends background to edges and creates space below */
+  font-size: 1.2em; /* Adjusted font size */
+  font-weight: bold; /* Bold text for header */
+}
+
+.popup-content label {
+  display: flex; /* Use flex to align checkbox and text */
+  align-items: center; /* Vertically center checkbox with text */
+  text-align: left; /* Not strictly necessary with flex, but good for clarity */
+  margin-left: 0; /* Remove left margin to align with content */
+  margin-bottom: 10px; /* Adjusted margin-bottom for spacing */
+  font-size: 1em; /* Adjusted font size */
+}
+
+.popup-content input[type="checkbox"] {
+  margin-right: 10px; /* Space between checkbox and text */
+  transform: scale(1.2); /* Make checkboxes slightly larger */
+}
+
+.popup-content .close-popup {
+  background-color: #FFC107; /* Yellow as per image */
+  color: black; /* Changed to black as per image */
+  font-weight: bold;
+  border: none; /* No border as per image */
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 12px 25px; /* Adjusted padding */
+  display: block; /* Make button full width of its container */
+  width: calc(100% - 40px); /* Adjust for padding of popup-content */
+  margin: 20px auto 0 auto; /* Center the button and add top margin */
+  font-size: 1.1em; /* Adjusted font size */
+  box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+}
+
+.popup-content .close-popup:hover {
+  background-color: rgba(255, 193, 7, 0.9); /* Slightly darker yellow on hover */
+  color: black; /* Keep color black on hover */
+}
+
