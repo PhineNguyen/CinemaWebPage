@@ -23,56 +23,59 @@
 
   <nav class="nav-item">
     <a href="#">PHIM</a>
-    <a href="#">RẠP CINETIX</a>
+    <a href="#" id="rap-cinetix-tab">RẠP CINETIX</a>
     <a href="#">GIÁ VÉ</a>
     <a href="#">LIÊN HỆ</a>
   </nav>
 
-  <?php
-$sql = "SELECT image_URL FROM movies";
-$result = mysqli_query($conn, $sql);
+  <div id="main-content">
+    <?php
+    $sql = "SELECT image_URL FROM movies";
+    $result = mysqli_query($conn, $sql);
 
-if ($result && $result->num_rows > 0) {
-  echo '<section>';
-  echo '<div class="slider">';
+    if ($result && $result->num_rows > 0) {
+      echo '<section>';
+      echo '<div class="slider">';
 
-  while ($row = mysqli_fetch_assoc($result)) {
-    echo '<div><img src="' . $row['image_URL'] . '" alt="Banner phim" /></div>';
-  }
+      while ($row = mysqli_fetch_assoc($result)) {
+        echo '<div><img src="' . $row['image_URL'] . '" alt="Banner phim" /></div>';
+      }
 
-  echo '</div>';
-  echo '
-    <div class="muitentrai">&#10094;</div>
-    <div class="muitenphai">&#10095;</div>
-  ';
-  echo '</section>';
-}
-?>
-
-
-  <h2>MOVIE SELECTION</h2>
-
-  <?php
-  $sql = "SELECT title_vi, image_URL FROM movies LIMIT 3";
-  $result = $conn->query($sql);
-  if ($result->num_rows > 0) {
-    echo '<div class="movie">';
-    while ($row = $result->fetch_assoc()) {
-      echo <<<HTML
-      <div class="movie-item">
-        <img src="{$row['image_URL']}" alt="poster film {$row['title_vi']}" />
-        <div class="button">
-          <div><a href="#">XEM CHI TIẾT</a></div>
-          <div><a href="#">ĐẶT VÉ</a></div>
-        </div>
-      </div>
-      HTML;
+      echo '</div>';
+      echo '
+        <div class="muitentrai">&#10094;</div>
+        <div class="muitenphai">&#10095;</div>
+      ';
+      echo '</section>';
     }
-    echo '</div>';
-  } else {
-    echo "Không có phim nào.";
-  }
-  ?>
+    ?>
+
+    <h2>MOVIE SELECTION</h2>
+
+    <?php
+    $sql = "SELECT title_vi, image_URL FROM movies LIMIT 3";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+      echo '<div class="movie">';
+      while ($row = $result->fetch_assoc()) {
+        echo <<<HTML
+        <div class="movie-item">
+          <img src="{$row['image_URL']}" alt="poster film {$row['title_vi']}" />
+          <div class="button">
+            <div><a href="#">XEM CHI TIẾT</a></div>
+            <div><a href="#">ĐẶT VÉ</a></div>
+          </div>
+        </div>
+        HTML;
+      }
+      echo '</div>';
+    } else {
+      echo "Không có phim nào.";
+    }
+    ?>
+  </div>
+
+  <div id="rap-cinetix-content" style="display:none;"></div>
 
   <footer>
     <div class="f1">
@@ -124,5 +127,28 @@ if ($result && $result->num_rows > 0) {
 
    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+   <link rel="stylesheet" href="CSS/rapcinetix.css" />
+   <script>
+    // Load rapCinetix.php content via AJAX when tab is clicked
+    document.addEventListener('DOMContentLoaded', function() {
+      const tab = document.getElementById('rap-cinetix-tab');
+      const mainContent = document.getElementById('main-content');
+      const rapContent = document.getElementById('rap-cinetix-content');
+      tab.addEventListener('click', function(e) {
+        e.preventDefault();
+        fetch('rapCinetix.php')
+          .then(res => res.text())
+          .then(html => {
+            mainContent.style.display = 'none';
+            rapContent.innerHTML = html;
+            rapContent.style.display = 'block';
+            // Load JS for dynamic effect
+            const script = document.createElement('script');
+            script.src = 'js/rapcinetix.js';
+            document.body.appendChild(script);
+          });
+      });
+    });
+   </script>
 </body>
 </html>
