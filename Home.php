@@ -24,7 +24,7 @@
     <a href="#" class="active">PHIM</a>
     <a href="#" id="rap-cinetix-tab">RẠP CINETIX</a>
     <a href="#" id="gia-ve-tab">GIÁ VÉ</a>
-    <a href="#">LIÊN HỆ</a>
+    <a href="#" id="lien-he-tab">LIÊN HỆ</a>
   </nav>
 
   <div id="main-content">
