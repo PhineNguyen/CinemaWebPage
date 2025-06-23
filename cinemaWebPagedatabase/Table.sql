@@ -38,7 +38,7 @@ CREATE TABLE cinemas (
 );
 
 CREATE TABLE rooms (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id  INT AUTO_INCREMENT PRIMARY KEY,
     cinema_id VARCHAR(100),
     room_number VARCHAR(50) NOT NULL,
     total_seats INT,
