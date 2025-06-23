@@ -1,13 +1,14 @@
-
-window.addEventListener('DOMContentLoaded', () => {
-  const vipSeats = document.querySelectorAll('.seat-vip');
-  if (vipSeats.length === 0) return;
+$(document).ready(function () {
+  const $vipSeats = $('.seat-vip');
+  if ($vipSeats.length === 0) return;
 
   let top = Infinity, left = Infinity, right = 0, bottom = 0;
 
-  vipSeats.forEach(seat => {
-    const rect = seat.getBoundingClientRect();
-    const containerRect = document.querySelector('.seating-container').getBoundingClientRect();
+  const $container = $('.seating-container');
+  const containerRect = $container[0].getBoundingClientRect();
+
+  $vipSeats.each(function () {
+    const rect = this.getBoundingClientRect();
 
     const relTop = rect.top - containerRect.top;
     const relLeft = rect.left - containerRect.left;
@@ -20,12 +21,15 @@ window.addEventListener('DOMContentLoaded', () => {
     if (relBottom > bottom) bottom = relBottom;
   });
 
-  const zone = document.createElement('div');
-  zone.id = 'vip_zone';
-  zone.style.top = `${top - 5}px`;
-  zone.style.left = `${left - 5}px`;
-  zone.style.width = `${right - left + 10}px`;
-  zone.style.height = `${bottom - top + 10}px`;
+  const $zone = $('<div>', { id: 'vip_zone' }).css({
+    position: 'absolute',
+    top: `${top - 5}px`,
+    left: `${left - 5}px`,
+    width: `${right - left + 10}px`,
+    height: `${bottom - top + 10}px`,
+    border: '2px dashed red', // bạn có thể tùy chỉnh thêm
+    pointerEvents: 'none'
+  });
 
-  document.querySelector('.seating-container').appendChild(zone);
+  $container.append($zone);
 });

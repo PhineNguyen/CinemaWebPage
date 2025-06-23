@@ -13,7 +13,6 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="CSS/Home.css" />
-  <link rel="stylesheet" href="CSS/rapcinetix.css" />
 </head>
 
 <body>

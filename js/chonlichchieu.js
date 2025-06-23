@@ -1,81 +1,69 @@
-const days = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
-const dateTabsContainer = document.getElementById("dateTabs");
+$(document).ready(function () {
+  const days = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+  const $dateTabsContainer = $("#dateTabs");
 
-let offset = 0; // ngày bắt đầu hiển thị
-const NUM_DAYS = 7;
+  let offset = 0;
+  const NUM_DAYS = 7;
 
-// tạo các tab ngày
-function renderDateTabs(startOffset) {
-  dateTabsContainer.style.transition = "none"; // reset animation
-  dateTabsContainer.style.transform = "translateX(0)";
-  dateTabsContainer.innerHTML = "";
+  function renderDateTabs(startOffset) {
+    $dateTabsContainer.css({
+      transition: "none",
+      transform: "translateX(0)"
+    }).empty();
 
-  for (let i = 0; i < NUM_DAYS; i++) {
-    const date = new Date();
-    date.setDate(date.getDate() + startOffset + i);
+    for (let i = 0; i < NUM_DAYS; i++) {
+      const date = new Date();
+      date.setDate(date.getDate() + startOffset + i);
 
-    const isToday = (startOffset + i === 0);
-    const thu = isToday ? "Hôm nay" : days[date.getDay()];
-    const ngay = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0');
+      const isToday = (startOffset + i === 0);
+      const thu = isToday ? "Hôm nay" : days[date.getDay()];
+      const ngay = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0');
 
-    const btn = document.createElement("button");
-    btn.className = "date-tab" + (i >= 6 ? " hidden" : "");
-    btn.innerHTML = `${thu}<br><span>${ngay}</span>`;
-    
-    if (isToday) btn.classList.add("active");
-    // Xử lý sự kiện click
-    btn.addEventListener("click", () => {
-      // Xóa class active của tất cả các nút
-      document.querySelectorAll(".date-tab").forEach(tab => tab.classList.remove("active"));
-      // Gán active cho nút vừa click
-      btn.classList.add("active");
-    });
-    dateTabsContainer.appendChild(btn);
+      const $btn = $("<button>")
+        .addClass("date-tab" + (i >= 6 ? " hidden" : ""))
+        .html(`${thu}<br><span>${ngay}</span>`);
+
+      if (isToday) $btn.addClass("active");
+
+      $btn.on("click", function () {
+        $(".date-tab").removeClass("active");
+        $(this).addClass("active");
+      });
+
+      $dateTabsContainer.append($btn);
+    }
   }
-}
 
+  function animateSlide(direction) {
+    const distance = 100;
+    const initial = direction === "next" ? distance : -distance;
 
-document.getElementById("nextBtn").addEventListener("click", () => {
-  offset++;
+    $dateTabsContainer
+      .css({
+        transition: "none",
+        transform: `translateX(${initial}px)`
+      })[0].offsetWidth; // trigger reflow
+
+    $dateTabsContainer
+      .css({
+        transition: "transform 0.3s ease",
+        transform: "translateX(0)"
+      });
+  }
+
+  $("#nextBtn").on("click", function () {
+    offset++;
+    animateSlide("next");
+    setTimeout(() => renderDateTabs(offset), 300);
+  });
+
+  $("#prevBtn").on("click", function () {
+    if (offset > 0) {
+      offset--;
+      animateSlide("prev");
+      setTimeout(() => renderDateTabs(offset), 300);
+    }
+  });
+
   renderDateTabs(offset);
 });
-
-document.getElementById("prevBtn").addEventListener("click", () => {
-  if (offset > 0) {
-    offset--;
-    renderDateTabs(offset);
-  }
-});
-
-
-function animateSlide(direction) {
-  // Slide effect
-  const distance = 100; // pixel
-  const initial = direction === "next" ? distance : -distance;
-  dateTabsContainer.style.transition = "none";
-  dateTabsContainer.style.transform = `translateX(${initial}px)`;
-
-  // Trigger reflow to restart animation
-  void dateTabsContainer.offsetWidth;
-
-  dateTabsContainer.style.transition = "transform 0.3s ease";
-  dateTabsContainer.style.transform = "translateX(0)";
-}
-
-// Next
-document.getElementById("nextBtn").addEventListener("click", () => {
-  offset++;
-  animateSlide("next");
-  setTimeout(() => renderDateTabs(offset), 300); // wait for animation
-});
-
-// Prev
-document.getElementById("prevBtn").addEventListener("click", () => {
-  if (offset > 0) {
-    offset--;
-    animateSlide("prev");
-    setTimeout(() => renderDateTabs(offset), 300); // wait for animation
-  }
-});
-// khởi tạo
-renderDateTabs(offset);

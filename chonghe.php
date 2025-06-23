@@ -10,11 +10,11 @@ include("header.php");
   <link rel="stylesheet" href="CSS/chonghe.css">
 </head>
 <body>
-  <nav class="nav-item">
-    <a href="#" class="active">PHIM</a>
-    <a href="#">RẠP CINETIX</a>
-    <a href="#">GIÁ VÉ</a>
-    <a href="#">LIÊN HỆ</a>
+   <nav class="nav-item">
+    <a href="#" id="home-tab">PHIM</a>
+    <a href="#" id="rap-cinetix-tab">RẠP CINETIX</a>
+    <a href="#" id="gia-ve-tab">GIÁ VÉ</a>
+    <a href="#" id="lien-he-tab">LIÊN HỆ</a>
   </nav>
 
 <div class="seat-container">
