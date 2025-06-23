@@ -1,6 +1,6 @@
 
 
-USE cinemawebpage;
+USE cinema;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
