@@ -9,6 +9,18 @@ include('header.php');
     <title>Document</title>
     <link rel="stylesheet" href="CSS/chonbapnuoc.css">
 </head>
+<!-- Bỏ mũi tên trong input -->
+<style>
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+input[type=number] {
+-moz-appearance: textfield;
+}
+</style>
+
 <body>
     <div class="main-contain">
       <div class="combo-list">
@@ -116,7 +128,7 @@ include('header.php');
   </div>
 </form>
 
-<!-- FORM CHỌN BẮP & NƯỚC -->
+<!-- FORM CHỌN BẮP & NƯỚC
 <form id="popup-combo" class="popup-form" style="display:none;">
   <div class="popup-content">
     <h3>Chọn vị bắp</h3>
@@ -136,7 +148,7 @@ include('header.php');
 
     <button type="button" class="close-popup">Xác nhận</button>
   </div>
-</form>
+</form> -->
 
 
 </body>

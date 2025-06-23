@@ -1,4 +1,4 @@
-use cinemawebpage;
+use cinema;
 INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo) VALUES
 (1,'Alice', 'alice@example.com', 'password123', '0123456789', 'admin'),
 (2,'Bob', 'bob@example.com', 'password123', '0987654321', 'admin'),

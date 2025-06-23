@@ -1,20 +1,24 @@
 $(document).ready(function () {
   // Ẩn popup ban đầu
-  $('#popup-nuoc, #popup-bap, #popup-combo').hide();
+  $('#popup-nuoc, #popup-bap').hide();
 
-  // Xử lý nút +
+  $(document).ready(function () {
+  // Xử lý nút tăng
   $('.plus').click(function () {
-    let input = $(this).siblings('input[type="number"]');
-    let current = parseInt(input.val()) || 0;
-    input.val(current + 1);
+    const input = $(this).siblings('input');
+    let currentValue = parseInt(input.val());
+    input.val(currentValue + 1);
   });
 
-  // Xử lý nút -
+  // Xử lý nút giảm
   $('.minus').click(function () {
-    let input = $(this).siblings('input[type="number"]');
-    let current = parseInt(input.val()) || 0;
-    if (current > 0) input.val(current - 1);
+    const input = $(this).siblings('input');
+    let currentValue = parseInt(input.val());
+    if (currentValue > 0) {
+      input.val(currentValue - 1);
+    }
   });
+});
 
   // Xử lý khi click nút "Chọn loại nước" hoặc "Chọn vị bắp"
   $('.select').click(function () {
@@ -79,84 +83,3 @@ $(document).ready(function () {
   });
 
 });
-
-
-// sự kiện cho combo
-$(document).ready(function () {
-  // Tăng giảm số lượng combo
-  $('.plus').click(function () {
-    let input = $(this).siblings('input[type="number"]');
-    let current = parseInt(input.val()) || 0;
-    input.val(current + 1);
-  });
-
-  $('.minus').click(function () {
-    let input = $(this).siblings('input[type="number"]');
-    let current = parseInt(input.val()) || 0;
-    if (current > 0) input.val(current - 1);
-  });
-
-  // Mở popup khi click "Thay đổi"
-  $('.select').click(function () {
-    const comboItem = $(this).closest('.combo-item');
-    const comboType = parseInt(comboItem.data('combo')); // 1 hoặc 2 người
-    const quantity = parseInt(comboItem.find('input[type="number"]').val()) || 0;
-
-    if (quantity === 0) {
-      alert("Vui lòng chọn số lượng combo trước.");
-      return;
-    }
-
-    const requiredBap = quantity; // luôn bằng số combo
-    const requiredNuoc = comboType === 1 ? quantity : quantity * 2;
-
-    // Reset popup
-    $('#popup-combo input[name="vi_bap"]').prop('checked', false);
-    $('#popup-combo input[name="nuoc"]').prop('checked', false).prop('disabled', false);
-
-    // Lưu số lượng cần chọn vào data attribute
-    $('#popup-combo').data('requiredBap', requiredBap);
-    $('#popup-combo').data('requiredNuoc', requiredNuoc);
-
-    // Hiện popup
-    $('#popup-combo').show();
-  });
-
-  // Giới hạn checkbox nước được chọn
-  $('#popup-combo input[name="nuoc"]').change(function () {
-    const max = $('#popup-combo').data('requiredNuoc') || 1;
-    const checked = $('#popup-combo input[name="nuoc"]:checked').length;
-
-    if (checked >= max) {
-      $('#popup-combo input[name="nuoc"]').not(':checked').prop('disabled', true);
-    } else {
-      $('#popup-combo input[name="nuoc"]').prop('disabled', false);
-    }
-  });
-
-  // Xác nhận popup
-  $('.close-popup').click(function () {
-    const bapSelected = $('#popup-combo input[name="vi_bap"]:checked').length;
-    const nuocSelected = $('#popup-combo input[name="nuoc"]:checked').length;
-
-    const bapNeed = $('#popup-combo').data('requiredBap');
-    const nuocNeed = $('#popup-combo').data('requiredNuoc');
-
-    if (bapSelected !== 1) {
-      alert("Vui lòng chọn 1 vị bắp (áp dụng cho tất cả combo).");
-      return;
-    }
-
-    if (nuocSelected !== nuocNeed) {
-      alert("Cần chọn đúng " + nuocNeed + " loại nước.");
-      return;
-    }
-
-    alert("Đã chọn thành công!\n- " + bapNeed + " bắp\n- " + nuocNeed + " nước");
-    $('#popup-combo').hide();
-  });
-});
-
-
-
-
