@@ -3,11 +3,11 @@ INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo) VALUES
 (1,'Alice', 'alice@example.com', 'password123', '0123456789', 'admin'),
 (2,'Bob', 'bob@example.com', 'password123', '0987654321', 'admin'),
 (3,'Charlie', 'charlie@example.com', 'password123', '0912345678', 'admin'),
-(4,'David', 'david@example.com', 'password123', '0909123456', 'user'),
-(5,'Eva', 'eva@example.com', 'password123', '0988123456', 'user'),
-(6,'Frank', 'frank@example.com', 'password123', '0934567890', 'user'),
-(7,'Grace', 'grace@example.com', 'password123', '0976543210', 'user'),
-(8,'Helen', 'helen@example.com', 'password123', '0901234567', 'admin'),
+(4,'Helen', 'helen@example.com', 'password123', '0901234567', 'admin'),
+(5,'David', 'david@example.com', 'password123', '0909123456', 'user'),
+(6,'Eva', 'eva@example.com', 'password123', '0988123456', 'user'),
+(7,'Frank', 'frank@example.com', 'password123', '0934567890', 'user'),
+(8,'Grace', 'grace@example.com', 'password123', '0976543210', 'user'),
 (9,'Ivan', 'ivan@example.com', 'password123', '0923456789', 'user'),
 (10,'Jane', 'jane@example.com', 'password123', '0911223344', 'user');
 
