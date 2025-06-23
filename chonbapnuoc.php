@@ -15,7 +15,7 @@ include('header.php');
         <h2>Combo - Bắp nước</h2>
 
         <!-- Combo 1 -->
-        <div class="combo-item">
+        <div class="combo-item" data-combo="1">
           <img src="pic/combo1big.jpg" alt="Combo 1 big">
           <div class="combo-info">
             <h3>Combo 1 big</h3>
@@ -26,10 +26,12 @@ include('header.php');
               <button class="plus">+</button>
             </div>
           </div>
+          <button class="select" id="chang1" style="background-color: orange; color: black;border: none;padding: 6px 12px;border-radius: 6px;font-weight: bold;cursor: pointer;margin-left: 200px;" 
+            >Thay đổi</button>
         </div>
 
         <!-- Combo 2 -->
-        <div class="combo-item">
+        <div class="combo-item" data-combo="2">
           <img src="pic/combo2big.jpg" alt="Combo 2 big">
           <div class="combo-info">
             <h3>Combo 2 big</h3>
@@ -40,6 +42,8 @@ include('header.php');
               <button class="plus">+</button>
             </div>
           </div>
+          <button class="select" id="chang2" style="background-color: orange; color: black;border: none;padding: 6px 12px;border-radius: 6px;font-weight: bold;cursor: pointer;margin-left: 200px;" 
+            >Thay đổi</button>
         </div>
 
         <!-- Nước lẻ -->
@@ -111,6 +115,29 @@ include('header.php');
     <button type="button" class="close-popup">Xác nhận</button>
   </div>
 </form>
+
+<!-- FORM CHỌN BẮP & NƯỚC -->
+<form id="popup-combo" class="popup-form" style="display:none;">
+  <div class="popup-content">
+    <h3>Chọn vị bắp</h3>
+    <div id="bap-options">
+      <label><input type="radio" name="vi_bap" value="Bơ"> Bơ</label><br>
+      <label><input type="radio" name="vi_bap" value="Phô mai"> Phô mai</label><br>
+      <label><input type="radio" name="vi_bap" value="Caramel"> Caramel</label><br><br>
+    </div>
+
+    <h3>Chọn loại nước</h3>
+    <div id="nuoc-options">
+      <label><input type="checkbox" name="nuoc" value="Milo"> Milo</label><br>
+      <label><input type="checkbox" name="nuoc" value="Coca Cola"> Coca Cola</label><br>
+      <label><input type="checkbox" name="nuoc" value="Sprite"> Sprite</label><br>
+      <label><input type="checkbox" name="nuoc" value="Fanta"> Fanta</label><br><br>
+    </div>
+
+    <button type="button" class="close-popup">Xác nhận</button>
+  </div>
+</form>
+
 
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
