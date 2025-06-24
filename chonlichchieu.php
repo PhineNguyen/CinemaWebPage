@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="CSS/chonlichchieu.css" />
 </head>
-<body>
+<body> <!---->
   <!-- Menu điều hướng -->
   <nav class="nav-item">
     <a href="#" class="active">PHIM</a>
