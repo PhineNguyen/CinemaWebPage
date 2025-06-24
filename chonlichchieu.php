@@ -7,12 +7,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Chọn lịch chiếu</title>
-<<<<<<< HEAD
   <link rel="stylesheet" href="CSS/chonlichchieu.css">
-=======
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="CSS/chonlichchieu.css" />
->>>>>>> d53afb058e83463d21ca4d3efa8c8e9f721e1798
+
 </head>
 <body> <!---->
   <!-- Menu điều hướng -->
