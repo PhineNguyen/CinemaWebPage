@@ -79,3 +79,31 @@ document.getElementById("prevBtn").addEventListener("click", () => {
 });
 // khởi tạo
 renderDateTabs(offset);
+
+// --- LỌC RẠP THEO THÀNH PHỐ ---
+document.addEventListener("DOMContentLoaded", function () {
+  const citySelect = document.getElementById("citySelect");
+  const cinemaSelect = document.getElementById("cinemaSelect");
+
+  if (citySelect && cinemaSelect) {
+    const allCinemas = Array.from(cinemaSelect.options).filter(opt => opt.value !== "");
+
+    citySelect.addEventListener("change", function () {
+      const selectedCity = citySelect.value;
+      cinemaSelect.innerHTML = '';
+
+      const defaultOption = document.createElement('option');
+      defaultOption.text = 'Tất cả rạp';
+      defaultOption.value = '';
+      cinemaSelect.add(defaultOption);
+
+      allCinemas.forEach(option => {
+        const city = option.getAttribute("data-city");
+        if (selectedCity === "" || city === selectedCity) {
+          cinemaSelect.add(option.cloneNode(true));
+        }
+      });
+    });
+  }
+});
+
