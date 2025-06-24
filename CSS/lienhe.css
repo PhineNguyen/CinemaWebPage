@@ -1,0 +1,49 @@
+   :root {
+  --bg-dark: #292929; /*Màu nền chính của web*/
+  --bg-footer: #222; /*Màu nền cho footer*/
+  --highlight: #EBB802; /*Màu vàng của button và đường kẻ*/
+  --text-light: white; /*Màu chữ sáng*/
+  --poster-hover-opacity: 0.3; /*Độ mờ khi di chuột vào*/
+  --scrollbar-thumb: rgba(255, 255, 255, 0.2); /*Màu thanh cuộn ngang*/
+}
+   body {
+      font-family: Arial, sans-serif;
+      background: var(--bg-dark) ;
+      margin: 0;
+      padding: 0;
+    }
+    .contact-container {
+      border-radius: 10px;
+      box-shadow: 0 12px 32px 4px rgba(0,0,0,0.6);
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: var(--bg-dark);
+
+    }
+    .title_contact {
+      text-align: center;
+      color: var(--highlight);
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    .branch {
+      margin-bottom: 30px;
+      border-left: 4px solid var(--highlight);
+      padding-left: 15px;
+    }
+    .branch h3{
+      font-size: 25px;
+      margin-top: 0;
+      color: var(--highlight);
+    }
+    .branch p {
+      margin: 5px 0;
+      color:var(--text-light);
+    }       
+    .branch-list{
+      margin: 10px;
+      padding: 0;
+      color: var(--text-light);
+    }

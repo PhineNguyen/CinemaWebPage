@@ -11,4 +11,5 @@ SELECT * FROM showtimes;
 SELECT * FROM users;
 SELECT * FROM foods;
 SELECT * FROM food_orders;
+SELECT * FROM food_variants;
 

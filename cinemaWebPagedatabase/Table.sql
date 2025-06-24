@@ -1,5 +1,4 @@
 
-CREATE DATABASE IF NOT EXISTS cinemawebpage;
 USE cinemawebpage;
 
 CREATE TABLE users (
@@ -30,37 +29,49 @@ CREATE TABLE movies (
 );
 
 CREATE TABLE cinemas (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id VARCHAR (100) PRIMARY KEY,
     ci_name VARCHAR(100) NOT NULL,
     address VARCHAR(255),
     city VARCHAR(100),
-    hotline VARCHAR(20)
+    hotline VARCHAR(20),
+    email_ci VARCHAR(100)
 );
 
 CREATE TABLE rooms (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    cinema_id INT,
+    id  INT AUTO_INCREMENT PRIMARY KEY,
+    cinema_id VARCHAR(100),
     room_number VARCHAR(50) NOT NULL,
     total_seats INT,
     FOREIGN KEY (cinema_id) REFERENCES cinemas(id)
 );
-
 CREATE TABLE seats (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id VARCHAR(10) PRIMARY KEY, -- Đổi sang mã ghế như 'R1-A1'
     room_id INT,
     seat_row CHAR(1),
     seat_number INT,
-    status ENUM('Ghế thường','Ghế VIP','Ghế đôi') default 'Ghế thường',
+    seat_type ENUM('Ghế thường','Ghế VIP','Ghế đôi') DEFAULT 'Ghế thường',
+    seat_status ENUM('Đã đặt','Ghế trống') DEFAULT 'Ghế trống',
     FOREIGN KEY (room_id) REFERENCES rooms(id)
 );
 
+
 CREATE TABLE foods (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id VARCHAR(100) PRIMARY KEY,
     namef VARCHAR(100) NOT NULL,
     descript TEXT,
+    food_images VARCHAR(255),
     price DECIMAL(10,2) NOT NULL,
     available BOOLEAN DEFAULT TRUE
 );
+CREATE TABLE food_variants (
+  variant_id INT AUTO_INCREMENT PRIMARY KEY,
+  food_id VARCHAR(10),
+  size VARCHAR(10),  		-- 'small' or 'large'
+  flavor VARCHAR(50),       -- e.g coca, sprite
+  price INT,
+  FOREIGN KEY (food_id) REFERENCES foods(id)
+);
+
 
 CREATE TABLE showtimes (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -96,7 +107,7 @@ CREATE TABLE bookings (
 CREATE TABLE booking_details (
     id INT AUTO_INCREMENT PRIMARY KEY,
     booking_id INT,
-    seat_id INT,
+    seat_id VARCHAR(100),
     FOREIGN KEY (booking_id) REFERENCES bookings(id),
     FOREIGN KEY (seat_id) REFERENCES seats(id)
 );
@@ -104,7 +115,7 @@ CREATE TABLE booking_details (
 CREATE TABLE food_orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     booking_id INT,
-    food_id INT,
+    food_id VARCHAR(100),
     quantity INT DEFAULT 1,
     FOREIGN KEY (booking_id) REFERENCES bookings(id),
     FOREIGN KEY (food_id) REFERENCES foods(id)

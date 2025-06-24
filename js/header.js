@@ -1,23 +1,20 @@
+$(document).ready(function () {
+  const $profile = $('.admin-profile');
+  const $logoutBtn = $('.logout-btn');
+  const $authButtons = $('.auth-buttons');
 
-document.addEventListener('DOMContentLoaded', function () {
-  const profile = document.querySelector('.admin-profile');
-  const logoutBtn = document.getElementById('.logout-btn');
-  const authButtons = document.getElementById('.auth-buttons');
-  profile.addEventListener('click', function (e) {
+  $profile.on('click', function (e) {
     e.stopPropagation();
-    this.classList.toggle('active');
+    $(this).toggleClass('active');
   });
-  document.addEventListener('click', function () {
-    profile.classList.remove('active');
-  });
-  logoutBtn.addEventListener('click',function(e){
-      e.preventDefault(); //ngăn chuyển trang nếu là tab a
-      profile.style.display='none'; // ẩn khối admin
-      authButtons.style.display ="flex";
-  });
-});
 
-document.addEventListener('active', function(){
-  
+  $(document).on('click', function () {
+    $profile.removeClass('active');
+  });
 
+  $logoutBtn.on('click', function (e) {
+    e.preventDefault(); // ngăn chuyển trang nếu là thẻ <a>
+    $profile.hide();    // ẩn khối admin
+    $authButtons.css('display', 'flex'); // hiện các nút đăng nhập/đăng ký
+  });
 });

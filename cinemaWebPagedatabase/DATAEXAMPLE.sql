@@ -1,13 +1,17 @@
+<<<<<<< HEAD
 use cinemawebpage;
+=======
+use cineme;
+>>>>>>> d4c57411d18ed5118ad9a11b0f73e9e06c3d73ea
 INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo) VALUES
 (1,'Alice', 'alice@example.com', 'password123', '0123456789', 'admin'),
 (2,'Bob', 'bob@example.com', 'password123', '0987654321', 'admin'),
 (3,'Charlie', 'charlie@example.com', 'password123', '0912345678', 'admin'),
-(4,'David', 'david@example.com', 'password123', '0909123456', 'user'),
-(5,'Eva', 'eva@example.com', 'password123', '0988123456', 'user'),
-(6,'Frank', 'frank@example.com', 'password123', '0934567890', 'user'),
-(7,'Grace', 'grace@example.com', 'password123', '0976543210', 'user'),
-(8,'Helen', 'helen@example.com', 'password123', '0901234567', 'admin'),
+(4,'Helen', 'helen@example.com', 'password123', '0901234567', 'admin'),
+(5,'David', 'david@example.com', 'password123', '0909123456', 'user'),
+(6,'Eva', 'eva@example.com', 'password123', '0988123456', 'user'),
+(7,'Frank', 'frank@example.com', 'password123', '0934567890', 'user'),
+(8,'Grace', 'grace@example.com', 'password123', '0976543210', 'user'),
 (9,'Ivan', 'ivan@example.com', 'password123', '0923456789', 'user'),
 (10,'Jane', 'jane@example.com', 'password123', '0911223344', 'user');
 
@@ -74,7 +78,7 @@ INSERT INTO movies (
     'T18 - Phim được phổ biến đến người xem từ đủ 18 tuổi trở lên (18+)',
     'Đang chiếu','https://i.postimg.cc/63n18q6Z/hq720.jpg',
     'https://image.tmdb.org/t/p/w500/tN3WWhiklSI8NErftXqyfkR9GJ.jpg', 
-    'https://www.youtube.com/watch?v=N7IcsG_hM4s'
+    'https://www.youtube.com/watch?v=N7IcHCM_hM4s'
 ),
 (
     5,
@@ -120,31 +124,83 @@ INSERT INTO movies (
 );
 
 
-INSERT INTO cinemas (id, ci_name, address, city, hotline) VALUES
-(1, 'Cinetix HN 1', 'Quận Hoàn Kiếm', 'Hà Nội', '19001001'),
-(2, 'Cinetix HN 2', 'Quận Đống Đa', 'Hà Nội', '19001002'),
-(3, 'Cinetix HN 3', 'Quận Cầu Giấy', 'Hà Nội', '19001003'),
-(4, 'Cinetix SG 1', 'Quận 1', 'Thành Phố Hồ Chí Minh', '19002001'),
-(5, 'Cinetix SG 2', 'Quận 3', 'Thành Phố Hồ Chí Minh', '19002002'),
-(6, 'Cinetix SG 3', 'Quận Bình Thạnh', 'Thành Phố Hồ Chí Minh', '19002003'),
-(7, 'Cinetix TV 1', 'Phường 1', 'Trà Vinh', '19003001'),
-(8, 'Cinetix TV 2', 'Phường 7', 'Trà Vinh', '19003002'),
-(9, 'Cinetix TV 3', 'Phường 8', 'Trà Vinh', '19003003'),
-(10, 'Cinetix BT 1', 'Phường 3', 'Bến Tre', '19004001'),
-(11, 'Cinetix BT 2', 'Phường 5', 'Bến Tre', '19004002'),
-(12, 'Cinetix BT 3', 'Phường 6', 'Bến Tre', '19004003');
+INSERT INTO cinemas (id, ci_name, address, city, hotline, email_ci) VALUES
+('HN1', 'CinetixHN 1', '100 Hồ Con Rùa Quận Hoàn Kiếm', 'Hà Nội', '19001001','HanoiCinetix@gmail.com'),
+('HN2', 'CinetixHN 2', '101 Lê Nin Quận Đống Đa', 'Hà Nội', '19001001','HanoiCinetix@gmail.com'),
+('HN3', 'CinetixHN 3', '102 Lý Thường Kiệt Quận Cầu Giấy', 'Hà Nội', '19001001','HanoiCinetix@gmail.com'),
+('HCM1', 'CinetixHCM 1', '103 Đồng Khởi Quận 1', 'Thành Phố Hồ Chí Minh', '19001002','HCMCinetix@gmail.com'),
+('HCM2', 'CinetixHCM 2', '104 Tên Lửa Quận 3', 'Thành Phố Hồ Chí Minh', '19001002','HCMCinetix@gmail.com'),
+('HCM3', 'CinetixHCM 3', '105 Xô Viết Nghệ Tĩnh Quận Bình Thạnh', 'Thành Phố Hồ Chí Minh', '19001002','HCMCinetix@gmail.com'),
+('TV1', 'CinetixTV 1', '106 Nguyễn Thị Minh Khai Phường 1', 'Trà Vinh', '19001003','TVCinetix@gmail.com'),
+('TV2', 'CinetixTV 2', '107 Nguyễn Đáng, Phường 7', 'Trà Vinh', '19001003','TVCinetix@gmail.com'),
+('TV3', 'CinetixTV 3', '108 Lý Thường Kiệt Phường 8', 'Trà Vinh', '19001003','TVCinetix@gmail.com'),
+('BT1', 'CinetixBT 1', '109 Hùng Vương Phường 3', 'Bến Tre', '19001004','BTCinetix@gmail.com'),
+('BT2', 'CinetixBT 2', '110 Phạm Ngũ Lão Phường 5', 'Bến Tre', '19001004','BTCinetix@gmail.com'),
+('BT3', 'CinetixBT 3', '111 Phan Chu Trinh Phường 6', 'Bến Tre', '19001004','BTCinetix@gmail.com');
 
 INSERT INTO rooms (id, cinema_id, room_number, total_seats) VALUES
-(1,1, 'Room 1', 50),
-(2,2, 'Room 2', 60),
-(3,3, 'Room 3', 70),
-(4,1, 'Room 4', 80),
-(5,2, 'Room 5', 90),
-(6,3, 'Room 6', 100),
-(7,1, 'Room 7', 50),
-(8,2, 'Room 8', 60),
-(9,3, 'Room 9', 70),
-(10,1, 'Room 10', 80);
+(1, 'HN1', 'Room 1', 65),
+(2, 'HN1', 'Room 2', 65),
+(3, 'HN1', 'Room 3', 65),
+(4, 'HN1', 'Room 4', 65),
+(5, 'HN1', 'Room 5', 65),
+(6, 'HN2', 'Room 1', 65),
+(7, 'HN2', 'Room 2', 65),
+(8, 'HN2', 'Room 3', 65),
+(9, 'HN2', 'Room 4', 65),
+(10, 'HN2', 'Room 5', 65),
+(11, 'HN3', 'Room 1', 65),
+(12, 'HN3', 'Room 2', 65),
+(13, 'HN3', 'Room 3', 65),
+(14, 'HN3', 'Room 4', 65),
+(15, 'HN3', 'Room 5', 65),
+(16, 'HCM1', 'Room 1', 65),
+(17, 'HCM1', 'Room 2', 65),
+(18, 'HCM1', 'Room 3', 65),
+(19, 'HCM1', 'Room 4', 65),
+(20, 'HCM1', 'Room 5', 65),
+(21, 'HCM2', 'Room 1', 65),
+(22, 'HCM2', 'Room 2', 65),
+(23, 'HCM2', 'Room 3', 65),
+(24, 'HCM2', 'Room 4', 65),
+(25, 'HCM2', 'Room 5', 65),
+(26, 'HCM3', 'Room 1', 65),
+(27, 'HCM3', 'Room 2', 65),
+(28, 'HCM3', 'Room 3', 65),
+(29, 'HCM3', 'Room 4', 65),
+(30, 'HCM3', 'Room 5', 65),
+(31, 'TV1', 'Room 1', 65),
+(32, 'TV1', 'Room 2', 65),
+(33, 'TV1', 'Room 3', 65),
+(34, 'TV1', 'Room 4', 65),
+(35, 'TV1', 'Room 5', 65),
+(36, 'TV2', 'Room 1', 65),
+(37, 'TV2', 'Room 2', 65),
+(38, 'TV2', 'Room 3', 65),
+(39, 'TV2', 'Room 4', 65),
+(40, 'TV2', 'Room 5', 65),
+(41, 'TV3', 'Room 1', 65),
+(42, 'TV3', 'Room 2', 65),
+(43, 'TV3', 'Room 3', 65),
+(44, 'TV3', 'Room 4', 65),
+(45, 'TV3', 'Room 5', 65),
+(46, 'BT1', 'Room 1', 65),
+(47, 'BT1', 'Room 2', 65),
+(48, 'BT1', 'Room 3', 65),
+(49, 'BT1', 'Room 4', 65),
+(50, 'BT1', 'Room 5', 65),
+(51, 'BT2', 'Room 1', 65),
+(52, 'BT2', 'Room 2', 65),
+(53, 'BT2', 'Room 3', 65),
+(54, 'BT2', 'Room 4', 65),
+(55, 'BT2', 'Room 5', 65),
+(56, 'BT3', 'Room 1', 65),
+(57, 'BT3', 'Room 2', 65),
+(58, 'BT3', 'Room 3', 65),
+(59, 'BT3', 'Room 4', 65),
+(60, 'BT3', 'Room 5', 65);
+
+
 INSERT INTO seats (id, room_id, seat_row, seat_number, seat_type, seat_status) VALUES
 -- phòng 1
 (101, 1, 'A', 1, 'Ghế thường', 'Ghế trống'),
@@ -477,12 +533,28 @@ INSERT INTO seats (id, room_id, seat_row, seat_number, seat_type, seat_status) V
 (564, 5, 'G', 4, 'Ghế đôi', 'Ghế trống'),
 (565, 5, 'G', 5, 'Ghế đôi', 'Ghế trống');
 
-INSERT INTO foods (id, namef, descript, price) VALUES
-('B01', 'Bỏng ngô', 'Bắp rang bơ giòn thơm','', 30000),
-('C02', 'Coca', 'Nước ngọt có ga mát lạnh','', 20000),
-('N03', 'Nachos', 'Khoai tây chiên phô mai', 35000),
-('X04', 'Xúc xích', 'Xúc xích kẹp bánh mì nóng', 40000),
-('W05', 'Nước lọc', 'Chai nước suối tinh khiết', 15000);
+INSERT INTO foods (id, namef, descript,food_images,price) VALUES
+('CB01', 'Combo1', '1 bắp 1 nước','https://i.postimg.cc/vBH1mLHF/combo1big.jpg', 30000),
+('CB02', 'Combo2', '2 nước 1 bắp','https://i.postimg.cc/63j842y7/combo2big.jpg', 20000),
+('B03', 'Bắp', 'Bắp','https://i.postimg.cc/mrSzR64y/bap.jpg', 35000),
+('N04', 'Coca Cola','Nước ngọt Coca cola','https://i.postimg.cc/d0Fkbcb0/coca-cola.jpg', 40000),
+('N05', 'Fanta', 'Nước ngọt Fanta','https://i.postimg.cc/HnrVwYy6/fanta.jpg', 15000),
+('N06', 'Sprite', 'Nước ngọt Sprite','https://i.postimg.cc/59rHxChT/sprite.jpg', 15000),
+('N07', 'Milo', 'Sữa milo','https://i.postimg.cc/0jhrZTGP/milo.jpg', 15000),
+('B00', 'Bắp phô mai', 'Bắp vị phô mai',null, 40000),
+('B01', 'Bắp bơ', 'Bắp vị bơ',null, 40000),
+('B02', 'Bắp caramel', 'Bắp vị caramel',null, 40000);
+-- Coca Cola (N04)
+INSERT INTO food_variants (variant_id ,food_id, size, flavor, price) VALUES
+(1,'N04', 'Nhỏ', 'Coca', 15000),
+(2,'N04', 'Lớn', 'Coca', 20000),
+(3,'N05', 'Nhỏ', 'Fanta', 15000),
+(4,'N05', 'Lớn', 'Fanta', 20000),
+(5,'N06', 'Nhỏ', 'Sprite', 15000),
+(6,'N06', 'Lớn', 'Sprite', 20000),
+(7,'N07', 'Nhỏ', 'Milo', 15000),
+(8,'N07', 'Lớn', 'Milo', 18000);
+
 
 INSERT INTO showtimes (id, movie_id, room_id, show_date, show_time, price) VALUES
 (1,1, 1, '2025-06-01', '18:00:00', 75000),
@@ -520,11 +592,11 @@ INSERT INTO booking_details (id, booking_id, seat_id) VALUES
 (6, 6, 106),
 (7, 7, 107);
 INSERT INTO food_orders (id, booking_id, food_id, quantity) VALUES
-(1, 1, 'C02', 2),   -- Alice đặt 2 phần Coke
-(2, 1, 'B01', 1),   -- Alice đặt 1 phần Bắp
-(3, 3, 'N03', 1),   -- Bob đặt 1 phần Nachos
-(4, 1, 'B01', 1),   -- Charlie đặt 1 phần Bắp
-(5, 5, 'W05', 1),   -- David đặt 1 chai nước
-(7, 2, 'C02', 2);   -- Eva đặt 2 lon Coke
+(1, 1, 'N04', 2),   -- Alice đặt 2 phần Coke
+(2, 1, 'B03', 1),   -- Alice đặt 1 phần Bắp
+(3, 3, 'N05', 1),  
+(4, 1, 'CB01', 1),   
+(5, 5, 'CB02', 1),   
+(7, 2, 'N07', 2);   
 
 

@@ -8,6 +8,7 @@
 // // Tạo kết nối
 // $conn = new mysqli($servername, $username, $password, $database);
 
+<<<<<<< HEAD
 // // Kiểm tra kết nối
 // if ($conn->connect_error) {
 //     die("Kết nối thất bại: " . $conn->connect_error);
@@ -20,3 +21,9 @@ $dbname = "cinemawebpage";   // thay bằng tên database bạn muốn kết n�
 
 $link=@mysqli_connect($servername, $username, $password, $dbname) or die("Kết nối thất bại");
 ?>
+=======
+// Kiểm tra kết nối
+if ($conn->connect_error) {
+    die("Kết nối thất bại: " . $conn->connect_error);
+}
+>>>>>>> fdea11551a9e46503bc5e03d31af2a3d4d9a820f

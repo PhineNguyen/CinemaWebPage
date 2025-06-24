@@ -1,13 +1,14 @@
 
 USE cinemawebpage;
-DROP TABLE IF EXISTS food_orders;
-DROP TABLE IF EXISTS booking_details;
-DROP TABLE IF EXISTS bookings;	
-DROP TABLE IF EXISTS seats;
-DROP TABLE IF EXISTS payments;
-DROP TABLE IF EXISTS showtimes;
-DROP TABLE IF EXISTS rooms;
-DROP TABLE IF EXISTS cinemas;
-DROP TABLE IF EXISTS movies;
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS foods;
+DROP TABLE food_orders;
+DROP TABLE booking_details;
+DROP TABLE bookings;	
+DROP TABLE seats;
+DROP TABLE payments;
+DROP TABLE showtimes;
+DROP TABLE rooms;
+DROP TABLE cinemas;
+DROP TABLE movies;
+DROP TABLE users;
+DROP TABLE food_variants;
+DROP TABLE foods;
