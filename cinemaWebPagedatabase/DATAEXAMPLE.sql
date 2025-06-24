@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 use cinemawebpage;
+=======
+use cineme;
+>>>>>>> d4c57411d18ed5118ad9a11b0f73e9e06c3d73ea
 INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo) VALUES
 (1,'Alice', 'alice@example.com', 'password123', '0123456789', 'admin'),
 (2,'Bob', 'bob@example.com', 'password123', '0987654321', 'admin'),
@@ -536,8 +540,10 @@ INSERT INTO foods (id, namef, descript,food_images,price) VALUES
 ('N04', 'Coca Cola','Nước ngọt Coca cola','https://i.postimg.cc/d0Fkbcb0/coca-cola.jpg', 40000),
 ('N05', 'Fanta', 'Nước ngọt Fanta','https://i.postimg.cc/HnrVwYy6/fanta.jpg', 15000),
 ('N06', 'Sprite', 'Nước ngọt Sprite','https://i.postimg.cc/59rHxChT/sprite.jpg', 15000),
-('N07', 'Milo', 'Sữa milo','https://i.postimg.cc/0jhrZTGP/milo.jpg', 15000);
-
+('N07', 'Milo', 'Sữa milo','https://i.postimg.cc/0jhrZTGP/milo.jpg', 15000),
+('B00', 'Bắp phô mai', 'Bắp vị phô mai',null, 40000),
+('B01', 'Bắp bơ', 'Bắp vị bơ',null, 40000),
+('B02', 'Bắp caramel', 'Bắp vị caramel',null, 40000);
 -- Coca Cola (N04)
 INSERT INTO food_variants (variant_id ,food_id, size, flavor, price) VALUES
 (1,'N04', 'Nhỏ', 'Coca', 15000),

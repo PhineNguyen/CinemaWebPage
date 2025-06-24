@@ -1,85 +1,55 @@
 $(document).ready(function () {
   // Ẩn popup ban đầu
-  $('#popup-nuoc, #popup-bap').hide();
+  $('#popup-nuoc, #popup-combo').hide();
 
   $(document).ready(function () {
-  // Xử lý nút tăng
-  $('.plus').click(function () {
-    const input = $(this).siblings('input');
-    let currentValue = parseInt(input.val());
-    input.val(currentValue + 1);
+    // Xử lý nút tăng: chỉ tăng tối đa 1
+    $('.plus').click(function () {
+      const input = $(this).siblings('input');
+      let currentValue = parseInt(input.val());
+      if (currentValue < 1) {
+        input.val(currentValue + 1);
+      }
+      else{
+        input.val(1);
+      }
+    });
+
+    // Xử lý nút giảm: không giảm dưới 0
+    $('.minus').click(function () {
+      const input = $(this).siblings('input');
+      let currentValue = parseInt(input.val());
+      if (currentValue > 0) {
+        input.val(currentValue - 1);
+      }
+    });
+  })
+
+  // Khi click vào nút "Thay đổi" của nước lẻ
+  $('#chang2').click(function() {
+    $('#popup-nuoc').fadeIn(); // Hiện form chọn nước
   });
 
-  // Xử lý nút giảm
-  $('.minus').click(function () {
-    const input = $(this).siblings('input');
-    let currentValue = parseInt(input.val());
-    if (currentValue > 0) {
-      input.val(currentValue - 1);
-    }
-  });
-});
-
-  // Xử lý khi click nút "Chọn loại nước" hoặc "Chọn vị bắp"
-  $('.select').click(function () {
-    const container = $(this).closest('.combo-item');
-    const input = container.find('input[type="number"]');
-    let value = parseInt(input.val()) || 0;
-
-    // Nếu là 0 thì tự tăng lên 1
-    if (value === 0) {
-      input.val(1);
-    }
-
-    // Hiển thị popup phù hợp
-    const buttonText = $(this).text().toLowerCase();
-    if (buttonText.includes("loại nước")) {
-      $('#popup-nuoc').css('display', 'flex');
-    } else if (buttonText.includes("vị bắp")) {
-      $('#popup-bap').css('display', 'flex');
-    }
-  });
-
-   // Đóng popup khi nhấn "Xác nhận"
-  // Khi người dùng chọn xong loại nước và nhấn xác nhận
-  $('.close-popup').click(function () {
-    // Lấy radio được chọn
-    const selected = $('input[name="loai_nuoc"]:checked');
-
-    if (selected.length > 0) {
-      const name = selected.data('name');
-      const price = selected.data('price');
-      const img = selected.data('img');
-
-      // Tìm phần tử combo hiện tại (combo-item đang mở popup)
-      const combo = $('#nuoc'); // Nếu nhiều combo, cần thêm cách xác định đúng cái đang mở
-
-      combo.find('h3').text(name); // Cập nhật tên
-      combo.find('.price').text(price); // Cập nhật giá
-      combo.find('img').attr('src', img); // Cập nhật ảnh
-      combo.find('img').attr('alt', name); // Thay alt ảnh (tùy chọn)
-    }
-
-    $(this).closest('.popup-form').fadeOut();
-  });
-
-  // Có thể thêm xử lý vị bắp ở đây sau nếu cần
-  $('.close-popup').click(function () {
+  // Khi click nút "Xác nhận" trong form
+  
+  $('.close-popup').click(function() {
   // Lấy radio được chọn
-  const selected = $('input[name="vi_bap"]:checked');
-
-  if (selected.length > 0) {
+    const selected = $('input[name="loai_nuoc"]:checked');
+    if (selected.length > 0) {
     const name = selected.data('name');
     const price = selected.data('price');
+    const img = selected.data('img');
 
-    // Tìm phần tử combo hiện tại (combo-item đang mở popup)
-    const combo = $('#bap'); // Nếu nhiều combo, cần thêm cách xác định đúng cái đang mở
+  // Cập nhật thông tin trong phần nước lẻ
+    const comboItem = $('#chang2').closest('.combo-item');
+    comboItem.find('img').attr('src', img).attr('alt', name);
+    comboItem.find('h3').text(name);
+    comboItem.find('.price').text(price);
+    }
 
-    combo.find('h3').text(name); // Cập nhật tên
-    combo.find('.price').text(price); // Cập nhật giá
-  }
+  // Ẩn popup
+  $('#popup-nuoc').fadeOut();
 
-  $(this).closest('.popup-form').fadeOut();
   });
-
 });
+
