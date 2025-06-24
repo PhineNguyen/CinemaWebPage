@@ -1,14 +1,13 @@
 <?php
   session_start();
   include('connect.php');
-  include('cinetix/header.php');
+  include('header.php');
 ?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
   <title>Chọn lịch chiếu</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="CSS/chonlichchieu.css">
 </head>
 <body>
@@ -123,4 +122,4 @@
 
   </div>
 </body>
-<?php include("cinetix/footer.php"); ?>
+<?php include('footer.php'); ?>

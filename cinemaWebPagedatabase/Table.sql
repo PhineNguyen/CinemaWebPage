@@ -1,4 +1,4 @@
-
+CREATE DATABASE IF NOT EXISTS cinemawebpage;
 USE cinemawebpage;
 
 CREATE TABLE users (
