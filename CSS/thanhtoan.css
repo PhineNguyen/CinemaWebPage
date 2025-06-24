@@ -1,0 +1,89 @@
+
+.payment-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  color: #fff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.main-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.ticket-info, .payment-method {
+  flex: 1 1 45%;
+  background: black;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.ticket-card {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.ticket-card img {
+  width: 100px;
+  border-radius: 4px;
+}
+
+.combo-item {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.combo-item img {
+  width: 50px;
+}
+
+.quantity {
+  margin-top: 5px;
+}
+
+.quantity button {
+  padding: 3px 8px;
+  margin: 0 3px;
+}
+
+.payment-method form label {
+  display: block;
+  margin: 8px 0;
+}
+
+.total {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.confirm-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #ffc107;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.confirm-btn:hover {
+  background: #e0a800;
+}
+
+.checkbox {
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+  .ticket-info, .payment-method {
+    flex: 1 1 100%;
+  }
+}

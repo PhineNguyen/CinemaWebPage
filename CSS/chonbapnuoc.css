@@ -166,3 +166,72 @@ body{
   color: black; /* Keep color black on hover */
 }
 
+/* popup cả bắp và nước */
+#popup-combo.popup-form {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#popup-combo .popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  color: black;
+  width: 320px;
+  text-align: left;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+#popup-combo .popup-content h3 {
+  background-color: #FFC107;
+  color: black;
+  text-align: center;
+  padding: 15px 20px;
+  margin: -20px -20px 20px -20px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#popup-combo .popup-content label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+#popup-combo .popup-content input[type="radio"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+#popup-combo .popup-content .close-popup {
+  background-color: #FFC107;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 12px 25px;
+  display: block;
+  width: calc(100% - 40px);
+  margin: 20px auto 0 auto;
+  font-size: 1.1em;
+  box-sizing: border-box;
+}
+
+#popup-combo .popup-content .close-popup:hover {
+  background-color: rgba(255, 193, 7, 0.9);
+}
+
+/* total */
+
