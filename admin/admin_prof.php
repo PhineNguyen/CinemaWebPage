@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+include("../connect.php");
 ?>
 <?php
 session_start(); // Bắt đầu session

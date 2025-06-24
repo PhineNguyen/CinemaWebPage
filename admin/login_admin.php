@@ -1,7 +1,7 @@
 <?php
 // Bắt đầu phiên làm việc và kết nối CSDL
 session_start();
-include("connect.php");
+include('../connect.php');
 
 // Khởi tạo biến lỗi rỗng
 $error = "";
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin</title>
-    <link rel="stylesheet" href="CSS/login_admin.css">
+    <link rel="stylesheet" href="../CSS/login_admin.css">
 </head>
 <body>
     <div class="khunglogin">
@@ -87,6 +87,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="js/login_admin.js"></script>
+    <script src="./login_admin.php"></script>
 </body>
 </html>

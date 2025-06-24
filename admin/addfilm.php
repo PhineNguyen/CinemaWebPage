@@ -1,6 +1,6 @@
 <?php
 // Kết nối CSDL
-include("connect.php");
+include("../connect.php");
 
 // Kiểm tra nếu form đã gửi
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

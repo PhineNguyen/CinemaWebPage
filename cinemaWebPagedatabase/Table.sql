@@ -1,6 +1,5 @@
-
-
-USE cinema;
+CREATE DATABASE IF NOT EXISTS cinemawebpage;
+USE cinemawebpage;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -34,7 +33,8 @@ CREATE TABLE cinemas (
     ci_name VARCHAR(100) NOT NULL,
     address VARCHAR(255),
     city VARCHAR(100),
-    hotline VARCHAR(20)
+    hotline VARCHAR(20),
+    email_ci VARCHAR(100)
 );
 
 CREATE TABLE rooms (

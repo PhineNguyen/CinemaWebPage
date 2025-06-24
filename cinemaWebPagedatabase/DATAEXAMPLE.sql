@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+use cinemawebpage;
+=======
 use cineme;
+>>>>>>> d4c57411d18ed5118ad9a11b0f73e9e06c3d73ea
 INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo) VALUES
 (1,'Alice', 'alice@example.com', 'password123', '0123456789', 'admin'),
 (2,'Bob', 'bob@example.com', 'password123', '0987654321', 'admin'),
@@ -74,7 +78,7 @@ INSERT INTO movies (
     'T18 - Phim được phổ biến đến người xem từ đủ 18 tuổi trở lên (18+)',
     'Đang chiếu','https://i.postimg.cc/63n18q6Z/hq720.jpg',
     'https://image.tmdb.org/t/p/w500/tN3WWhiklSI8NErftXqyfkR9GJ.jpg', 
-    'https://www.youtube.com/watch?v=N7IcsG_hM4s'
+    'https://www.youtube.com/watch?v=N7IcHCM_hM4s'
 ),
 (
     5,
@@ -120,20 +124,19 @@ INSERT INTO movies (
 );
 
 
-INSERT INTO cinemas (id, ci_name, address, city, hotline) VALUES
-('HN1', 'CinetixHN 1', 'Quận Hoàn Kiếm', 'Hà Nội', '19001001'),
-('HN2', 'CinetixHN 2', 'Quận Đống Đa', 'Hà Nội', '19001002'),
-('HN3', 'CinetixHN 3', 'Quận Cầu Giấy', 'Hà Nội', '19001003'),
-('SG1', 'CinetixSG 1', 'Quận 1', 'Thành Phố Hồ Chí Minh', '19002001'),
-('SG2', 'CinetixSG 2', 'Quận 3', 'Thành Phố Hồ Chí Minh', '19002002'),
-('SG3', 'CinetixSG 3', 'Quận Bình Thạnh', 'Thành Phố Hồ Chí Minh', '19002003'),
-('TV1', 'CinetixTV 1', 'Phường 1', 'Trà Vinh', '19003001'),
-('TV2', 'CinetixTV 2', 'Phường 7', 'Trà Vinh', '19003002'),
-('TV3', 'CinetixTV 3', 'Phường 8', 'Trà Vinh', '19003003'),
-('BT1', 'CinetixBT 1', 'Phường 3', 'Bến Tre', '19004001'),
-('BT2', 'CinetixBT 2', 'Phường 5', 'Bến Tre', '19004002'),
-('BT3', 'CinetixBT 3', 'Phường 6', 'Bến Tre', '19004003');
-
+INSERT INTO cinemas (id, ci_name, address, city, hotline, email_ci) VALUES
+('HN1', 'CinetixHN 1', '100 Hồ Con Rùa Quận Hoàn Kiếm', 'Hà Nội', '19001001','HanoiCinetix@gmail.com'),
+('HN2', 'CinetixHN 2', '101 Lê Nin Quận Đống Đa', 'Hà Nội', '19001001','HanoiCinetix@gmail.com'),
+('HN3', 'CinetixHN 3', '102 Lý Thường Kiệt Quận Cầu Giấy', 'Hà Nội', '19001001','HanoiCinetix@gmail.com'),
+('HCM1', 'CinetixHCM 1', '103 Đồng Khởi Quận 1', 'Thành Phố Hồ Chí Minh', '19001002','HCMCinetix@gmail.com'),
+('HCM2', 'CinetixHCM 2', '104 Tên Lửa Quận 3', 'Thành Phố Hồ Chí Minh', '19001002','HCMCinetix@gmail.com'),
+('HCM3', 'CinetixHCM 3', '105 Xô Viết Nghệ Tĩnh Quận Bình Thạnh', 'Thành Phố Hồ Chí Minh', '19001002','HCMCinetix@gmail.com'),
+('TV1', 'CinetixTV 1', '106 Nguyễn Thị Minh Khai Phường 1', 'Trà Vinh', '19001003','TVCinetix@gmail.com'),
+('TV2', 'CinetixTV 2', '107 Nguyễn Đáng, Phường 7', 'Trà Vinh', '19001003','TVCinetix@gmail.com'),
+('TV3', 'CinetixTV 3', '108 Lý Thường Kiệt Phường 8', 'Trà Vinh', '19001003','TVCinetix@gmail.com'),
+('BT1', 'CinetixBT 1', '109 Hùng Vương Phường 3', 'Bến Tre', '19001004','BTCinetix@gmail.com'),
+('BT2', 'CinetixBT 2', '110 Phạm Ngũ Lão Phường 5', 'Bến Tre', '19001004','BTCinetix@gmail.com'),
+('BT3', 'CinetixBT 3', '111 Phan Chu Trinh Phường 6', 'Bến Tre', '19001004','BTCinetix@gmail.com');
 
 INSERT INTO rooms (id, cinema_id, room_number, total_seats) VALUES
 (1, 'HN1', 'Room 1', 65),
@@ -151,21 +154,21 @@ INSERT INTO rooms (id, cinema_id, room_number, total_seats) VALUES
 (13, 'HN3', 'Room 3', 65),
 (14, 'HN3', 'Room 4', 65),
 (15, 'HN3', 'Room 5', 65),
-(16, 'SG1', 'Room 1', 65),
-(17, 'SG1', 'Room 2', 65),
-(18, 'SG1', 'Room 3', 65),
-(19, 'SG1', 'Room 4', 65),
-(20, 'SG1', 'Room 5', 65),
-(21, 'SG2', 'Room 1', 65),
-(22, 'SG2', 'Room 2', 65),
-(23, 'SG2', 'Room 3', 65),
-(24, 'SG2', 'Room 4', 65),
-(25, 'SG2', 'Room 5', 65),
-(26, 'SG3', 'Room 1', 65),
-(27, 'SG3', 'Room 2', 65),
-(28, 'SG3', 'Room 3', 65),
-(29, 'SG3', 'Room 4', 65),
-(30, 'SG3', 'Room 5', 65),
+(16, 'HCM1', 'Room 1', 65),
+(17, 'HCM1', 'Room 2', 65),
+(18, 'HCM1', 'Room 3', 65),
+(19, 'HCM1', 'Room 4', 65),
+(20, 'HCM1', 'Room 5', 65),
+(21, 'HCM2', 'Room 1', 65),
+(22, 'HCM2', 'Room 2', 65),
+(23, 'HCM2', 'Room 3', 65),
+(24, 'HCM2', 'Room 4', 65),
+(25, 'HCM2', 'Room 5', 65),
+(26, 'HCM3', 'Room 1', 65),
+(27, 'HCM3', 'Room 2', 65),
+(28, 'HCM3', 'Room 3', 65),
+(29, 'HCM3', 'Room 4', 65),
+(30, 'HCM3', 'Room 5', 65),
 (31, 'TV1', 'Room 1', 65),
 (32, 'TV1', 'Room 2', 65),
 (33, 'TV1', 'Room 3', 65),
