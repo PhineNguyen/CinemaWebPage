@@ -64,8 +64,8 @@
             <img src="$image" alt="Poster phim $title" />
           </div>
           <div class="button">
-            <div><a href="#">XEM CHI TIẾT</a></div>
-            <div><a href="#">ĐẶT VÉ</a></div>
+            <div><a href="chitietphim.php">XEM CHI TIẾT</a></div>
+            <div><a href="chonlichchieu.php">ĐẶT VÉ</a></div>
           </div>
         </div>
         HTML;
