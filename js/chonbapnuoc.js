@@ -1,5 +1,24 @@
 $(document).ready(function () {
-  
+// Hàm cập nhật tính tổng
+  function updateTotal(){
+    let total = 0;
+    $('.combo-item').each(function () {
+    const priceText = $(this).find('.price').text().replace(/[^\d]/g, '');
+    const price = parseInt(priceText) || 0; // nếu không phải số thì gán 0
+    const quantity = parseInt($(this).find('input[type="number"]').val());
+    // Kiểm tra tính hợp lệ
+    if (!isNaN(quantity) && quantity >= 0) {
+    total += price * quantity;
+    }
+    });
+    $('#total-price').text(total.toLocaleString('vi-VN') + 'đ');
+  }
+
+  // Nếu người dùng nhập số trực tiếp
+  $('input[type="number"]').on('input', function () {
+  updateTotal();
+  });
+
   $(document).ready(function () {
     // Xử lý nút tăng
     $('.plus').click(function () {
@@ -7,6 +26,7 @@ $(document).ready(function () {
       let currentValue = parseInt(input.val());
       if (currentValue >= 0) {
         input.val(currentValue + 1);
+        updateTotal();
       }
     });
 
@@ -16,6 +36,7 @@ $(document).ready(function () {
       let currentValue = parseInt(input.val());
       if (currentValue > 0) {
         input.val(currentValue - 1);
+        updateTotal();
       }
     });
   })
@@ -27,12 +48,7 @@ $(document).ready(function () {
   // Nếu là nút của nước lẻ (ví dụ: changN04)
   if (buttonId === 'changN04') {
     $('#popup-nuoc').fadeIn();
-  } else if(buttonId === 'changB03') {
-    $('#popup-bap').fadeIn();
-  } else if(buttonId === 'changCB01' || buttonId === 'changCB02'){
-    currentComboButton = buttonId; // lưu lại nút đang chọn
-    $('#popup-bap2').fadeIn();
-  }
+  } 
   });
 
   // Khi click nút "Xác nhận" trong form
@@ -49,44 +65,10 @@ $(document).ready(function () {
     comboItem.find('img').attr('src', img).attr('alt', name);
     comboItem.find('h3').text(name);
     comboItem.find('.price').text(price);
+    updateTotal();
     }
-
   // Ẩn popup
   $('#popup-nuoc').fadeOut();
-
   });
-
-  $('#b2').click(function() {
-  // Lấy radio được chọn
-    const selected = $('input[name="vi_bap"]:checked');
-    if (selected.length > 0) {
-    const name = selected.data('name');
-    const price = selected.data('price');
-
-  // Cập nhật thông tin trong phần bắp lẻ
-    const comboItem = $('#changB03').closest('.combo-item');
-    comboItem.find('h3').text(name);
-    comboItem.find('.price').text(price);
-    }
-
-  // Ẩn popup
-  $('#popup-bap').fadeOut();
-
-  });
-
-  $('#b3').click(function() {
-  // Lấy radio được chọn
-    const selected = $('input[name="vi_bap"]:checked');
-    if (selected.length > 0 && currentComboButton !== null) {
-    const name = selected.data('name');
-  // Tìm phần combo tương ứng với nút được click trước đó
-    const comboItem = $('#' + currentComboButton).closest('.combo-item');
-    comboItem.find('.vibap').text(name);
-    }
-  // Ẩn popup
-  $('#popup-bap2').fadeOut();
-
-  });
-  
 });
 
