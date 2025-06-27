@@ -1,7 +1,6 @@
 <?php
-  session_start();
-  include('../connect.php');
-  include('header_admin.php');
+include('../connect.php');
+include('header_admin.php');
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -10,7 +9,8 @@
   <title>Trang quản trị</title>
   <link rel="stylesheet" href="../admin/adminCSS/admin_layout.css">
   <link rel="stylesheet" href="../admin/adminCSS/header_admin.css"> 
-  <link rel="stylesheet" href="../admin/adminCSS/admin.css">
+  <link rel="stylesheet" href="../admin/adminCSS/quanlyphim.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
   <div class="admin-layout">
@@ -18,6 +18,7 @@
       <?php include('sidebar_admin.php'); ?>
     </aside>
 <?php
+
 $limit = 4;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($page < 1) $page = 1;
@@ -32,63 +33,62 @@ $total_pages = ceil($total_records / $limit);
 
 // Truy vấn dữ liệu có JOIN 3 bảng
 $sql = "SELECT 
-    movies.title AS title, 
-    movies.image_url AS image_url, 
-    movies.ticket_price AS ticket_price,
-    movies.status AS status,
-    rooms.room_number AS room_number, 
-    showtimes.show_date AS show_date, 
-    showtimes.show_time AS show_time
-FROM showtimes
-JOIN movies ON showtimes.movie_id = movies.id
-JOIN rooms ON showtimes.room_id = rooms.id
-LIMIT $offset, $limit";
+    t.ticket_code AS ma_ve,
+    m.title AS ten_phim,
+    st.show_time AS thoi_gian,
+    st.show_date AS ngay,
+    r.room_number AS phong,
+    1 AS so_ve,  -- mỗi dòng là 1 vé
+    CONCAT(s.seat_row, s.seat_number) AS so_ghe,
+    t.status AS trang_thai
+    FROM tickets t
+    JOIN booking_details bd ON t.booking_detail_id = bd.id
+    JOIN seats s ON bd.seat_id = s.id
+    JOIN rooms r ON s.room_id = r.id
+    JOIN bookings b ON bd.booking_id = b.id
+    JOIN showtimes st ON b.showtime_id = st.id
+    JOIN movies m ON st.movie_id = m.id
+    LIMIT $offset, $limit";
 
 $results = mysqli_query($conn, $sql);
 
 if ($results && mysqli_num_rows($results) > 0) {
-  echo '<main class="main-content">';
-    echo '<div class="dashboard">';
-      echo '<div class="card">';
-        echo '<div>Tổng số vé bán ra (T5/2025)</div>';
-        echo '<h2>100</h2>';
+    echo '<main class="main-content">';
+    echo '<div class="buttons">';
+    echo '<button><i class="fa-solid fa-plus"></i><span> Thêm </span></button>';
+    echo '<button><i class="fa-solid fa-minus"></i><span> Xóa</span></button>';
+    echo '<button><i class="fa-solid fa-wrench"></i><span> Sửa</span></button>';
     echo '</div>';
-      echo '<div class="card">';
-        echo '<div>Doanh thu trong ngày (01/06/2025)</div>';
-        echo '<h2>500,000</h2>';
-    echo '</div>';
-      echo '<div class="card">';
-        echo '<div>Doanh thu trong tháng (T5/2025)</div>';
-        echo '<h2>8,000,000</h2>';
-    echo '</div>';
-  echo '</div>';
 
-  echo '<div class="date-list" style="margin: 20px 0;">';
-    echo '<label for="date-input">Chọn ngày:</label>';
-    echo '<input type="text" id="date-input" name="date-input" list="date-options" placeholder="Chọn ngày (VD: 2025-06-01)">';
-      echo '<datalist id="date-options">';
-        echo '<option value="2025-06-01">';
-        echo '<option value="2025-06-02">';
-        echo '<option value="2025-06-03">';
-        echo '<option value="2025-06-04">';
-        echo '<option value="2025-06-05">';
-    echo '</datalist>';
-    echo '</div>';
     echo '<table>';
     echo '<thead>
             <tr>
+                <th><input type="checkbox" id="checkAll"></th>
+                <th>Mã vé</th>
                 <th>Tên phim</th>
-                <th>Số vé đã bán</th>
-                <th>Doanh thu</th>
+                <th>Ngày</th>
+                <th>Thời gian</th>
+                <th>Phòng</th>
+                <th>Số vé</th>
+                <th>Số ghế</th>
+                <th>Trạng thái</th>
+                <th></th>
             </tr>
           </thead>';
     echo '<tbody>';
 
     while ($row = mysqli_fetch_assoc($results)) {
         echo "<tr>
-                <td>{$row['show_date']}</td>
-                <td>{$row['show_time']}</td>
-                <td>{$row['room_number']}</td>
+                <td><input type='checkbox' class='checkItem'></td>
+                <td>{$row['ma_ve']}</td>
+                <td>{$row['ten_phim']}</td>
+                <td>{$row['ngay']}</td>
+                <td>{$row['thoi_gian']}</td>
+                <td>{$row['phong']}</td>
+                <td>{$row['so_ve']}</td>
+                <td>{$row['so_ghe']}</td>
+                <td>{$row['trang_thai']}</td>
+                <td><button class='btn-edit'>Cập nhật</button></td>
               </tr>";
     }
 
@@ -118,7 +118,6 @@ if ($results && mysqli_num_rows($results) > 0) {
     echo "<p class='main-content'>Không có lịch chiếu phim nào.</p>";
 }
 ?>
-   
   </div>
 </body>
 </html>

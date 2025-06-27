@@ -1,7 +1,6 @@
 <?php
-  session_start();
-  include('../connect.php');
-  include('header_admin.php');
+include('../connect.php');
+include('header_admin.php');
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -10,13 +9,15 @@
   <title>Trang quản trị</title>
   <link rel="stylesheet" href="../admin/adminCSS/admin_layout.css">
   <link rel="stylesheet" href="../admin/adminCSS/header_admin.css"> 
-  <link rel="stylesheet" href="../admin/adminCSS/admin.css">
+  <link rel="stylesheet" href="../admin/adminCSS/quanlyphim.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
   <div class="admin-layout">
     <aside class="sidebar">
       <?php include('sidebar_admin.php'); ?>
     </aside>
+
 <?php
 $limit = 4;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -47,48 +48,38 @@ LIMIT $offset, $limit";
 $results = mysqli_query($conn, $sql);
 
 if ($results && mysqli_num_rows($results) > 0) {
-  echo '<main class="main-content">';
-    echo '<div class="dashboard">';
-      echo '<div class="card">';
-        echo '<div>Tổng số vé bán ra (T5/2025)</div>';
-        echo '<h2>100</h2>';
+    echo '<main class="main-content">';
+    echo '<div class="buttons">';
+    echo '<button><i class="fa-solid fa-plus"></i><span> Thêm </span></button>';
+    echo '<button><i class="fa-solid fa-minus"></i><span> Xóa</span></button>';
+    echo '<button><i class="fa-solid fa-wrench"></i><span> Sửa</span></button>';
     echo '</div>';
-      echo '<div class="card">';
-        echo '<div>Doanh thu trong ngày (01/06/2025)</div>';
-        echo '<h2>500,000</h2>';
-    echo '</div>';
-      echo '<div class="card">';
-        echo '<div>Doanh thu trong tháng (T5/2025)</div>';
-        echo '<h2>8,000,000</h2>';
-    echo '</div>';
-  echo '</div>';
 
-  echo '<div class="date-list" style="margin: 20px 0;">';
-    echo '<label for="date-input">Chọn ngày:</label>';
-    echo '<input type="text" id="date-input" name="date-input" list="date-options" placeholder="Chọn ngày (VD: 2025-06-01)">';
-      echo '<datalist id="date-options">';
-        echo '<option value="2025-06-01">';
-        echo '<option value="2025-06-02">';
-        echo '<option value="2025-06-03">';
-        echo '<option value="2025-06-04">';
-        echo '<option value="2025-06-05">';
-    echo '</datalist>';
-    echo '</div>';
     echo '<table>';
     echo '<thead>
             <tr>
+                <th><input type="checkbox" id="checkAll"></th>
                 <th>Tên phim</th>
-                <th>Số vé đã bán</th>
-                <th>Doanh thu</th>
+                <th>Poster</th>
+                <th>Giá vé</th>
+                <th>Ngày chiếu</th>
+                <th>Giờ chiếu</th>
+                <th>Phòng</th>
+                <th>Trạng thái</th>
             </tr>
           </thead>';
     echo '<tbody>';
 
     while ($row = mysqli_fetch_assoc($results)) {
         echo "<tr>
+                <td><input type='checkbox' class='checkItem'></td>
+                <td>{$row['title']}</td>
+                <td><img src='{$row['image_url']}' width='100'></td>
+                <td>{$row['ticket_price']}đ</td>
                 <td>{$row['show_date']}</td>
                 <td>{$row['show_time']}</td>
                 <td>{$row['room_number']}</td>
+                <td>{$row['status']}</td>
               </tr>";
     }
 
@@ -118,7 +109,10 @@ if ($results && mysqli_num_rows($results) > 0) {
     echo "<p class='main-content'>Không có lịch chiếu phim nào.</p>";
 }
 ?>
-   
   </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script src="/adminjs/sidebar.js"></script>
+
 </body>
+
 </html>

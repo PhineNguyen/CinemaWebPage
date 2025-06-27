@@ -1,17 +1,19 @@
-// Click chuột vô admin, menu xuất hiện
-    $(document).ready(function(){
-        $(".mucluc").hide(); 
-        $(".admin-profile").click(function(){ 
-            $(".mucluc").slideToggle(300); 
-        });
+$(document).ready(function() {
+    // Ẩn menu mục lục khi load
+    $(".mucluc").hide();
+
+    // Click vào admin-profile thì hiện/tắt menu
+    $(".admin-profile").on("click", function(e) {
+        e.stopPropagation();
+        $(".mucluc").slideToggle(200);
     });
-    //Di chuyển chuột vô admin, chữ đổi màu
-    $(document).ready(function(){
-        $(".admin-profile").mouseover(function(){ 
-            $(".admin-profile").css({"color":"#ffc107"})
-        });
-        $(".admin-profile").mouseleave(function(){ 
-            $(".admin-profile").css({"color":"white"})
-        });
+    // Click ra ngoài thì ẩn menu
+    $(document).on("click", function() {
+        $(".mucluc").slideUp(200);
     });
-    
+    // Hover đổi màu chữ admin
+    $(".admin-profile").hover(
+        function() { $(this).css({"color":"#ffc107"}); },
+        function() { $(this).css({"color":"white"}); }
+    );
+});

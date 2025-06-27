@@ -1,4 +1,11 @@
-
+:root {
+  --bg-dark: #292929;
+  --bg-footer: #222;
+  --highlight: #EBB802;
+  --text-light: white;
+  --poster-hover-opacity: 0.3;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.2);
+}
 
 body {
   background-color: #111;

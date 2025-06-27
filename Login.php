@@ -6,7 +6,6 @@ include("header.php");
 
 // Khởi tạo biến lỗi rỗng
 $error = "";
-
 // Xử lý khi form được gửi đi
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
@@ -43,8 +42,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đăng nhập</title>
   <link rel="stylesheet" href="CSS/LoRe.css"> <!-- File CSS riêng -->
+  <title>Đăng nhập</title>
+  
 </head>
 <body>
   <div class="login-container">
@@ -54,19 +54,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <p class="error"><?php echo $error; ?></p>
     <?php endif; ?>
 
-    <form method="post" action="login.php">
+    <form method="post" action="login.php" autocomplete="off">
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-
+      <input type="email" id="email" name="email"  required>
       <label for="password">Mật khẩu</label>
       <input type="password" id="password" name="password" required>
-
       <button type="submit">Đăng nhập</button>
     </form>
 
     <p class="register-link">Chưa có tài khoản? <a href="register.php" style="color:white">Đăng ký</a></p>
   </div>
-
+       <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+       <script src="./js/login_admin.js"></script> 
 
 </body>
 </html>

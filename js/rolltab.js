@@ -1,60 +1,77 @@
 $(document).ready(function () {
   const $navTabs = $('.nav-item a');
+  const $tabHome = $('#tab-home');
   const $tabRap = $('#rap-cinetix-tab');
   const $tabGiaVe = $('#gia-ve-tab');
   const $tabLienhe = $('#lien-he-tab');
+
   const $mainContent = $('#main-content');
   const $rapContent = $('#rap-cinetix-content');
   const $giaVeContent = $('#gia-ve-content');
+  const $lienHeContent = $('#lien-he-content');
+  
+  // PHIM (Trang chủ)
+  $tabHome.on('click', function (e) {
+    e.preventDefault();
+    $navTabs.removeClass('active');
+    $tabHome.addClass('active');
 
-  // Tab RẠP CINETIX
+    $rapContent.hide();
+    $giaVeContent.hide();
+    $lienHeContent.hide();
+    $mainContent.show();
+  });
+
+  // RẠP CINETIX
   $tabRap.on('click', function (e) {
     e.preventDefault();
     $navTabs.removeClass('active');
     $tabRap.addClass('active');
+
     $mainContent.hide();
     $giaVeContent.hide();
+    $lienHeContent.hide();
+
+    $rapContent.html('<div class="loading">Đang tải...</div>').show();
     $.get('rapCinetix.php', function (html) {
-      $rapContent.html(html).show();
+      $rapContent.html(html);
       initializeRapCinetixScript();
     });
   });
 
-  // Tab GIÁ VÉ
+  // GIÁ VÉ
   $tabGiaVe.on('click', function (e) {
     e.preventDefault();
     $navTabs.removeClass('active');
     $tabGiaVe.addClass('active');
+
     $mainContent.hide();
     $rapContent.hide();
+    $lienHeContent.hide();
+
+    $giaVeContent.html('<div class="loading">Đang tải...</div>').show();
     $.get('giave.php', function (html) {
-      $giaVeContent.html(html).show();
+      $giaVeContent.html(html);
     });
   });
 
-  // Tab LIÊN HỆ
+  // LIÊN HỆ
   $tabLienhe.on('click', function (e) {
     e.preventDefault();
     $navTabs.removeClass('active');
     $tabLienhe.addClass('active');
+
     $mainContent.hide();
     $rapContent.hide();
+    $giaVeContent.hide();
+
+    $lienHeContent.html('<div class="loading">Đang tải...</div>').show();
     $.get('lienhe.php', function (html) {
-      $giaVeContent.html(html).show();
+      $lienHeContent.html(html);
     });
   });
 
-  // Tab PHIM (mặc định giao diện chính)
-  $navTabs.eq(0).on('click', function (e) {
-    e.preventDefault();
-    $navTabs.removeClass('active');
-    $(this).addClass('active');
-    $rapContent.hide();
-    $giaVeContent.hide();
-    $mainContent.show();
-  });
-
-  // Hàm khởi tạo rạp
+  // Hàm khởi tạo sau khi tải rạp
   function initializeRapCinetixScript() {
     const cinemaDetails = {
       "Hồ Chí Minh": ["CINETIX GO! Quận 1", "CINETIX VINCOM Thủ Đức"],
@@ -144,19 +161,17 @@ $(document).ready(function () {
         });
       }
 
-      // Click mặc định vào tỉnh đầu tiên
+      // Tự động click tỉnh đầu tiên
       $cinemaItems.eq(0).click();
     }
   }
 
-  // Scroll phim
+  // Cuộn phim
   window.scrollMovies = function (direction) {
     const $movieList = $('#movie-list');
     if (!$movieList.length) return;
-
     const scrollAmount = 440;
     const currentScroll = $movieList.scrollLeft();
-
     $movieList.animate({
       scrollLeft: direction === 'left' ? currentScroll - scrollAmount : currentScroll + scrollAmount
     }, 400);
