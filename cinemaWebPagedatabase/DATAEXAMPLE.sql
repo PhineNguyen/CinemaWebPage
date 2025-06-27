@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 use cinemawebpage;
 INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo, start_date, account_status) VALUES
 -- Admins
@@ -32,6 +33,23 @@ INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo, start_d
 ('U000111', 'Zane', 'zane@example.com', 'password123', '0399988776', 'user', NULL, 'Hoạt động'),
 ('U777888', 'Lily', 'lily@example.com', 'password123', '0322223333', 'user', NULL, 'Không hoạt động'),
 ('U999999', 'Noah', 'noah@example.com', 'password123', '0333444555', 'user', NULL, 'Hoạt động');
+=======
+
+use cinemawebpage;
+
+use cinemawebpage;
+INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo) VALUES
+(1,'Alice', 'alice@example.com', 'password123', '0123456789', 'admin'),
+(2,'Bob', 'bob@example.com', 'password123', '0987654321', 'admin'),
+(3,'Charlie', 'charlie@example.com', 'password123', '0912345678', 'admin'),
+(4,'Helen', 'helen@example.com', 'password123', '0901234567', 'admin'),
+(5,'David', 'david@example.com', 'password123', '0909123456', 'user'),
+(6,'Eva', 'eva@example.com', 'password123', '0988123456', 'user'),
+(7,'Frank', 'frank@example.com', 'password123', '0934567890', 'user'),
+(8,'Grace', 'grace@example.com', 'password123', '0976543210', 'user'),
+(9,'Ivan', 'ivan@example.com', 'password123', '0923456789', 'user'),
+(10,'Jane', 'jane@example.com', 'password123', '0911223344', 'user');
+>>>>>>> 5b1cd645d4c1aeba7557e168118e0bb6d1ff69d5
 
 
 INSERT INTO movies (
@@ -595,6 +613,20 @@ INSERT INTO foods (id, namef, descript,food_images,price) VALUES
 ('N05', 'Fanta', 'Nước ngọt Fanta','https://i.postimg.cc/HnrVwYy6/fanta.jpg', 15000),
 ('N06', 'Sprite', 'Nước ngọt Sprite','https://i.postimg.cc/59rHxChT/sprite.jpg', 15000),
 ('N07', 'Milo', 'Sữa milo','https://i.postimg.cc/0jhrZTGP/milo.jpg', 15000);
+<<<<<<< HEAD
+=======
+
+-- Coca Cola (N04)
+INSERT INTO food_variants (variant_id ,food_id, size, flavor, price) VALUES
+(1,'N04', 'Nhỏ', 'Coca', 15000),
+(2,'N04', 'Lớn', 'Coca', 20000),
+(3,'N05', 'Nhỏ', 'Fanta', 15000),
+(4,'N05', 'Lớn', 'Fanta', 20000),
+(5,'N06', 'Nhỏ', 'Sprite', 15000),
+(6,'N06', 'Lớn', 'Sprite', 20000),
+(7,'N07', 'Nhỏ', 'Milo', 15000),
+(8,'N07', 'Lớn', 'Milo', 18000);
+>>>>>>> 5b1cd645d4c1aeba7557e168118e0bb6d1ff69d5
 
 INSERT INTO showtimes (id, movie_id, room_id, show_date, show_time) VALUES
 (1,1, 1, '2025-06-01', '18:00:00'),
