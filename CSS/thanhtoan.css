@@ -1,89 +1,215 @@
+body {
+  background-color: #1c1c1c;
+  color: #fff;
+}
 
 .payment-container {
   max-width: 1100px;
-  margin: 40px auto;
-  padding: 30px;
-  background-color: #1e1e1e;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-  color: #fff;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-.main-content {
+  margin: auto;
   display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-}
-.ticket-info, .payment-method {
-  flex: 1 1 45%;
-  background: black;
-  padding: 15px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.ticket-card {
-  display: flex;
-  gap: 10px;
+h2 {
   margin-bottom: 10px;
 }
 
-.ticket-card img {
-  width: 100px;
-  border-radius: 4px;
+.warning-box {
+  background-color: #fff3cd;
+  border-left: 5px solid #ffc107;
+  color: #856404;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
 }
 
-.combo-item {
+/* ===== Layout 2 cột ===== */
+.left-and-right {
   display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ===== Cột trái (thông tin + combo) ===== */
+.left-section {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== Cột phải (PTTT) ===== */
+.payment {
+  flex: 1;
+  background-color: #2c2c2c;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.payment-methods h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #555;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.payment-methods label {
+  display: flex;
+  align-items: center;
   gap: 10px;
-  margin-top: 10px;
+  margin-bottom: 12px;
+  cursor: pointer;
 }
 
-.combo-item img {
-  width: 50px;
+.payment-methods img {
+  width: 28px;
+  height: auto;
 }
 
-.quantity {
-  margin-top: 5px;
+/* ===== Khung thông tin vé ===== */
+.ticket-section {
+  background: white;
+  color: black;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  gap: 12px;
 }
 
-.quantity button {
-  padding: 3px 8px;
-  margin: 0 3px;
+.ticket-infor {
+  display: flex;
+  gap: 12px;
 }
 
-.payment-method form label {
-  display: block;
-  margin: 8px 0;
+.ticket-infor img {
+  width: 100px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
 }
 
-.total {
-  margin-top: 15px;
+.ticket-details h4 {
+  margin: 0 0 5px;
+  font-size: 1rem;
+}
+
+.ticket-details p {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+}
+
+.ticket-info {
+  border-top: 1px dashed #bbb;
+  margin-top: 8px;
+  padding-top: 8px;
+  font-size: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 20px;
+}
+
+/* ===== Combo section ===== */
+.combo-section {
+  background: white;
+  color: black;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.combo-section h3 {
+  margin: 0 0 10px;
+}
+
+.combo-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.combo-box img {
+  width: 70px;
+  height: 70px;
+  object-fit: fill;
+  border-radius: 7px;
+}
+
+.combo-info {
+  flex-grow: 1;
+  font-size: 0.9rem;
+}
+
+.combo-price {
   font-weight: bold;
+  color: #e89f00;
 }
 
-.confirm-btn {
-  margin-top: 15px;
-  padding: 10px 20px;
+.quantity-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quantity-box button {
+  padding: 4px 10px;
+  font-weight: bold;
   background: #ffc107;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
 }
 
-.confirm-btn:hover {
-  background: #e0a800;
+.quantity-box input {
+  width: 40px;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
-.checkbox {
-  margin-top: 10px;
-  font-size: 0.9em;
+/* ===== Tổng tiền và nút xác nhận ===== */
+.summary {
+  background-color: #2c2c2c;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
 }
 
+.total {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.terms {
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.confirm-btn {
+  width: 100%;
+  padding: 12px;
+  font-weight: bold;
+  background-color: #ffc107;
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.confirm-btn:hover{
+  background-color: #ffc107ec;
+  color: #000000e3;
+}
+
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
-  .ticket-info, .payment-method {
-    flex: 1 1 100%;
+  .left-and-right {
+    flex-direction: column;
   }
 }
