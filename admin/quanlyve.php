@@ -19,18 +19,27 @@ include('header_admin.php');
     </aside>
 <?php
 
-$limit = 4;
+$limit = 6;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($page < 1) $page = 1;
 
 $offset = ($page - 1) * $limit;
+$total_result = mysqli_query($conn, "
+    SELECT COUNT(*) AS total
+    FROM tickets t
+    JOIN booking_details bd ON t.booking_detail_id = bd.id
+    JOIN seats s ON bd.seat_id = s.id
+    JOIN rooms r ON s.room_id = r.id
+    JOIN bookings b ON bd.booking_id = b.id
+    JOIN showtimes st ON b.showtime_id = st.id
+    JOIN movies m ON st.movie_id = m.id
+");
 
-// Tính tổng số bản ghi để phân trang
-$total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM showtimes");
 $total_row = mysqli_fetch_assoc($total_result);
 $total_records = $total_row['total'];
 $total_pages = ceil($total_records / $limit);
-
+if ($page > $total_pages && $total_pages > 0) $page = $total_pages;
+$offset = ($page - 1) * $limit;
 // Truy vấn dữ liệu có JOIN 3 bảng
 $sql = "SELECT 
     t.ticket_code AS ma_ve,
@@ -115,7 +124,7 @@ if ($results && mysqli_num_rows($results) > 0) {
 
     echo '</main>';
 } else {
-    echo "<p class='main-content'>Không có lịch chiếu phim nào.</p>";
+    echo " ";
 }
 ?>
   </div>

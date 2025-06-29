@@ -1,16 +1,40 @@
 
 use cinemawebpage;
-INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo) VALUES
-(1,'Alice', 'alice@example.com', 'password123', '0123456789', 'admin'),
-(2,'Bob', 'bob@example.com', 'password123', '0987654321', 'admin'),
-(3,'Charlie', 'charlie@example.com', 'password123', '0912345678', 'admin'),
-(4,'Helen', 'helen@example.com', 'password123', '0901234567', 'admin'),
-(5,'David', 'david@example.com', 'password123', '0909123456', 'user'),
-(6,'Eva', 'eva@example.com', 'password123', '0988123456', 'user'),
-(7,'Frank', 'frank@example.com', 'password123', '0934567890', 'user'),
-(8,'Grace', 'grace@example.com', 'password123', '0976543210', 'user'),
-(9,'Ivan', 'ivan@example.com', 'password123', '0923456789', 'user'),
-(10,'Jane', 'jane@example.com', 'password123', '0911223344', 'user');
+INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo, start_date, account_status) VALUES
+-- Admins
+('A123456', 'Alice', 'alice@example.com', 'password123', '0123456789', 'admin', '2023-01-15', 'Hoạt động'),
+('A321654', 'Bob', 'bob@example.com', 'password123', '0987654321', 'admin', '2022-12-01', 'Hoạt động'),
+('A111111', 'Daniel', 'daniel@example.com', 'password123', '0321654987', 'admin', '2023-03-11', 'Hoạt động'),
+('A222222', 'Elisa', 'elisa@example.com', 'password123', '0399998888', 'admin', '2022-07-20', 'Không hoạt động'),
+('A333333', 'George', 'george@example.com', 'password123', '0312345678', 'admin', '2024-01-05', 'Hoạt động'),
+-- Employees
+('E789564', 'Charlie', 'charlie@example.com', 'password123', '0912345678', 'employee', '2024-03-22', 'Hoạt động'),
+('E147852', 'Helen', 'helen@example.com', 'password123', '0901234567', 'employee', '2023-08-09', 'Hoạt động'),
+('E555555', 'Ivy', 'ivy@example.com', 'password123', '0390011223', 'employee', '2023-09-30', 'Không hoạt động'),
+('E666666', 'Jack', 'jack@example.com', 'password123', '0355223344', 'employee', '2022-11-10', 'Hoạt động'),
+('E777777', 'Luna', 'luna@example.com', 'password123', '0377889900', 'employee', '2023-05-16', 'Hoạt động'),
+-- Users
+('U852369', 'David', 'david@example.com', 'password123', '0909123456', 'user', NULL, 'Hoạt động'),
+('U369852', 'Eva', 'eva@example.com', 'password123', '0988123456', 'user', NULL, 'Không hoạt động'),
+('U145869', 'Frank', 'frank@example.com', 'password123', '0934567890', 'user', NULL, 'Hoạt động'),
+('U458921', 'Grace', 'grace@example.com', 'password123', '0976543210', 'user', NULL, 'Hoạt động'),
+('U758123', 'Ivan', 'ivan@example.com', 'password123', '0923456789', 'user', NULL, 'Không hoạt động'),
+('U146289', 'Jane', 'jane@example.com', 'password123', '0911223344', 'user', NULL, 'Hoạt động'),
+('U584126', 'Phines', 'phines@example.com', 'password123', '0332564894', 'user', NULL, 'Hoạt động'),
+('U123123', 'Quinn', 'quinn@example.com', 'password123', '0365123488', 'user', NULL, 'Hoạt động'),
+('U654321', 'Ray', 'ray@example.com', 'password123', '0354789123', 'user', NULL, 'Hoạt động'),
+('U111222', 'Sara', 'sara@example.com', 'password123', '0345987123', 'user', NULL, 'Hoạt động'),
+('U333444', 'Tina', 'tina@example.com', 'password123', '0389988776', 'user', NULL, 'Không hoạt động'),
+('U999000', 'Uri', 'uri@example.com', 'password123', '0397766554', 'user', NULL, 'Hoạt động'),
+('U888777', 'Victor', 'victor@example.com', 'password123', '0322446688', 'user', NULL, 'Không hoạt động'),
+('U555666', 'Wendy', 'wendy@example.com', 'password123', '0377665544', 'user', NULL, 'Hoạt động'),
+('U444555', 'Xuan', 'xuan@example.com', 'password123', '0399552244', 'user', NULL, 'Hoạt động'),
+('U222333', 'Yen', 'yen@example.com', 'password123', '0366335544', 'user', NULL, 'Hoạt động'),
+('U000111', 'Zane', 'zane@example.com', 'password123', '0399988776', 'user', NULL, 'Hoạt động'),
+('U777888', 'Lily', 'lily@example.com', 'password123', '0322223333', 'user', NULL, 'Không hoạt động'),
+('U999999', 'Noah', 'noah@example.com', 'password123', '0333444555', 'user', NULL, 'Hoạt động');
+
+
 
 
 
@@ -589,6 +613,7 @@ INSERT INTO food_variants (variant_id ,food_id, size, flavor, price) VALUES
 (7,'N07', 'Nhỏ', 'Milo', 15000),
 (8,'N07', 'Lớn', 'Milo', 18000);
 
+
 INSERT INTO showtimes (id, movie_id, room_id, show_date, show_time) VALUES
 (1,1, 1, '2025-06-01', '18:00:00'),
 (2,2, 2, '2025-06-02', '19:00:00'),
@@ -596,23 +621,43 @@ INSERT INTO showtimes (id, movie_id, room_id, show_date, show_time) VALUES
 (4,4, 4, '2025-06-04', '21:00:00'),
 (5,5, 5, '2025-06-05', '22:00:00'),
 (6,6, 6, '2025-06-06', '23:00:00'),
-(7,7, 7, '2025-06-07', '00:00:00');
+(7,7, 7, '2025-06-07', '00:00:00'),
+(8, 2, 32, '2025-06-06', '20:00:00'),
+(9, 4, 16, '2025-07-01', '19:00:00'),
+(10, 5, 26, '2025-06-07', '19:00:00'),
+(11, 5, 25, '2025-06-12', '21:00:00'),
+(12, 7, 9, '2025-06-06', '17:00:00'),
+(13, 4, 43, '2025-06-04', '14:00:00'),
+(14, 4, 44, '2025-06-22', '22:00:00'),
+(15, 5, 18, '2025-06-26', '13:00:00'),
+(16, 6, 32, '2025-06-29', '13:00:00'),
+(17, 7, 50, '2025-06-29', '10:00:00'),
+(18, 4, 9, '2025-06-05', '17:00:00'),
+(19, 3, 11, '2025-06-28', '14:00:00'),
+(20, 6, 59, '2025-06-29', '11:00:00'),
+(21, 4, 52, '2025-06-11', '11:00:00'),
+(22, 3, 44, '2025-06-03', '16:00:00'),
+(23, 7, 27, '2025-06-24', '22:00:00'),
+(24, 4, 27, '2025-06-09', '17:00:00'),
+(25, 1, 3, '2025-06-14', '18:00:00'),
+(26, 6, 37, '2025-06-09', '11:00:00'),
+(27, 5, 19, '2025-06-18', '17:00:00');
 INSERT INTO payments (id, payment_method, payment_time, payment_status) VALUES
 (1, 'Momo', NOW(), 'success'),
 (2, 'Momo', NOW(), 'success'),
 (3, 'ZaloPay', NOW(), 'success'),
-(4, 'Tiền mặt', NOW(), 'success'),
+(4, 'Cash', NOW(), 'success'),
 (5, 'Momo', NOW(), 'success'),
 (6, 'ZaloPay', NOW(), 'success'),
-(7, 'Tiền mặt', NOW(), 'success'),
+(7, 'Cash', NOW(), 'success'),
 (8, 'Momo', NOW(), 'success'),
 (9, 'ZaloPay', NOW(), 'success'),
 (10, 'Momo', NOW(), 'success'),
 (11, 'Momo', NOW(), 'success'),
-(12, 'Tiền mặt', NOW(), 'success'),
+(12, 'Cash', NOW(), 'success'),
 (13, 'ZaloPay', NOW(), 'success'),
 (14, 'Momo', NOW(), 'success'),
-(15, 'Tiền mặt', NOW(), 'success');
+(15, 'Cash', NOW(), 'success');
 
 INSERT INTO bookings (id, user_id, showtime_id, booking_time, total_amount, status, payment_id) VALUES
 (1, 'U852369', 1, NOW(), 75000, 'paid', 1),
