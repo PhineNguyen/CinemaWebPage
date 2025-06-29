@@ -17,34 +17,45 @@
     <aside class="sidebar">
       <?php include('sidebar_admin.php'); ?>
     </aside>
+
+
+
 <?php
-$limit = 4;
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-if ($page < 1) $page = 1;
+$ticket_count = "SELECT COUNT(bd.id) AS total_tickets_sold
+FROM bookings b
+JOIN booking_details bd ON b.id = bd.booking_id
+JOIN showtimes s ON b.showtime_id = s.id
+WHERE b.status = 'paid'
+  AND MONTH(s.show_date) = $month;
+  AND YEAR(s.show_date) = $year";
+$ticketTotal = mysqli_query($conn, $ticket_count);
+// $limit = 5;
+// $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+// if ($page < 1) $page = 1;
 
-$offset = ($page - 1) * $limit;
+// $offset = ($page - 1) * $limit;
 
-// Tính tổng số bản ghi để phân trang
-$total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM showtimes");
-$total_row = mysqli_fetch_assoc($total_result);
-$total_records = $total_row['total'];
-$total_pages = ceil($total_records / $limit);
+// // Tính tổng số bản ghi để phân trang
+// $total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM showtimes");
+// $total_row = mysqli_fetch_assoc($total_result);
+// $total_records = $total_row['total'];
+// $total_pages = ceil($total_records / $limit);
 
-// Truy vấn dữ liệu có JOIN 3 bảng
-$sql = "SELECT 
-    movies.title AS title, 
-    movies.image_url AS image_url, 
-    movies.ticket_price AS ticket_price,
-    movies.status AS status,
-    rooms.room_number AS room_number, 
-    showtimes.show_date AS show_date, 
-    showtimes.show_time AS show_time
-FROM showtimes
-JOIN movies ON showtimes.movie_id = movies.id
-JOIN rooms ON showtimes.room_id = rooms.id
-LIMIT $offset, $limit";
+// // Truy vấn dữ liệu có JOIN 3 bảng
+// $sql = "SELECT 
+//     movies.title AS title, 
+//     movies.image_url AS image_url, 
+//     movies.ticket_price AS ticket_price,
+//     movies.status AS status,
+//     rooms.room_number AS room_number, 
+//     showtimes.show_date AS show_date, 
+//     showtimes.show_time AS show_time
+// FROM showtimes
+// JOIN movies ON showtimes.movie_id = movies.id
+// JOIN rooms ON showtimes.room_id = rooms.id
+// LIMIT $offset, $limit";
 
-$results = mysqli_query($conn, $sql);
+
 
 if ($results && mysqli_num_rows($results) > 0) {
   echo '<main class="main-content">';

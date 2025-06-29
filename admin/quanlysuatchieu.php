@@ -75,7 +75,7 @@ if ($results && mysqli_num_rows($results) > 0) {
                 <td><input type='checkbox' class='checkItem'></td>
                 <td>{$row['title']}</td>
                 <td><img src='{$row['image_url']}' width='100'></td>
-                <td>{$row['ticket_price']}đ</td>
+                <td>{$row['ticket_price']}VNĐ</td>
                 <td>{$row['show_date']}</td>
                 <td>{$row['show_time']}</td>
                 <td>{$row['room_number']}</td>

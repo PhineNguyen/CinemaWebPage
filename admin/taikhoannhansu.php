@@ -26,7 +26,7 @@ if ($page < 1) $page = 1;
 $offset = ($page - 1) * $limit;
 
 // Tính tổng số bản ghi để phân trang
-$total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM showtimes");
+$total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM users WHERE users.ro_lo = 'admin' OR users.ro_lo = 'employee'");
 $total_row = mysqli_fetch_assoc($total_result);
 $total_records = $total_row['total'];
 $total_pages = ceil($total_records / $limit);

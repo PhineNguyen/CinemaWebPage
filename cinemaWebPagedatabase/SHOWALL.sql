@@ -7,10 +7,10 @@ Show tables;
 --   SELECT * FROM payments;
 --   SELECT * FROM rooms;
 --   SELECT * FROM seats;
---   SELECT * FROM showtimes;
+   SELECT * FROM showtimes;
 --   SELECT * FROM users;
 --   SELECT * FROM foods;
 --   SELECT * FROM food_orders;
 --   SELECT * FROM food_variants;
-   SELECT * FROM tickets;
+--   SELECT * FROM tickets;
 

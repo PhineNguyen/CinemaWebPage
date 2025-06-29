@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 use cinemawebpage;
 INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo, start_date, account_status) VALUES
 -- Admins
@@ -33,23 +32,6 @@ INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo, start_d
 ('U000111', 'Zane', 'zane@example.com', 'password123', '0399988776', 'user', NULL, 'Hoạt động'),
 ('U777888', 'Lily', 'lily@example.com', 'password123', '0322223333', 'user', NULL, 'Không hoạt động'),
 ('U999999', 'Noah', 'noah@example.com', 'password123', '0333444555', 'user', NULL, 'Hoạt động');
-=======
-
-use cinemawebpage;
-
-use cinemawebpage;
-INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo) VALUES
-(1,'Alice', 'alice@example.com', 'password123', '0123456789', 'admin'),
-(2,'Bob', 'bob@example.com', 'password123', '0987654321', 'admin'),
-(3,'Charlie', 'charlie@example.com', 'password123', '0912345678', 'admin'),
-(4,'Helen', 'helen@example.com', 'password123', '0901234567', 'admin'),
-(5,'David', 'david@example.com', 'password123', '0909123456', 'user'),
-(6,'Eva', 'eva@example.com', 'password123', '0988123456', 'user'),
-(7,'Frank', 'frank@example.com', 'password123', '0934567890', 'user'),
-(8,'Grace', 'grace@example.com', 'password123', '0976543210', 'user'),
-(9,'Ivan', 'ivan@example.com', 'password123', '0923456789', 'user'),
-(10,'Jane', 'jane@example.com', 'password123', '0911223344', 'user');
->>>>>>> 5b1cd645d4c1aeba7557e168118e0bb6d1ff69d5
 
 
 INSERT INTO movies (
@@ -613,20 +595,6 @@ INSERT INTO foods (id, namef, descript,food_images,price) VALUES
 ('N05', 'Fanta', 'Nước ngọt Fanta','https://i.postimg.cc/HnrVwYy6/fanta.jpg', 15000),
 ('N06', 'Sprite', 'Nước ngọt Sprite','https://i.postimg.cc/59rHxChT/sprite.jpg', 15000),
 ('N07', 'Milo', 'Sữa milo','https://i.postimg.cc/0jhrZTGP/milo.jpg', 15000);
-<<<<<<< HEAD
-=======
-
--- Coca Cola (N04)
-INSERT INTO food_variants (variant_id ,food_id, size, flavor, price) VALUES
-(1,'N04', 'Nhỏ', 'Coca', 15000),
-(2,'N04', 'Lớn', 'Coca', 20000),
-(3,'N05', 'Nhỏ', 'Fanta', 15000),
-(4,'N05', 'Lớn', 'Fanta', 20000),
-(5,'N06', 'Nhỏ', 'Sprite', 15000),
-(6,'N06', 'Lớn', 'Sprite', 20000),
-(7,'N07', 'Nhỏ', 'Milo', 15000),
-(8,'N07', 'Lớn', 'Milo', 18000);
->>>>>>> 5b1cd645d4c1aeba7557e168118e0bb6d1ff69d5
 
 INSERT INTO showtimes (id, movie_id, room_id, show_date, show_time) VALUES
 (1,1, 1, '2025-06-01', '18:00:00'),
@@ -635,23 +603,43 @@ INSERT INTO showtimes (id, movie_id, room_id, show_date, show_time) VALUES
 (4,4, 4, '2025-06-04', '21:00:00'),
 (5,5, 5, '2025-06-05', '22:00:00'),
 (6,6, 6, '2025-06-06', '23:00:00'),
-(7,7, 7, '2025-06-07', '00:00:00');
+(7,7, 7, '2025-06-07', '00:00:00'),
+(8, 2, 32, '2025-06-06', '20:00:00'),
+(9, 4, 16, '2025-07-01', '19:00:00'),
+(10, 5, 26, '2025-06-07', '19:00:00'),
+(11, 5, 25, '2025-06-12', '21:00:00'),
+(12, 7, 9, '2025-06-06', '17:00:00'),
+(13, 4, 43, '2025-06-04', '14:00:00'),
+(14, 4, 44, '2025-06-22', '22:00:00'),
+(15, 5, 18, '2025-06-26', '13:00:00'),
+(16, 6, 32, '2025-06-29', '13:00:00'),
+(17, 7, 50, '2025-06-29', '10:00:00'),
+(18, 4, 9, '2025-06-05', '17:00:00'),
+(19, 3, 11, '2025-06-28', '14:00:00'),
+(20, 6, 59, '2025-06-29', '11:00:00'),
+(21, 4, 52, '2025-06-11', '11:00:00'),
+(22, 3, 44, '2025-06-03', '16:00:00'),
+(23, 7, 27, '2025-06-24', '22:00:00'),
+(24, 4, 27, '2025-06-09', '17:00:00'),
+(25, 1, 3, '2025-06-14', '18:00:00'),
+(26, 6, 37, '2025-06-09', '11:00:00'),
+(27, 5, 19, '2025-06-18', '17:00:00');
 INSERT INTO payments (id, payment_method, payment_time, payment_status) VALUES
 (1, 'Momo', NOW(), 'success'),
 (2, 'Momo', NOW(), 'success'),
 (3, 'ZaloPay', NOW(), 'success'),
-(4, 'Tiền mặt', NOW(), 'success'),
+(4, 'Cash', NOW(), 'success'),
 (5, 'Momo', NOW(), 'success'),
 (6, 'ZaloPay', NOW(), 'success'),
-(7, 'Tiền mặt', NOW(), 'success'),
+(7, 'Cash', NOW(), 'success'),
 (8, 'Momo', NOW(), 'success'),
 (9, 'ZaloPay', NOW(), 'success'),
 (10, 'Momo', NOW(), 'success'),
 (11, 'Momo', NOW(), 'success'),
-(12, 'Tiền mặt', NOW(), 'success'),
+(12, 'Cash', NOW(), 'success'),
 (13, 'ZaloPay', NOW(), 'success'),
 (14, 'Momo', NOW(), 'success'),
-(15, 'Tiền mặt', NOW(), 'success');
+(15, 'Cash', NOW(), 'success');
 
 INSERT INTO bookings (id, user_id, showtime_id, booking_time, total_amount, status, payment_id) VALUES
 (1, 'U852369', 1, NOW(), 75000, 'paid', 1),
