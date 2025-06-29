@@ -155,21 +155,25 @@ h2 {
 }
 
 .quantity-box button {
-  padding: 4px 10px;
+  padding: auto;
   font-weight: bold;
-  background: #ffc107;
-  border: none;
-  border-radius: 4px;
+  background: white;
+  border: 2px solid #ff9f43;
+  color: #ff9f43;
+  border-radius: 50%;
   cursor: pointer;
 }
 
-.quantity-box input {
-  width: 40px;
-  text-align: center;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+.minus, .plus {
+  width: 28px;
+  height: 28px;         
+  font-size: 16px;
 }
 
+.minus:hover, .plus:hover {
+  background: #ff9f43;
+  color: white;
+}
 /* ===== Tổng tiền và nút xác nhận ===== */
 .summary {
   background-color: #2c2c2c;

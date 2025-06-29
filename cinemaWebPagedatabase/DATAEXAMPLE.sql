@@ -1,40 +1,3 @@
-<<<<<<< HEAD
-use cinemawebpage;
-INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo, start_date, account_status) VALUES
--- Admins
-('A123456', 'Alice', 'alice@example.com', 'password123', '0123456789', 'admin', '2023-01-15', 'Hoạt động'),
-('A321654', 'Bob', 'bob@example.com', 'password123', '0987654321', 'admin', '2022-12-01', 'Hoạt động'),
-('A111111', 'Daniel', 'daniel@example.com', 'password123', '0321654987', 'admin', '2023-03-11', 'Hoạt động'),
-('A222222', 'Elisa', 'elisa@example.com', 'password123', '0399998888', 'admin', '2022-07-20', 'Không hoạt động'),
-('A333333', 'George', 'george@example.com', 'password123', '0312345678', 'admin', '2024-01-05', 'Hoạt động'),
--- Employees
-('E789564', 'Charlie', 'charlie@example.com', 'password123', '0912345678', 'employee', '2024-03-22', 'Hoạt động'),
-('E147852', 'Helen', 'helen@example.com', 'password123', '0901234567', 'employee', '2023-08-09', 'Hoạt động'),
-('E555555', 'Ivy', 'ivy@example.com', 'password123', '0390011223', 'employee', '2023-09-30', 'Không hoạt động'),
-('E666666', 'Jack', 'jack@example.com', 'password123', '0355223344', 'employee', '2022-11-10', 'Hoạt động'),
-('E777777', 'Luna', 'luna@example.com', 'password123', '0377889900', 'employee', '2023-05-16', 'Hoạt động'),
--- Users
-('U852369', 'David', 'david@example.com', 'password123', '0909123456', 'user', NULL, 'Hoạt động'),
-('U369852', 'Eva', 'eva@example.com', 'password123', '0988123456', 'user', NULL, 'Không hoạt động'),
-('U145869', 'Frank', 'frank@example.com', 'password123', '0934567890', 'user', NULL, 'Hoạt động'),
-('U458921', 'Grace', 'grace@example.com', 'password123', '0976543210', 'user', NULL, 'Hoạt động'),
-('U758123', 'Ivan', 'ivan@example.com', 'password123', '0923456789', 'user', NULL, 'Không hoạt động'),
-('U146289', 'Jane', 'jane@example.com', 'password123', '0911223344', 'user', NULL, 'Hoạt động'),
-('U584126', 'Phines', 'phines@example.com', 'password123', '0332564894', 'user', NULL, 'Hoạt động'),
-('U123123', 'Quinn', 'quinn@example.com', 'password123', '0365123488', 'user', NULL, 'Hoạt động'),
-('U654321', 'Ray', 'ray@example.com', 'password123', '0354789123', 'user', NULL, 'Hoạt động'),
-('U111222', 'Sara', 'sara@example.com', 'password123', '0345987123', 'user', NULL, 'Hoạt động'),
-('U333444', 'Tina', 'tina@example.com', 'password123', '0389988776', 'user', NULL, 'Không hoạt động'),
-('U999000', 'Uri', 'uri@example.com', 'password123', '0397766554', 'user', NULL, 'Hoạt động'),
-('U888777', 'Victor', 'victor@example.com', 'password123', '0322446688', 'user', NULL, 'Không hoạt động'),
-('U555666', 'Wendy', 'wendy@example.com', 'password123', '0377665544', 'user', NULL, 'Hoạt động'),
-('U444555', 'Xuan', 'xuan@example.com', 'password123', '0399552244', 'user', NULL, 'Hoạt động'),
-('U222333', 'Yen', 'yen@example.com', 'password123', '0366335544', 'user', NULL, 'Hoạt động'),
-('U000111', 'Zane', 'zane@example.com', 'password123', '0399988776', 'user', NULL, 'Hoạt động'),
-('U777888', 'Lily', 'lily@example.com', 'password123', '0322223333', 'user', NULL, 'Không hoạt động'),
-('U999999', 'Noah', 'noah@example.com', 'password123', '0333444555', 'user', NULL, 'Hoạt động');
-=======
-
 
 use cinemawebpage;
 INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo) VALUES
@@ -48,7 +11,7 @@ INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo) VALUES
 (8,'Grace', 'grace@example.com', 'password123', '0976543210', 'user'),
 (9,'Ivan', 'ivan@example.com', 'password123', '0923456789', 'user'),
 (10,'Jane', 'jane@example.com', 'password123', '0911223344', 'user');
->>>>>>> 5b1cd645d4c1aeba7557e168118e0bb6d1ff69d5
+
 
 
 INSERT INTO movies (
@@ -612,8 +575,8 @@ INSERT INTO foods (id, namef, descript,food_images,price) VALUES
 ('N05', 'Fanta', 'Nước ngọt Fanta','https://i.postimg.cc/HnrVwYy6/fanta.jpg', 15000),
 ('N06', 'Sprite', 'Nước ngọt Sprite','https://i.postimg.cc/59rHxChT/sprite.jpg', 15000),
 ('N07', 'Milo', 'Sữa milo','https://i.postimg.cc/0jhrZTGP/milo.jpg', 15000);
-<<<<<<< HEAD
-=======
+
+
 
 -- Coca Cola (N04)
 INSERT INTO food_variants (variant_id ,food_id, size, flavor, price) VALUES
@@ -625,7 +588,6 @@ INSERT INTO food_variants (variant_id ,food_id, size, flavor, price) VALUES
 (6,'N06', 'Lớn', 'Sprite', 20000),
 (7,'N07', 'Nhỏ', 'Milo', 15000),
 (8,'N07', 'Lớn', 'Milo', 18000);
->>>>>>> 5b1cd645d4c1aeba7557e168118e0bb6d1ff69d5
 
 INSERT INTO showtimes (id, movie_id, room_id, show_date, show_time) VALUES
 (1,1, 1, '2025-06-01', '18:00:00'),

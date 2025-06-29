@@ -10,17 +10,7 @@ include('connect.php');
   <title>Thanh toán</title>
   <link rel="stylesheet" href="CSS/thanhtoan.css">
 </head>
-<!-- Bỏ mũi tên trong input -->
-<style>
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
--webkit-appearance: none;
-margin: 0;
-}
-input[type=number] {
--moz-appearance: textfield;
-}
-</style>
+
 <body>
   <div class="payment-container">
     <h2>Thanh toán</h2>
@@ -59,7 +49,7 @@ input[type=number] {
                 </div>
                 <div class="quantity-box">
                   <button class="minus">-</button>
-                  <input type="number" value="1" min="0">
+                  <div class="quantity-display">0</div>
                   <button class="plus">+</button>
                 </div>
               </div>
