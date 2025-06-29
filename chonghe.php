@@ -134,7 +134,7 @@ $row = $result->fetch_assoc();
 <div class="continue-btn">
   <button class="button-continute">Tiếp tục</button>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/chonghe.js"></script>
 </body>
 </html>

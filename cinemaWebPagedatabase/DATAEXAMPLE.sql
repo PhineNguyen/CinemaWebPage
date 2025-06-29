@@ -32,6 +32,25 @@ INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo, start_d
 ('U000111', 'Zane', 'zane@example.com', 'password123', '0399988776', 'user', NULL, 'Hoạt động'),
 ('U777888', 'Lily', 'lily@example.com', 'password123', '0322223333', 'user', NULL, 'Không hoạt động'),
 ('U999999', 'Noah', 'noah@example.com', 'password123', '0333444555', 'user', NULL, 'Hoạt động');
+<<<<<<< HEAD
+=======
+=======
+
+
+use cinemawebpage;
+INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo) VALUES
+(1,'Alice', 'alice@example.com', 'password123', '0123456789', 'admin'),
+(2,'Bob', 'bob@example.com', 'password123', '0987654321', 'admin'),
+(3,'Charlie', 'charlie@example.com', 'password123', '0912345678', 'admin'),
+(4,'Helen', 'helen@example.com', 'password123', '0901234567', 'admin'),
+(5,'David', 'david@example.com', 'password123', '0909123456', 'user'),
+(6,'Eva', 'eva@example.com', 'password123', '0988123456', 'user'),
+(7,'Frank', 'frank@example.com', 'password123', '0934567890', 'user'),
+(8,'Grace', 'grace@example.com', 'password123', '0976543210', 'user'),
+(9,'Ivan', 'ivan@example.com', 'password123', '0923456789', 'user'),
+(10,'Jane', 'jane@example.com', 'password123', '0911223344', 'user');
+>>>>>>> 5b1cd645d4c1aeba7557e168118e0bb6d1ff69d5
+>>>>>>> f056659101416385fa45cc50aa9f6d4c959ed657
 
 
 INSERT INTO movies (
