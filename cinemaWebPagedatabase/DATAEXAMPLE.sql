@@ -35,7 +35,6 @@ INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo, start_d
 ('U999999', 'Noah', 'noah@example.com', 'password123', '0333444555', 'user', NULL, 'Hoạt động');
 =======
 
-use cinemawebpage;
 
 use cinemawebpage;
 INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo) VALUES

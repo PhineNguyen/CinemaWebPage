@@ -32,4 +32,8 @@ $(document).ready(function () {
   });
 
   $container.append($zone);
+  // Chuyển trang chonbapnuoc
+  $('.button-continute').click(function(){
+    window.location.href = 'chonbapnuoc.php';
+  })
 });
