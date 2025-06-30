@@ -1,3 +1,4 @@
+
 use cinemawebpage;
 INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo, start_date, account_status) VALUES
 -- Admins
@@ -33,6 +34,12 @@ INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo, start_d
 ('U000111', 'Zane', 'zane@example.com', 'password123', '0399988776', 'user', NULL, 'Hoạt động'),
 ('U777888', 'Lily', 'lily@example.com', 'password123', '0322223333', 'user', NULL, 'Không hoạt động'),
 ('U999999', 'Noah', 'noah@example.com', 'password123', '0333444555', 'user', NULL, 'Hoạt động');
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> fce72d1a5028a96331c935e43d98db5396a56995
 
 
 INSERT INTO movies (
@@ -596,6 +603,20 @@ INSERT INTO foods (id, namef, descript,food_images,price) VALUES
 ('N05', 'Fanta', 'Nước ngọt Fanta','https://i.postimg.cc/HnrVwYy6/fanta.jpg', 15000),
 ('N06', 'Sprite', 'Nước ngọt Sprite','https://i.postimg.cc/59rHxChT/sprite.jpg', 15000),
 ('N07', 'Milo', 'Sữa milo','https://i.postimg.cc/0jhrZTGP/milo.jpg', 15000);
+
+
+
+-- Coca Cola (N04)
+INSERT INTO food_variants (variant_id ,food_id, size, flavor, price) VALUES
+(1,'N04', 'Nhỏ', 'Coca', 15000),
+(2,'N04', 'Lớn', 'Coca', 20000),
+(3,'N05', 'Nhỏ', 'Fanta', 15000),
+(4,'N05', 'Lớn', 'Fanta', 20000),
+(5,'N06', 'Nhỏ', 'Sprite', 15000),
+(6,'N06', 'Lớn', 'Sprite', 20000),
+(7,'N07', 'Nhỏ', 'Milo', 15000),
+(8,'N07', 'Lớn', 'Milo', 18000);
+
 
 INSERT INTO showtimes (id, movie_id, room_id, show_date, show_time) VALUES
 (1,1, 1, '2025-06-01', '18:00:00'),
