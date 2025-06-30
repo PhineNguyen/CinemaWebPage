@@ -34,13 +34,6 @@ INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo, start_d
 ('U000111', 'Zane', 'zane@example.com', 'password123', '0399988776', 'user', NULL, 'Hoạt động'),
 ('U777888', 'Lily', 'lily@example.com', 'password123', '0322223333', 'user', NULL, 'Không hoạt động'),
 ('U999999', 'Noah', 'noah@example.com', 'password123', '0333444555', 'user', NULL, 'Hoạt động');
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> fce72d1a5028a96331c935e43d98db5396a56995
-
 
 INSERT INTO movies (
     id, title, 
