@@ -1,7 +1,7 @@
 use cinemawebpage;
 Show tables;
---   SELECT * FROM booking_details;
---   SELECT * FROM bookings;
+   SELECT * FROM booking_details;
+   SELECT * FROM bookings;
 --   SELECT * FROM cinemas;
 --   SELECT * FROM movies;
 --   SELECT * FROM payments;

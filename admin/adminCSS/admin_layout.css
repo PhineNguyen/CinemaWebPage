@@ -1,10 +1,10 @@
 :root {
-  --bg-dark: #292929; /* Màu nền chính */
+  --bg-dark: #292929;
   --bg-footer: #222;
-  --highlight: #EBB802;
+  --highlight: #ebb902e8;
   --text-light: white;
   --poster-hover-opacity: 0.3;
-  --scrollbar-thumb: rgba(255, 255, 255, 0.2);
+  --scrollbar-thumb: rgba(255, 255, 255, 0.386);
 }
 body{
   background-color: var(--bg-dark);

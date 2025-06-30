@@ -13,6 +13,7 @@ INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo, start_d
 ('E666666', 'Jack', 'jack@example.com', 'password123', '0355223344', 'employee', '2022-11-10', 'Hoạt động'),
 ('E777777', 'Luna', 'luna@example.com', 'password123', '0377889900', 'employee', '2023-05-16', 'Hoạt động'),
 -- Users
+('GUEST001', 'Khách vãng lai', 'guest@example.com', 'guest', '0000000000', 'user', NULL, 'Hoạt động'),
 ('U852369', 'David', 'david@example.com', 'password123', '0909123456', 'user', NULL, 'Hoạt động'),
 ('U369852', 'Eva', 'eva@example.com', 'password123', '0988123456', 'user', NULL, 'Không hoạt động'),
 ('U145869', 'Frank', 'frank@example.com', 'password123', '0934567890', 'user', NULL, 'Hoạt động'),
@@ -32,25 +33,6 @@ INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo, start_d
 ('U000111', 'Zane', 'zane@example.com', 'password123', '0399988776', 'user', NULL, 'Hoạt động'),
 ('U777888', 'Lily', 'lily@example.com', 'password123', '0322223333', 'user', NULL, 'Không hoạt động'),
 ('U999999', 'Noah', 'noah@example.com', 'password123', '0333444555', 'user', NULL, 'Hoạt động');
-<<<<<<< HEAD
-=======
-=======
-
-
-use cinemawebpage;
-INSERT INTO users (id, user_name, email, pass_word, phone_number, ro_lo) VALUES
-(1,'Alice', 'alice@example.com', 'password123', '0123456789', 'admin'),
-(2,'Bob', 'bob@example.com', 'password123', '0987654321', 'admin'),
-(3,'Charlie', 'charlie@example.com', 'password123', '0912345678', 'admin'),
-(4,'Helen', 'helen@example.com', 'password123', '0901234567', 'admin'),
-(5,'David', 'david@example.com', 'password123', '0909123456', 'user'),
-(6,'Eva', 'eva@example.com', 'password123', '0988123456', 'user'),
-(7,'Frank', 'frank@example.com', 'password123', '0934567890', 'user'),
-(8,'Grace', 'grace@example.com', 'password123', '0976543210', 'user'),
-(9,'Ivan', 'ivan@example.com', 'password123', '0923456789', 'user'),
-(10,'Jane', 'jane@example.com', 'password123', '0911223344', 'user');
->>>>>>> 5b1cd645d4c1aeba7557e168118e0bb6d1ff69d5
->>>>>>> f056659101416385fa45cc50aa9f6d4c959ed657
 
 
 INSERT INTO movies (
@@ -644,43 +626,43 @@ INSERT INTO showtimes (id, movie_id, room_id, show_date, show_time) VALUES
 (26, 6, 37, '2025-06-09', '11:00:00'),
 (27, 5, 19, '2025-06-18', '17:00:00');
 INSERT INTO payments (id, payment_method, payment_time, payment_status) VALUES
-(1, 'Momo', NOW(), 'success'),
-(2, 'Momo', NOW(), 'success'),
-(3, 'ZaloPay', NOW(), 'success'),
-(4, 'Cash', NOW(), 'success'),
-(5, 'Momo', NOW(), 'success'),
-(6, 'ZaloPay', NOW(), 'success'),
-(7, 'Cash', NOW(), 'success'),
-(8, 'Momo', NOW(), 'success'),
-(9, 'ZaloPay', NOW(), 'success'),
-(10, 'Momo', NOW(), 'success'),
-(11, 'Momo', NOW(), 'success'),
-(12, 'Cash', NOW(), 'success'),
-(13, 'ZaloPay', NOW(), 'success'),
-(14, 'Momo', NOW(), 'success'),
-(15, 'Cash', NOW(), 'success');
+(1, 'Momo', NOW(), 'Thành công'),
+(2, 'Momo', NOW(), 'Thành công'),
+(3, 'ZaloPay', NOW(), 'Thành công'),
+(4, 'Tiền mặt', NOW(), 'Thành công'),
+(5, 'Momo', NOW(), 'Thành công'),
+(6, 'ZaloPay', NOW(), 'Thành công'),
+(7, 'Tiền mặt', NOW(), 'Thành công'),
+(8, 'Momo', NOW(), 'Thành công'),
+(9, 'ZaloPay', NOW(), 'Thành công'),
+(10, 'Momo', NOW(), 'Thành công'),
+(11, 'Momo', NOW(), 'Thành công'),
+(12, 'Tiền mặt', NOW(), 'Thành công'),
+(13, 'ZaloPay', NOW(), 'Thành công'),
+(14, 'Banking', NOW(), 'Thành công'),
+(15, 'Tiền mặt', NOW(), 'Thành công');
 
 INSERT INTO bookings (id, user_id, showtime_id, booking_time, total_amount, status, payment_id) VALUES
-(1, 'U852369', 1, NOW(), 75000, 'paid', 1),
-(2, 'U369852', 2, NOW(), 76000, 'paid', 2),
-(3, 'U145869', 3, NOW(), 77000, 'paid', 3),
-(4, 'U458921', 4, NOW(), 78000, 'unpaid', NULL), -- chưa thanh toán nên chưa có payment
-(5, 'U758123', 5, NOW(), 79000, 'paid', 4),
-(6, 'U146289', 6, NOW(), 80000, 'paid', 5),
-(7, 'U584126', 7, NOW(), 81000, 'unpaid', NULL),
-(8, 'U145869', 1, NOW(), 82000, 'paid', 6),
-(9, 'U458921', 2, NOW(), 83000, 'paid', 7),
-(10,'U758123', 3, NOW(), 84000, 'unpaid', NULL),
-(11, 'U146289', 4, NOW(), 85000, 'paid', 8),
-(12, 'U584126', 5, NOW(), 86000, 'paid', 9),
-(13, 'U852369', 6, NOW(), 87000, 'paid', 10),
-(14, 'U369852', 7, NOW(), 88000, 'unpaid', NULL),
-(15, 'U123123', 1, NOW(), 89000, 'paid', 11),
-(16, 'U654321', 2, NOW(), 90000, 'paid', 12),
-(17, 'U111222', 3, NOW(), 91000, 'paid', 13),
-(18, 'U333444', 4, NOW(), 92000, 'unpaid', NULL),
-(19, 'U999000', 5, NOW(), 93000, 'paid', 14),
-(20, 'U888777', 6, NOW(), 94000, 'paid', 15);
+(1, 'U852369', 1, NOW(), 75000, 'Đã thanh toán', 1),
+(2, 'U369852', 2, NOW(), 76000, 'Đã thanh toán', 2),
+(3, 'U145869', 3, NOW(), 77000, 'Đã thanh toán', 3),
+(4, 'U458921', 4, NOW(), 78000, 'Chưa thanh toán', NULL), -- chưa thanh toán nên chưa có payment
+(5, 'U758123', 5, NOW(), 79000, 'Đã thanh toán', 4),
+(6, 'U146289', 6, NOW(), 80000, 'Đã thanh toán', 5),
+(7, 'U584126', 7, NOW(), 81000, 'Chưa thanh toán', NULL),
+(8, 'U145869', 1, NOW(), 82000, 'Đã thanh toán', 6),
+(9, 'U458921', 2, NOW(), 83000, 'Đã thanh toán', 7),
+(10,'U758123', 3, NOW(), 84000, 'Chưa thanh toán', NULL),
+(11, 'U146289', 4, NOW(), 85000, 'Đã thanh toán', 8),
+(12, 'U584126', 5, NOW(), 86000, 'Đã thanh toán', 9),
+(13, 'U852369', 6, NOW(), 87000, 'Đã thanh toán', 10),
+(14, 'U369852', 7, NOW(), 88000, 'Chưa thanh toán', NULL),
+(15, 'U123123', 1, NOW(), 89000, 'Đã thanh toán', 11),
+(16, 'U654321', 2, NOW(), 90000, 'Đã thanh toán', 12),
+(17, 'U111222', 3, NOW(), 91000, 'Đã thanh toán', 13),
+(18, 'U333444', 4, NOW(), 92000, 'Chưa thanh toán', NULL),
+(19, 'U999000', 5, NOW(), 93000, 'Đã thanh toán', 14),
+(20, 'U888777', 6, NOW(), 94000, 'Đã thanh toán', 15);
 
 
 INSERT INTO booking_details (id, booking_id, seat_id) VALUES

@@ -51,7 +51,7 @@ CREATE TABLE rooms (
     FOREIGN KEY (cinema_id) REFERENCES cinemas(id)
 );
 CREATE TABLE seats (
-    id VARCHAR(10) PRIMARY KEY, -- Đổi sang mã ghế như 'R1-A1'
+    id INT PRIMARY KEY, -- Đổi sang mã ghế như 'R1-A1'
     room_id INT,
     seat_row CHAR(1),
     seat_number INT,
@@ -90,9 +90,9 @@ CREATE TABLE showtimes (
 
 CREATE TABLE payments (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    payment_method ENUM('Cash', 'Banking', 'Momo', 'ZaloPay') DEFAULT 'Cash',
+    payment_method ENUM('Tiền mặt', 'Banking', 'Momo', 'ZaloPay') DEFAULT 'Tiền mặt',
     payment_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    payment_status ENUM('success', 'failed')
+    payment_status VARCHAR(50) DEFAULT 'thành công'
 );
 
 CREATE TABLE bookings (
@@ -101,7 +101,7 @@ CREATE TABLE bookings (
     showtime_id INT,
     booking_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     total_amount DECIMAL(10,0),
-    status ENUM('paid','unpaid') DEFAULT 'unpaid',
+    status ENUM('Đã thanh toán','Chưa thanh toán') DEFAULT 'Đã thanh toán',
     payment_id INT,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (showtime_id) REFERENCES showtimes(id),
@@ -111,7 +111,7 @@ CREATE TABLE bookings (
 CREATE TABLE booking_details (
     id INT AUTO_INCREMENT PRIMARY KEY,
     booking_id INT,
-    seat_id VARCHAR(100),
+    seat_id INT,
     FOREIGN KEY (booking_id) REFERENCES bookings(id),
     FOREIGN KEY (seat_id) REFERENCES seats(id)
 );

@@ -1,7 +1,15 @@
 <?php
-  session_start();
-  include('../connect.php');
-  include('header_admin.php');
+session_start();
+
+// Kiểm tra đăng nhập và vai trò admin
+if (!isset($_SESSION['user']) || $_SESSION['ro_lo'] !== 'admin') {
+    header("Location: admin_login.php");
+    exit();
+}
+
+include('../connect.php');
+include('header_admin.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -13,123 +21,141 @@
   <link rel="stylesheet" href="../admin/adminCSS/admin.css">
 </head>
 <body>
-  <div class="admin-layout">
-    <aside class="sidebar">
-      <?php include('sidebar_admin.php'); ?>
-    </aside>
+<div class="admin-layout">
+  <aside class="sidebar">
+    <?php include('sidebar_admin.php'); ?>
+  </aside>
 
+  <?php
+  $month = date('m');
+  $year = date('Y');
 
+  // Tổng vé bán ra trong tháng
+  $sql_tickets = "SELECT COUNT(bd.id) AS total_tickets_sold
+                  FROM bookings b
+                  JOIN booking_details bd ON b.id = bd.booking_id
+                  JOIN showtimes s ON b.showtime_id = s.id
+                  WHERE b.status = 'paid'
+                    AND MONTH(s.show_date) = $month
+                    AND YEAR(s.show_date) = $year";
+  $result_tickets = mysqli_query($conn, $sql_tickets);
+  $row_tickets = mysqli_fetch_assoc($result_tickets);
+  $totalTickets = $row_tickets['total_tickets_sold'] ?? 0;
 
-<?php
-$ticket_count = "SELECT COUNT(bd.id) AS total_tickets_sold
-FROM bookings b
-JOIN booking_details bd ON b.id = bd.booking_id
-JOIN showtimes s ON b.showtime_id = s.id
-WHERE b.status = 'paid'
-  AND MONTH(s.show_date) = $month;
-  AND YEAR(s.show_date) = $year";
-$ticketTotal = mysqli_query($conn, $ticket_count);
-// $limit = 5;
-// $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-// if ($page < 1) $page = 1;
+  // Doanh thu trong ngày
+  $sql_daily = "SELECT SUM(total_amount) AS daily_revenue
+                FROM bookings
+                WHERE status = 'paid'
+                  AND DATE(booking_time) = CURDATE()";
+  $result_daily = mysqli_query($conn, $sql_daily);
+  $row_daily = mysqli_fetch_assoc($result_daily);
+  $dailyRevenue = $row_daily['daily_revenue'] ?? 0;
 
-// $offset = ($page - 1) * $limit;
+  // Doanh thu trong tháng
+  $sql_monthly = "SELECT SUM(total_amount) AS monthly_revenue
+                  FROM bookings
+                  WHERE status = 'paid'
+                    AND booking_time BETWEEN DATE_FORMAT(NOW(), '%Y-%m-01') AND LAST_DAY(NOW())";
+  $result_monthly = mysqli_query($conn, $sql_monthly);
+  $row_monthly = mysqli_fetch_assoc($result_monthly);
+  $monthlyRevenue = $row_monthly['monthly_revenue'] ?? 0;
 
-// // Tính tổng số bản ghi để phân trang
-// $total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM showtimes");
-// $total_row = mysqli_fetch_assoc($total_result);
-// $total_records = $total_row['total'];
-// $total_pages = ceil($total_records / $limit);
+  // Xử lý ngày được chọn
+  $selectedDate = isset($_GET['selected_date']) ? mysqli_real_escape_string($conn, $_GET['selected_date']) : date('Y-m-d');
+  if (!DateTime::createFromFormat('Y-m-d', $selectedDate)) {
+    $selectedDate = date('Y-m-d');
+  }
+  ?>
 
-// // Truy vấn dữ liệu có JOIN 3 bảng
-// $sql = "SELECT 
-//     movies.title AS title, 
-//     movies.image_url AS image_url, 
-//     movies.ticket_price AS ticket_price,
-//     movies.status AS status,
-//     rooms.room_number AS room_number, 
-//     showtimes.show_date AS show_date, 
-//     showtimes.show_time AS show_time
-// FROM showtimes
-// JOIN movies ON showtimes.movie_id = movies.id
-// JOIN rooms ON showtimes.room_id = rooms.id
-// LIMIT $offset, $limit";
+  <main class="main-content">
+    <div class="dashboard">
+      <div class="card">
+        <div>Tổng số vé bán ra (T<?php echo $month . '/' . $year; ?>)</div>
+        <h2><?php echo $totalTickets; ?></h2>
+      </div>
 
+      <div class="card">
+        <div>Doanh thu trong ngày (<?php echo date('d/m/Y'); ?>)</div>
+        <h2><?php echo number_format($dailyRevenue, 0, ',', '.'); ?> VNĐ</h2>
+      </div>
 
+      <div class="card">
+        <div>Doanh thu trong tháng (<?php echo date('m/Y'); ?>)</div>
+        <h2><?php echo number_format($monthlyRevenue, 0, ',', '.'); ?> VNĐ</h2>
+      </div>
+    </div>
 
-if ($results && mysqli_num_rows($results) > 0) {
-  echo '<main class="main-content">';
-    echo '<div class="dashboard">';
-      echo '<div class="card">';
-        echo '<div>Tổng số vé bán ra (T5/2025)</div>';
-        echo '<h2>100</h2>';
-    echo '</div>';
-      echo '<div class="card">';
-        echo '<div>Doanh thu trong ngày (01/06/2025)</div>';
-        echo '<h2>500,000</h2>';
-    echo '</div>';
-      echo '<div class="card">';
-        echo '<div>Doanh thu trong tháng (T5/2025)</div>';
-        echo '<h2>8,000,000</h2>';
-    echo '</div>';
-  echo '</div>';
-
-  echo '<div class="date-list" style="margin: 20px 0;">';
-    echo '<label for="date-input">Chọn ngày:</label>';
-    echo '<input type="text" id="date-input" name="date-input" list="date-options" placeholder="Chọn ngày (VD: 2025-06-01)">';
-      echo '<datalist id="date-options">';
-        echo '<option value="2025-06-01">';
-        echo '<option value="2025-06-02">';
-        echo '<option value="2025-06-03">';
-        echo '<option value="2025-06-04">';
-        echo '<option value="2025-06-05">';
-    echo '</datalist>';
-    echo '</div>';
-    echo '<table>';
-    echo '<thead>
-            <tr>
-                <th>Tên phim</th>
-                <th>Số vé đã bán</th>
-                <th>Doanh thu</th>
-            </tr>
-          </thead>';
-    echo '<tbody>';
-
-    while ($row = mysqli_fetch_assoc($results)) {
-        echo "<tr>
-                <td>{$row['show_date']}</td>
-                <td>{$row['show_time']}</td>
-                <td>{$row['room_number']}</td>
-              </tr>";
-    }
-
-    echo '</tbody></table>';
-
-    // Hiển thị phân trang
-    if ($total_pages > 1) {
-        echo '<div class="pagination">';
-        if ($page > 1) {
-            echo '<a href="?page=' . ($page - 1) . '">Trang trước</a>';
+    <!-- Chọn ngày -->
+    <form method="GET" style="margin: 20px 0;">
+      <label for="date-input">Chọn ngày:</label>
+      <input type="date" id="date-input" name="selected_date" list="date-options" value="<?php echo $selectedDate; ?>">
+      <datalist id="date-options">
+        <?php
+        $dateQuery = "SELECT DISTINCT show_date FROM showtimes ORDER BY show_date";
+        $dateResult = mysqli_query($conn, $dateQuery);
+        while ($dateRow = mysqli_fetch_assoc($dateResult)) {
+          echo "<option value='{$dateRow['show_date']}'>";
         }
-        for ($i = 1; $i <= $total_pages; $i++) {
-            if ($i == $page) {
-                echo '<strong>' . $i . '</strong>';
-            } else {
-                echo '<a href="?page=' . $i . '">' . $i . '</a>';
+        ?>
+      </datalist>
+      <input type="submit" value="Lọc">
+    </form>
+
+    <!-- Bảng danh sách lịch chiếu -->
+    <div class="table-container">
+      <h2>Danh sách lịch chiếu ngày <?php echo date('d/m/Y', strtotime($selectedDate)); ?></h2>
+      <table class="showtimes-table">
+        <thead>
+          <tr>
+            <th>Tên phim</th>
+            <th>Số vé đã bán</th>
+            <th>Tổng doanh thu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          $sql = "
+            SELECT 
+              m.title,
+              COUNT(DISTINCT bd.id) AS tickets_sold,
+              IFNULL(SUM(
+                CASE 
+                  WHEN st.price_seat_type IS NOT NULL THEN st.price_seat_type
+                  ELSE 0
+                END
+              ), 0) + IFNULL(SUM(fo.quantity * f.price), 0) AS total_revenue
+            FROM showtimes s
+            JOIN movies m ON s.movie_id = m.id
+            LEFT JOIN bookings b ON b.showtime_id = s.id AND b.status = 'paid'
+            LEFT JOIN booking_details bd ON bd.booking_id = b.id
+            LEFT JOIN seats st ON bd.seat_id = st.id
+            LEFT JOIN food_orders fo ON fo.booking_id = b.id
+            LEFT JOIN foods f ON fo.food_id = f.id
+            WHERE s.show_date = '$selectedDate'
+            GROUP BY m.id, m.title
+            ORDER BY m.title ASC
+          ";
+          $result = mysqli_query($conn, $sql);
+
+          if ($result && mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+              echo "<tr>";
+              echo "<td>" . htmlspecialchars($row['title']) . "</td>";
+              echo "<td>" . number_format($row['tickets_sold']) . "</td>";
+              echo "<td>" . number_format($row['total_revenue'], 0, ',', '.') . " VNĐ</td>";
+              echo "</tr>";
             }
-        }
-        if ($page < $total_pages) {
-            echo '<a href="?page=' . ($page + 1) . '">Trang sau</a>';
-        }
-        echo '</div>';
-    }
+          } else {
+            echo "<tr><td colspan='3'>Không có dữ liệu cho ngày này.</td></tr>";
+          }
+          ?>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../js/admin_profile.js"></script>
 
-    echo '</main>';
-} else {
-    echo "<p class='main-content'>Không có lịch chiếu phim nào.</p>";
-}
-?>
-   
-  </div>
 </body>
 </html>

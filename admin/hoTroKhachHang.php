@@ -2,7 +2,8 @@
 session_start();
 
 // Kiểm tra quyền truy cập
-if (!isset($_SESSION['user']) || ($_SESSION['ro_lo'] !== 'admin' && $_SESSION['ro_lo'] !== 'employee')) {
+if (!isset($_SESSION['user']) || $_SESSION['ro_lo'] !== 'employee') {
+    header("Location: homeEmployee.php");
     exit();
 }
 
@@ -13,7 +14,7 @@ include('header_admin.php');
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Trang quản trị</title>
+  <title>Hỗ trợ khách hàng</title>
   <link rel="stylesheet" href="../admin/adminCSS/admin_layout.css">
   <link rel="stylesheet" href="../admin/adminCSS/header_admin.css"> 
   <link rel="stylesheet" href="../admin/adminCSS/quanlyphim.css">
