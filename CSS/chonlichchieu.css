@@ -1,147 +1,93 @@
 body {
-  background-color: #1c1c1c;
+  background-color: #111;
+  color: white;
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
 
 .content {
-  max-width: 900px;
+  padding: 30px;
+  max-width: 1000px;
   margin: auto;
-  padding: 20px;
-  color: #fff;
 }
 
 .lich {
+  font-size: 28px;
   font-weight: bold;
-  font-size: 24px;
-  color: white;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 10px;
-}
-
-/* Thanh điều khiển lịch */
-.control-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
+  color: #ffc107;
   margin-bottom: 20px;
-}
-
-.scroll-btn {
-  background-color: #3a3a3a;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.scroll-btn:hover {
-  background-color: #ebb802;
-  color: #000;
-}
-
-.date-tabs-wrapper {
-  overflow: hidden;
-  flex: 1;
 }
 
 .date-tabs {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .date-tab {
-  background-color: #292929;
-  color: #b5b0b0;
-  padding: 10px;
-  min-width: 90px;
-  text-align: center;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+  background-color: #333;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-decoration: none;
   transition: 0.3s;
 }
 
-.date-tab:hover,
-.date-tab.active {
-  background-color: #ebb802;
-  color: #000;
+.date-tab.active,
+.date-tab:hover {
+  background-color: #ffc107;
+  color: black;
+}
+
+.filters {
+  margin-bottom: 20px;
 }
 
 .filter-select {
-  background-color: white;
-  color: #000;
-  border: none;
-  padding: 8px 10px;
-  font-size: 14px;
+  margin-right: 10px;
+  padding: 6px 12px;
   border-radius: 4px;
-  cursor: pointer;
+  border: none;
+  font-size: 14px;
 }
 
-/* Danh sách rạp */
 .cinema {
   margin-bottom: 30px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 20px;
 }
 
 .cinema h3 {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 20px;
   margin-bottom: 10px;
-  border-left: 5px solid #ebb802;
-  padding-left: 10px;
+  color: #ffc107;
 }
 
-.room-title {
+.format-title {
   font-weight: bold;
-  color: #bbb;
   margin-top: 10px;
   margin-bottom: 5px;
-  padding-left: 10px;
-}
-
-.movie-title {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-size: 16px;
-  padding-left: 20px;
+  color: #ccc;
 }
 
 .times {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding-left: 20px;
   margin-bottom: 10px;
 }
 
 .time-btn {
-  background-color: #eee;
-  color: #000;
+  background-color: white;
+  color: black;
   border: none;
-  padding: 8px 14px;
+  padding: 6px 12px;
+  margin: 4px 6px;
   border-radius: 4px;
   cursor: pointer;
   transition: 0.2s;
+  font-size: 14px;
 }
 
 .time-btn:hover {
-  background-color: #ffcc00;
-  color: #000;
-}
-
-hr {
-  border: none;
-  border-top: 1px solid #444;
-  margin: 20px 0;
-}
-.unselectable {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  background-color: #ffc107;
 }

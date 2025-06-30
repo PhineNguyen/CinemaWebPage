@@ -8,7 +8,7 @@
 ?>
 <div class="sidebar">
   <div class="sidebar-item">
-    <?php if ($role === 'admin'): ?>
+   <?php if ($role === 'admin'): ?>
       <a href="admin.php"><i class="fa-solid fa-chart-line"></i><span>Dashboard</span></a>
       <a href="taikhoannguoidung.php"><i class="fa-solid fa-users"></i><span>Tài khoản người dùng</span></a>
       <a href="taikhoannhansu.php"><i class="fa-solid fa-user-tie"></i><span>Tài khoản nhân sự</span></a>
@@ -16,9 +16,11 @@
       <a href="quanlysuatchieu.php"><i class="fa-solid fa-clock"></i><span>Quản lý suất chiếu</span></a>
       <a href="quanlyrapPC.php"><i class="fa-solid fa-building"></i><span>Quản lý rạp & Phòng chiếu</span></a>
     <?php endif; ?>
+    <?php if ($role === 'employee'): ?>
       <a href="xemSuatChieu.php"><i class="fa-solid fa-film"></i><span>Xem suất chiếu</span></a>
       <a href="datVe.php"><i class="fa-solid fa-clock"></i><span>Đặt vé</span></a>
       <a href="hoTroKhachHang.php"><i class="fa-solid fa-film"></i><span>Hỗ trợ khách hàng</span></a>
+    <?php endif; ?>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>

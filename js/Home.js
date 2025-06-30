@@ -1,23 +1,48 @@
 $(document).ready(function () {
-  let currentIndex = 0;
-  const $slides = $('.slides');
-  const totalSlides = $('.slides img').length;
+  const $slider = $('.slides');
+  const $slideItems = $('.slide-item');
+  const totalSlides = $slideItems.length;
+  let currentSlide = 0;
+  let slideInterval;
 
-  function showSlide(index) {
-    if (index >= totalSlides) currentIndex = 0;
-    else if (index < 0) currentIndex = totalSlides - 1;
-    else currentIndex = index;
-
-    $slides.css('transform', `translateX(-${currentIndex * 900}px)`);
+  function updateSliderPosition() {
+    const slideWidth = $('.banner-slider').width();
+    const newTransform = -currentSlide * slideWidth;
+    $slider.css({
+      'transform': `translateX(${newTransform}px)`,
+      'transition': 'transform 0.6s ease'
+    });
   }
 
-  function nextSlide() {
-    showSlide(currentIndex + 1);
+  // Chuyển slide
+  window.prevSlide = function () {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateSliderPosition();
+  };
+
+  window.nextSlide = function () {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateSliderPosition();
+  };
+
+  function startAutoSlide() {
+    slideInterval = setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateSliderPosition();
+    }, 3000);
   }
 
-  function prevSlide() {
-    showSlide(currentIndex - 1);
+  function stopAutoSlide() {
+    clearInterval(slideInterval);
   }
 
-  setInterval(nextSlide, 5000);
+  // Dừng khi hover và khởi động lại khi rời chuột
+  $('.banner-slider').hover(stopAutoSlide, startAutoSlide);
+
+  // Cập nhật lại khi resize
+  $(window).on('resize', updateSliderPosition);
+
+  // Khởi tạo
+  updateSliderPosition();
+  startAutoSlide();
 });
