@@ -3,7 +3,7 @@
   --bg-footer: #222; /*Màu nền cho footer*/
   --highlight: #EBB802; /*Màu vàng của button và đường kẻ*/
   --poster-hover-opacity: 0.3; /*Độ mờ khi di chuột vào*/
-  --scrollbar-thumb: rgba(255, 255, 255, 0.2); /*Màu thanh cuộn ngang*/
+  --scrollbar-thumb: rgba(255, 255, 255, 0.42); /*Màu thanh cuộn ngang*/
 }
 
 .dashboard {
@@ -41,6 +41,7 @@ th, td {
   padding: 12px;
   border: 1px solid #444;
   text-align: left;
+  background-color: var(--scrollbar-thumb);
 }
 
 th {
@@ -72,4 +73,31 @@ th {
 }
 .stat-block h2 {
   margin-bottom: 10px;
+}
+label{
+  font-size: 20px;
+  font-weight: bold;
+
+}
+input{
+  width: 150px;
+  height: 30px;
+  text-align: center;
+}
+input[type="submit"] {
+  width:100px;
+  color: var(--bg-footer);
+  border:none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}
+input[type="submit"]:hover {
+  background: #d4a601;
+  color: black;
 }

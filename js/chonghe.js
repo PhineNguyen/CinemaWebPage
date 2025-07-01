@@ -1,39 +1,77 @@
 $(document).ready(function () {
-  const $vipSeats = $('.seat-vip');
-  if ($vipSeats.length === 0) return;
+  const seatPrice = 50000;
+  const vipPrice = 70000;
+  const specialPrice = 100000;
+  let selectedSeats = [];
 
-  let top = Infinity, left = Infinity, right = 0, bottom = 0;
+  $('.seat-available').on('click', function () {
+    const $seat = $(this);
+    const seatCode = $seat.text().trim();
+    const isSelected = $seat.hasClass('seat-selected');
 
-  const $container = $('.seating-container');
-  const containerRect = $container[0].getBoundingClientRect();
+    if (isSelected) {
+      $seat.removeClass('seat-selected');
+      selectedSeats = selectedSeats.filter(s => s !== seatCode);
+    } else {
+      $seat.addClass('seat-selected');
+      selectedSeats.push(seatCode);
+    }
 
-  $vipSeats.each(function () {
-    const rect = this.getBoundingClientRect();
-
-    const relTop = rect.top - containerRect.top;
-    const relLeft = rect.left - containerRect.left;
-    const relRight = rect.right - containerRect.left;
-    const relBottom = rect.bottom - containerRect.top;
-
-    if (relTop < top) top = relTop;
-    if (relLeft < left) left = relLeft;
-    if (relRight > right) right = relRight;
-    if (relBottom > bottom) bottom = relBottom;
+    updateSummary();
   });
 
-  const $zone = $('<div>', { id: 'vip_zone' }).css({
-    position: 'absolute',
-    top: `${top - 5}px`,
-    left: `${left - 5}px`,
-    width: `${right - left + 10}px`,
-    height: `${bottom - top + 10}px`,
-    border: '2px dashed red', // bạn có thể tùy chỉnh thêm
-    pointerEvents: 'none'
-  });
+  function updateSummary() {
+    let total = 0;
+    selectedSeats.forEach(seat => {
+      const $btn = $(`button:contains(${seat})`);
+      const className = $btn.attr('class');
 
-  $container.append($zone);
-  // Chuyển trang chonbapnuoc
-  $('.button-continute').click(function(){
-    window.location.href = 'chonbapnuoc.php';
-  })
+      if (className.includes('special')) total += specialPrice;
+      else if (className.includes('vip')) total += vipPrice;
+      else total += seatPrice;
+    });
+
+    // Cộng thêm giá combo từ localStorage nếu có
+    let comboData = localStorage.getItem('comboData');
+    let comboTotal = 0;
+    if (comboData) {
+      try {
+        comboTotal = JSON.parse(comboData).total || 0;
+      } catch (e) {}
+    }
+
+    $('#ticket-price').text(formatMoney(total) + ' đ');
+    $('#ticket-total').text(formatMoney(total + comboTotal) + ' đ');
+    $('#selected-seats-list').text(selectedSeats.length > 0 ? selectedSeats.join(', ') : 'Không có');
+  }
+
+  function formatMoney(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
+  $('.button-continute').on('click', function () {
+    if (selectedSeats.length === 0) {
+      alert("Vui lòng chọn ít nhất một ghế.");
+      return;
+    }
+
+    const form = $('<form>', {
+      method: 'POST',
+      action: 'chonbapnuoc.php'
+    });
+
+    $('<input>').attr({
+      type: 'hidden',
+      name: 'seats',
+      value: selectedSeats.join(',')
+    }).appendTo(form);
+
+    $('<input>').attr({
+      type: 'hidden',
+      name: 'showtime_id',
+      value: SHOWTIME_ID
+    }).appendTo(form);
+
+    form.appendTo('body').submit();
+  });
 });

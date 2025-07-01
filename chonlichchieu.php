@@ -1,6 +1,23 @@
 <?php
-  include('connect.php');
-  include('header.php');
+include('connect.php');
+include('header.php');
+
+// Tạo danh sách ngày (hôm nay + 6 ngày tiếp)
+$dates = [];
+setlocale(LC_TIME, 'vi_VN'); // Tiếng Việt
+for ($i = 0; $i < 7; $i++) {
+    $day = date('Y-m-d', strtotime("+$i day"));
+    $dates[] = [
+        'date' => $day,
+        'label' => $i === 0 ? 'Hôm nay' : strftime('%A', strtotime($day)),
+        'short' => date('d/m', strtotime($day)),
+    ];
+}
+
+$current_date = $_GET['date'] ?? date('Y-m-d');
+$city = $_GET['city'] ?? '';
+$cinema_id = $_GET['cinema'] ?? '';
+$movie_id = $_GET['id'] ?? ''; // lấy từ chitietphim.php
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -8,136 +25,125 @@
   <meta charset="UTF-8">
   <title>Chọn lịch chiếu</title>
   <link rel="stylesheet" href="CSS/chonlichchieu.css">
-
 </head>
-<body> <!---->
-  <!-- Menu điều hướng -->
+<body>
   <nav class="nav-item">
-    <a href="#" class="active">PHIM</a>
-    <a href="#">RẠP CINETIX</a>
-    <a href="#">GIÁ VÉ</a>
-    <a href="#">LIÊN HỆ</a>
+    <a href="home.php">PHIM</a>
+    <a href="rapCinetix.php">RẠP CINETIX</a>
+    <a href="giave.php">GIÁ VÉ</a>
+    <a href="lienhe.php">LIÊN HỆ</a>
   </nav>
 
   <div class="content">
     <p class="lich">Lịch chiếu</p>
-    <div class="showtime-bar">
-      <div class="control-row">
-        <button class="scroll-btn" id="prevBtn">&lt;</button>
-        <div class="date-tabs-wrapper">
-          <div class="date-tabs" id="dateTabs"></div>
-        </div>
-        <button class="scroll-btn" id="nextBtn">&gt;</button>
 
-        <?php
-        // Lấy danh sách tỉnh/thành
-        $city_query = "SELECT DISTINCT city FROM cinemas ORDER BY city";
-        $city_result = mysqli_query($link, $city_query);
-        if (!$city_result) {
-          die("Lỗi truy vấn city: " . mysqli_error($link));
-        }
-
-        // Lấy danh sách rạp
-        $ci_name_query = "SELECT id, ci_name, city FROM cinemas ORDER BY ci_name";
-        $ci_name_result = mysqli_query($link, $ci_name_query);
-        if (!$ci_name_result) {
-          die("Lỗi truy vấn ci_name: " . mysqli_error($link));
-        }
-
-        $cinemas_data = [];
-        while ($row = mysqli_fetch_assoc($ci_name_result)) {
-          $cinemas_data[] = $row;
-        }
-        ?>
-
-        <select class="filter-select" id="citySelect">
-          <option value="">Toàn quốc</option>
-          <?php
-          while ($row = mysqli_fetch_assoc($city_result)) {
-            echo '<option value="' . htmlspecialchars($row['city']) . '">' . htmlspecialchars($row['city']) . '</option>';
-          }
-          ?>
-        </select>
-
-        <select class="filter-select" id="cinemaSelect">
-          <option value="">Tất cả rạp</option>
-          <?php
-          foreach ($cinemas_data as $cinema) {
-            echo '<option value="' . htmlspecialchars($cinema['id']) . '" data-city="' . htmlspecialchars($cinema['city']) . '">' . htmlspecialchars($cinema['ci_name']) . '</option>';
-          }
-          ?>
-        </select>
-      </div>
+    <!-- Tabs ngày -->
+    <div class="date-tabs">
+      <?php foreach ($dates as $d): ?>
+        <a href="?date=<?php echo $d['date']; ?><?php if ($movie_id) echo '&id=' . $movie_id; ?>" class="date-tab <?php if ($d['date'] === $current_date) echo 'active'; ?>">
+          <?php echo $d['label']; ?><br><?php echo $d['short']; ?>
+        </a>
+      <?php endforeach; ?>
     </div>
 
-    <script src="js/chonlichchieu.js"></script>
-
-    <p style="font-weight: bold; font-size:20px; color: white;">Danh sách rạp</p>
+    <!-- Bộ lọc -->
+    <div class="filters">
+      <form method="GET">
+        <input type="hidden" name="date" value="<?php echo htmlspecialchars($current_date); ?>">
+        <?php if ($movie_id): ?>
+          <input type="hidden" name="id" value="<?php echo htmlspecialchars($movie_id); ?>">
+        <?php endif; ?>
+        <select name="city" class="filter-select">
+          <option value="">Toàn quốc</option>
+          <?php
+          $city_rs = mysqli_query($conn, "SELECT DISTINCT city FROM cinemas ORDER BY city");
+          while ($row = mysqli_fetch_assoc($city_rs)) {
+              $selected = ($city === $row['city']) ? 'selected' : '';
+              echo "<option value='{$row['city']}' $selected>{$row['city']}</option>";
+          }
+          ?>
+        </select>
+        <select name="cinema" class="filter-select">
+          <option value="">Tất cả rạp</option>
+          <?php
+          $cinema_rs = mysqli_query($conn, "SELECT id, ci_name FROM cinemas ORDER BY ci_name");
+          while ($row = mysqli_fetch_assoc($cinema_rs)) {
+              $selected = ($cinema_id === $row['id']) ? 'selected' : '';
+              echo "<option value='{$row['id']}' $selected>{$row['ci_name']}</option>";
+          }
+          ?>
+        </select>
+        <button type="submit" class="filter-select">Lọc</button>
+      </form>
+    </div>
 
     <?php
-    // Truy vấn dữ liệu từ CSDL
+    // Truy vấn dữ liệu suất chiếu
     $sql = "
     SELECT 
+        s.id AS showtime_id,
         c.ci_name AS cinema_name,
-        c.city AS cinema_city,
-        r.room_number AS room_name,
-        m.title AS movie_title,
-        m.genre,
-        m.image_url,
-        s.show_time,
-        s.price
+        s.show_time
     FROM showtimes s
     JOIN rooms r ON s.room_id = r.id
     JOIN cinemas c ON r.cinema_id = c.id
     JOIN movies m ON s.movie_id = m.id
-    WHERE s.show_date = CURDATE()
-    ORDER BY c.ci_name, r.room_number, s.show_time";
+    WHERE s.show_date = ?
+    ";
 
-    $result = mysqli_query($link, $sql);
-    if (!$result) {
-      die("Lỗi truy vấn showtimes: " . mysqli_error($link));
+    $params = [$current_date];
+    if (!empty($city)) {
+        $sql .= " AND c.city = ?";
+        $params[] = $city;
+    }
+    if (!empty($cinema_id)) {
+        $sql .= " AND c.id = ?";
+        $params[] = $cinema_id;
+    }
+    if (!empty($movie_id)) {
+        $sql .= " AND m.id = ?";
+        $params[] = $movie_id;
     }
 
-    if (mysqli_num_rows($result) == 0) {
-      echo "<p style='color: white;'>Hiện không có lịch chiếu nào trong hôm nay.</p>";
+    $sql .= " ORDER BY c.ci_name, s.show_time";
+
+    $stmt = mysqli_prepare($conn, $sql);
+    if ($stmt) {
+        $types = str_repeat('s', count($params));
+        mysqli_stmt_bind_param($stmt, $types, ...$params);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
     } else {
-      $cinemas = [];
-      while ($row = mysqli_fetch_assoc($result)) {
-          $cinema = $row['cinema_name'];
-          $room = $row['room_name'];
-          $movie = $row['movie_title'];
-          $time = substr($row['show_time'], 0, 5);
+        echo "<p>Lỗi truy vấn.</p>";
+        include('footer.php');
+        exit;
+    }
 
-          $cinemas[$cinema][$room][$movie][] = $time;
-      }
+    if (!$result || mysqli_num_rows($result) === 0) {
+        echo "<p>Không có lịch chiếu cho ngày này.</p>";
+    } else {
+        $cinemas = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $cinema = $row['cinema_name'];
+            $cinemas[$cinema][] = [
+                'time' => substr($row['show_time'], 0, 5),
+                'showtime_id' => $row['showtime_id']
+            ];
+        }
 
-      foreach ($cinemas as $cinema_name => $rooms) {
-          echo "<div class='cinema'>";
-          echo "<h3>" . htmlspecialchars($cinema_name) . "</h3>";
-
-          foreach ($rooms as $room_name => $movies) {
-              echo "<div class='room-title'>" . htmlspecialchars($room_name) . "</div>";
-
-              foreach ($movies as $movie_title => $times) {
-                  echo "<div class='movie-title'><strong>" . htmlspecialchars($movie_title) . "</strong></div>";
-                  echo "<div class='times'>";
-                  foreach ($times as $time) {
-                      echo "<button class='time-btn'>" . htmlspecialchars($time) . "</button>";
-                  }
-                  echo "</div>";
-              }
-          }
-
-          echo "</div><hr>";
-      }
+        foreach ($cinemas as $cinema_name => $times) {
+            echo "<div class='cinema'>";
+            echo "<h3>" . htmlspecialchars($cinema_name) . "</h3>";
+            echo "<div class='times'>";
+            foreach ($times as $t) {
+                echo "<a href='chonghe.php?showtime_id=" . $t['showtime_id'] . "' class='time-btn'>" . htmlspecialchars($t['time']) . "</a>";
+            }
+            echo "</div>";
+            echo "</div>";
+        }
     }
     ?>
   </div>
-  <script src="js/chonlichchieu.js"></script>
 </body>
-<<<<<<< HEAD
-<?php include('footer.php'); ?>
-=======
 </html>
-<?php include("footer.php"); ?>
->>>>>>> d53afb058e83463d21ca4d3efa8c8e9f721e1798
+<?php include('footer.php'); ?>

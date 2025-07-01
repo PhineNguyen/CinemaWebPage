@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  // Hàm định dạng giá tiền
+  // Hàm định dạng tiền VNĐ
   function formatCurrency(amount) {
     return amount.toLocaleString('vi-VN') + 'đ';
   }
@@ -17,17 +17,14 @@ $(document).ready(function () {
       if (quantity > 0) {
         total += quantity * price;
 
-        // Lấy phần flavor-options ngay sau combo-item
         const $options = $item.next('.flavor-options');
 
-        // Nếu có tick size lớn, cộng thêm giá
         const sizeLon = $options.find('input[type="checkbox"][value="lon"]:checked');
         if (sizeLon.length) {
-          const extra = parseInt(sizeLon.data('price')) || 0; // Trả về 0 nếu số ko xác định
+          const extra = parseInt(sizeLon.data('price')) || 0;
           total += extra * quantity;
         }
 
-        // Nếu có tick size nhỏ, trừ đi giá
         const sizeNho = $options.find('input[type="checkbox"][value="nho"]:checked');
         if (sizeNho.length) {
           const name = $item.find('h3').text().trim();
@@ -35,7 +32,8 @@ $(document).ready(function () {
             const minus = parseInt(sizeNho.data('price')) || 0;
             total -= minus * quantity;
           }
-      }}
+        }
+      }
     });
 
     $('#total-price').text(formatCurrency(total));
@@ -61,21 +59,62 @@ $(document).ready(function () {
     }
   });
 
-  // Khi tick/untick checkbox size
+  // Thay đổi checkbox
   $('input[type="checkbox"][name="size_flavor"]').change(function () {
     updateTotal();
   });
 
-  // Tính tiền lần đầu
+  // Lần đầu
   updateTotal();
 
   // Nút quay lại
-  $('#back').click(function(){
+  $('#back').click(function () {
     window.location.href = 'chonghe.php';
-  })
+  });
 
   // Nút tiếp tục
-  $('#continue').click(function(){
-    window.location.href = 'thanhtoan.php';
-  })
+  $('#continue').click(function () {
+    const selectedItems = [];
+
+    $('.combo-item').each(function () {
+      const $item = $(this);
+      const quantity = parseInt($item.find('.quantity-display').text());
+      if (quantity === 0) return;
+
+      const name = $item.find('h3').text().trim();
+      const basePrice = parseInt($item.find('.combo-price').text().replace(/[^\d]/g, ''));
+      let extraPrice = 0;
+      let size = '';
+
+      const $options = $item.next('.flavor-options');
+      const sizeLon = $options.find('input[type="checkbox"][value="lon"]:checked');
+      if (sizeLon.length) {
+        extraPrice += parseInt(sizeLon.data('price')) || 0;
+        size = '(Size lớn)';
+      }
+
+      const sizeNho = $options.find('input[type="checkbox"][value="nho"]:checked');
+      if (sizeNho.length && name === "Coca Cola") {
+        extraPrice -= parseInt(sizeNho.data('price')) || 0;
+        size = '(Size nhỏ)';
+      }
+
+      selectedItems.push({
+        name: name + ' ' + size,
+        quantity: quantity,
+        price: basePrice + extraPrice
+      });
+    });
+
+    const comboTotal = selectedItems.reduce((sum, item) => sum + item.quantity * item.price, 0);
+
+    // Lưu vào localStorage
+    localStorage.setItem('comboData', JSON.stringify({
+      items: selectedItems,
+      total: comboTotal
+    }));
+
+    // Chuyển lại trang chọn ghế
+    window.location.href = 'chonghe.php?from_combo=1';
+  });
 });
