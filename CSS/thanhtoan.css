@@ -194,8 +194,15 @@ h2 {
   margin-bottom: 15px;
 }
 
+.button-row {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
 .confirm-btn {
-  width: 100%;
+  flex: 1; /* giúp 2 nút đều nhau */
+  max-width: 200px;
   padding: 12px;
   font-weight: bold;
   background-color: #ffc107;
@@ -209,6 +216,24 @@ h2 {
 .confirm-btn:hover{
   background-color: #ffc107ec;
   color: #000000e3;
+}
+
+.back-btn {
+  flex: 1; /* giúp 2 nút đều nhau */
+  max-width: 200px;
+  padding: 12px;
+  font-weight: bold;
+  background-color: #555;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.back-btn:hover{
+  background-color: #555555ce;
+  color: rgba(255, 255, 255, 0.877);
 }
 
 /* ===== Responsive ===== */

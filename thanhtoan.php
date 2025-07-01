@@ -1,6 +1,12 @@
 <?php  
 include('header.php');
 include('connect.php');
+session_start();
+// Kiểm tra nếu đã thanh toán thành công, chuyển hướng về trang chủ
+if (isset($_SESSION['paid_success']) && $_SESSION['paid_success'] === true) {
+    unset($_SESSION['paid_success']); // Hủy session 
+    header("Location: Home.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -24,56 +30,137 @@ include('connect.php');
         
         <div class="ticket-section">
           <!-- Thông tin vé -->
-          <div class="ticket-infor">
-            <img src="pic/Doraemon_Movie_2025_Poster.jpg" alt="Doraemon">
-            <div class="ticket-details">
-              <h4>CINETIX Tân Bình</h4>
-              <p>Doraemon movie 44: Nobita và cuộc phiêu lưu vào thế giới trong tranh</p>
-              <div class="ticket-info">
-                <div><strong>Thời gian:</strong><br>17:00~18:45<br>Thứ bảy, 07/06/2025</div>
-                <div><strong>Định dạng:</strong><br>2D Lồng tiếng</div>
-                <div><strong>Phòng chiếu:</strong><br>Rạp số 5</div>
-                <div><strong>Số ghế:</strong><br>E08</div>
+          <?php
+            $sql = "SELECT 
+                      ci.ci_name AS rap,
+                      mv.title AS ten_phim,
+                      mv.image_url AS poster,
+                      DATE_FORMAT(st.show_time, '%H:%i') AS gio_bat_dau,
+                      DATE_FORMAT(st.show_date, '%d/%m/%Y') AS ngay_chieu,
+                      mv.lgs AS dinh_dang,
+                      rm.room_number AS phong_chieu,
+                      s.id AS so_ghe
+                    FROM tickets t
+                    JOIN booking_details bd ON t.booking_detail_id = bd.id
+                    JOIN seats s ON bd.seat_id = s.id
+                    JOIN bookings b ON bd.booking_id = b.id
+                    JOIN showtimes st ON b.showtime_id = st.id
+                    JOIN movies mv ON st.movie_id = mv.id
+                    JOIN rooms rm ON st.room_id = rm.id
+                    JOIN cinemas ci ON rm.cinema_id = ci.id
+                    LIMIT 1";
+                    
+            $result = $conn->query($sql);
+            if ($result && $result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+          ?>
+            <div class="ticket-infor">
+              <img src="<?php echo htmlspecialchars($row['poster']); ?>" alt="<?php echo htmlspecialchars($row['ten_phim']); ?>">
+              <div class="ticket-details">
+                <h4><?php echo htmlspecialchars($row['rap']); ?></h4>
+                <p><?php echo htmlspecialchars($row['ten_phim']); ?></p>
+                <div class="ticket-info">
+                  <div><strong>Thời gian:</strong><br><?php echo $row['gio_bat_dau']; ?><br><?php echo $row['ngay_chieu']; ?></div>
+                  <div><strong>Định dạng:</strong><br><?php echo htmlspecialchars($row['dinh_dang']); ?></div>
+                  <div><strong>Phòng chiếu:</strong><br><?php echo htmlspecialchars($row['phong_chieu']); ?></div>
+                  <div><strong>Số ghế:</strong><br><?php echo htmlspecialchars($row['so_ghe']); ?></div>
+                </div>
               </div>
             </div>
-          </div>
+          <?php
+              }
+            } else {
+              echo "<p>Không có vé nào được tìm thấy.</p>";
+            }
+          ?>
         </div>
-        <!-- Combo và Tổng tiền -->
+
+        <!-- Combo -->
             <div class="combo-section">
               <h3>Combo bắp nước</h3>
-              <div class="combo-box">
-                <img src="pic/Doraemon_Movie_2025_Poster.jpg" alt="Combo">
-                <div class="combo-info">
-                  <div><strong>Combo 1 big</strong><br><small>Bắp caramel</small></div>
-                  <div class="combo-price">89.000đ</div>
-                </div>
-                <div class="quantity-box">
-                  <button class="minus">-</button>
-                  <div class="quantity-display">0</div>
-                  <button class="plus">+</button>
-                </div>
-              </div>
+              <?php
+              $sql = "
+                  SELECT 
+                      b.id AS booking_id,
+                      f.namef AS combo_name,
+                      f.food_images,
+                      f.price,
+                      f.descript,
+                      fo.quantity,
+                      (fo.quantity * f.price) AS total_price
+                  FROM bookings b
+                  JOIN food_orders fo ON b.id = fo.booking_id
+                  JOIN foods f ON fo.food_id = f.id
+                  GROUP BY b.id
+                  LIMIT 1 OFFSET 3
+              ";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                ?>
+                    <div class="combo-box">
+                      <img src="<?php echo $row['food_images']; ?>" alt="Combo">
+                      <div class="combo-info">
+                        <div>
+                          <strong><?php echo htmlspecialchars($row['combo_name']); ?></strong><br>
+                          <small><?php echo $row['descript']; ?></small>
+                        </div>
+                        <div class="combo-price"><?php echo number_format($row['price'], 0, ',', '.'); ?>đ</div>
+                      </div>
+                      <div class="quantity-box">
+                        <button class="minus">-</button>
+                        <div class="quantity-display"><?php echo $row['quantity']; ?></div>
+                        <button class="plus">+</button>
+                      </div>
+                    </div>
+                <?php
+                    }
+                } else {
+                    echo "<p>Không có combo nào được đặt.</p>";
+                }
+              ?>
             </div>
       </div>
         <!-- Phương thức thanh toán -->
         <div class="payment">
           <div class="payment-methods">
             <h3>Phương thức thanh toán</h3>
-            <label><input type="radio" name="payment" checked> <img src="#"> Thẻ ATM ( thẻ nội địa )</label><br>
-            <label><input type="radio" name="payment"> <img src="#"> Thẻ quốc tế ( Visa, Master, Amex, JCB)</label><br>
-            <label><input type="radio" name="payment"> <img src="#"> VNPay</label><br>
-            <label><input type="radio" name="payment"> <img src="#"> Momo</label><br>
-            <label><input type="radio" name="payment"> <img src="#"> ZaloPay</label>
+            <label><input type="radio" name="payment" checked>Thẻ ATM ( thẻ nội địa )</label><br>
+            <label><input type="radio" name="payment"> Thẻ quốc tế ( Visa, Master, Amex, JCB)</label><br>
+            <label><input type="radio" name="payment"> VNPay</label><br>
+            <label><input type="radio" name="payment"> Momo</label><br>
+            <label><input type="radio" name="payment"> ZaloPay</label>
           </div>
         </div>
     </div>
     <!-- Tổng tiền -->
-      <div class="summary">
-        <p class="total">Tạm tính: <strong>195.000đ</strong></p>
+      <div class="summary" >
+        <?php
+          $sql = "SELECT 
+            b.id AS booking_id,
+            (SUM(b.total_amount) + IFNULL(SUM(f.price * fo.quantity), 0))AS tam_tinh
+          FROM bookings b
+          JOIN booking_details bd ON b.id = bd.booking_id
+          JOIN seats s ON bd.seat_id = s.id
+          LEFT JOIN food_orders fo ON b.id = fo.booking_id
+          LEFT JOIN foods f ON fo.food_id = f.id
+          WHERE b.id = 5
+          GROUP BY b.id;
+          ";
+          $result = $conn->query($sql);
+          if ($row = $result->fetch_assoc()) {
+            echo "<p class='total'>Tạm tính: <strong>".number_format($row['tam_tinh'], 0, ',', '.')."đ</strong></p>";
+          }
+        ?>
         <label class="terms">
           <input type="checkbox"> Tôi đồng ý với điều khoản sử dụng và mua vé cho người có độ tuổi phù hợp
         </label>
-        <button class="confirm-btn">Xác nhận</button>
+        <!-- Nút back và confirm -->
+        <div class="button-row">
+          <button class="back-btn">Quay lại</button>
+          <button class="confirm-btn">Xác nhận</button>
+        </div>
       </div>
   </div>
 </body>
