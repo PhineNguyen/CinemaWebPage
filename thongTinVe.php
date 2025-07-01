@@ -1,4 +1,7 @@
-<?php include('header.php') ?>
+<?php session_start();
+$_SESSION['paid_success'] = true; //Gán biến xác nhận thanh toán thành công
+include('header.php');
+include('connect.php') ?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -10,18 +13,43 @@
 </head>
 <body>
   <div class="success-container">
-    <h1><i class="fa-solid fa-circle-check"style="color: #00cc66;"></i></h1>
+    <h1><i class="fa-solid fa-circle-check" style="color: #00cc66;"></i></h1>
     <h1>THANH TOÁN THÀNH CÔNG!</h1>
     <p class="description">Bạn đã đặt vé online thành công. CINETIX Cinema xin chân thành cảm ơn bạn. Thông tin vé của bạn ở bên dưới:</p>
 
     <div class="ticket-card">
+      <?php
+        $sql = "SELECT 
+                  ci.ci_name AS rap,
+                  mv.title AS ten_phim,
+                  mv.image_url AS poster,
+                  mv.lgs AS dinh_dang,
+                  t.ticket_code AS ma_ve,
+                  DATE_FORMAT(st.show_time, '%H:%i') AS gio_bat_dau,
+                  DATE_FORMAT(st.show_date, '%d/%m/%Y') AS ngay_chieu,
+                  rm.room_number AS phong_chieu,
+                  s.id AS so_ghe
+                FROM tickets t
+                JOIN booking_details bd ON t.booking_detail_id = bd.id
+                JOIN seats s ON bd.seat_id = s.id
+                JOIN bookings b ON bd.booking_id = b.id
+                JOIN showtimes st ON b.showtime_id = st.id
+                JOIN movies mv ON st.movie_id = mv.id
+                JOIN rooms rm ON st.room_id = rm.id
+                JOIN cinemas ci ON rm.cinema_id = ci.id
+                LIMIT 1";
+
+        $result = $conn->query($sql);
+        if ($result && $result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+      ?>
       <div class="ticket-header">
         <div class="cinema-info">
           <img src="pic/Doraemon_Movie_2025_Poster.jpg" alt="Logo Cinetix" class="cinema-logo">
           <div>
-            <h3>CINETIX Tân Bình</h3>
-            <p class="movie-title">Doraemon movie 44: Nobita và cuộc phiêu lưu vào thế giới trong tranh</p>
-            <small>2D Lồng tiếng</small>
+            <h3><?php echo htmlspecialchars($row['rap']); ?></h3>
+            <p class="movie-title"><?php echo htmlspecialchars($row['ten_phim']); ?></p>
+            <small><?php echo htmlspecialchars($row['dinh_dang']); ?></small>
           </div>
         </div>
         <div class="ticket-actions">
@@ -31,14 +59,14 @@
       </div>
 
       <div class="ticket-body">
-        <img src="pic/Doraemon_Movie_2025_Poster.jpg" alt="Poster phim" class="poster">
+        <img src="<?php echo htmlspecialchars($row['poster']); ?>" alt="Poster phim" class="poster">
 
         <div class="ticket-details">
-          <p><strong>Mã đặt vé:</strong> <span class="code">K8315NA9</span></p>
-          <p><strong>Thời gian:</strong> <span class="time">17:00~18:45</span></p>
-          <p><strong>Thứ bảy,</strong> 07/06/2025</p>
-          <p><strong>Phòng chiếu:</strong> <strong>Rạp số 5</strong></p>
-          <p><strong>Số ghế:</strong> E08</p>
+          <p><strong>Mã đặt vé:</strong> <span class="code"><?php echo $row['ma_ve']; ?></span></p>
+          <p><strong>Thời gian:</strong> <span class="time"><?php echo $row['gio_bat_dau']; ?></span></p>
+          <p><?php echo $row['ngay_chieu']; ?></p>
+          <p><strong>Phòng chiếu:</strong> <?php echo htmlspecialchars($row['phong_chieu']); ?></p>
+          <p><strong>Số ghế:</strong> <?php echo htmlspecialchars($row['so_ghe']); ?></p>
           <p><strong>Số vé:</strong> 01</p>
           <small class="note">Đưa mã này cho nhân viên soát vé để nhận vé vào rạp</small>
         </div>
@@ -47,8 +75,16 @@
           <img src="pic/qrcode-default.png" alt="QR code" class="qr-code">
         </div>
       </div>
+      <?php
+          }
+        } else {
+          echo "<p>Không có vé nào được tìm thấy.</p>";
+        }
+      ?>
     </div>
   </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/thongTinVe.js"></script>
 </html>
 <?php include('footer.php') ?>
