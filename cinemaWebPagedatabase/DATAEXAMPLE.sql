@@ -726,18 +726,5 @@ INSERT INTO food_orders (id, booking_id, food_id, quantity) VALUES
 (4, 1, 'CB01', 1),   
 (5, 5, 'CB02', 1),   
 (7, 2, 'N07', 2);  
-INSERT INTO food_variants (variant_id, food_id, size, price) VALUES
-(1, 'CB01', 'Size Nhỏ', 0),
-(2, 'CB01', 'Size Lớn', 30000),
-(3, 'CB02', 'Size Vừa', 20000),
-(4, 'B03', 'Size Nhỏ', 0),
-(5, 'B03', 'Size Lớn', 10000),
-(6, 'N04', 'Size nhỏ', 0),
-(7, 'N04', 'Size lớn', 10000),
-(8, 'N05', 'Size nhỏ', 0),
-(9, 'N05', 'Size lớn', 10000),
-(10, 'N06', 'Size nhỏ', 0),
-(11, 'N06', 'Size Lớn', 10000),
-(12, 'N07', 'Size Nhỏ', 0),
-(13, 'N07', 'Size Nhỏ', 10000);
+
 

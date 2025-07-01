@@ -74,6 +74,7 @@ CREATE TABLE food_variants (
   variant_id INT AUTO_INCREMENT PRIMARY KEY,
   food_id VARCHAR(10),
   size VARCHAR(10),  		-- 'small' or 'large'
+  flavor VARCHAR(100),
   price INT,
   FOREIGN KEY (food_id) REFERENCES foods(id)
 );
