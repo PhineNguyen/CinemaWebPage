@@ -16,10 +16,12 @@
             <button class="close-btn" onclick="closeQR()">x</button>
             <p >Quét mã bên dưới để thanh toán</p>
             <img src="pic/qrcode-default.png" alt="QR Code" class="qr-img">
-            <p class="timer">2:59</p>
+            <p class="timer"></p>
         </div>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/maQRthanhtoan.js"></script>
 </html>
 <?php
     include('footer.php');
