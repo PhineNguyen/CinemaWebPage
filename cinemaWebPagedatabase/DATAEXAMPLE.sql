@@ -144,7 +144,7 @@ INSERT INTO cinemas (id, ci_name, address, city, hotline, email_ci, ci_status) V
 -- HÀ NỘI
 ('HN1', 'Cinetix Hà Nội 1', '100 Hồ Con Rùa, Quận Hoàn Kiếm', 'Hà Nội', '19001001', 'HanoiCinetix@gmail.com', 'Hoạt động'),
 ('HN2', 'Cinetix Hà Nội 2', '101 Lê Nin, Quận Đống Đa', 'Hà Nội', '19001001', 'HanoiCinetix@gmail.com', 'Hoạt động'),
-('HN3', 'Cinetix Hà Nội 3', '102 Lý Thường Kiệt, Quận Cầu Giấy', 'Hà Nội', '19001001', 'HanoiCinetix@gmail.com', 'Tạm ngừng'),
+('HN3', 'Cinetix Hà Nội 3', '102 Lý Thường Kiệt, Quận Cầu Giấy', 'Hà Nội', '19001001', 'HanoiCinetix@gmail.com', 'Hoạt động'),
 
 -- TP. HỒ CHÍ MINH
 ('HCM1', 'Cinetix TP.HCM 1', '103 Đồng Khởi, Quận 1', 'TP. Hồ Chí Minh', '19001002', 'HCMCinetix@gmail.com', 'Hoạt động'),
@@ -157,7 +157,7 @@ INSERT INTO cinemas (id, ci_name, address, city, hotline, email_ci, ci_status) V
 ('TV3', 'Cinetix Trà Vinh 3', '108 Lý Thường Kiệt, Phường 8', 'Trà Vinh', '19001003', 'TvCinetix@gmail.com', 'Hoạt động'),
 
 -- BẾN TRE
-('BT1', 'Cinetix Bến Tre 1', '109 Hùng Vương, Phường 3', 'Bến Tre', '19001004', 'BTCinetix@gmail.com', 'Tạm ngừng'),
+('BT1', 'Cinetix Bến Tre 1', '109 Hùng Vương, Phường 3', 'Bến Tre', '19001004', 'BTCinetix@gmail.com', 'Hoạt động'),
 ('BT2', 'Cinetix Bến Tre 2', '110 Phạm Ngũ Lão, Phường 5', 'Bến Tre', '19001004', 'BTCinetix@gmail.com', 'Hoạt động'),
 ('BT3', 'Cinetix Bến Tre 3', '111 Phan Chu Trinh, Phường 6', 'Bến Tre', '19001004', 'BTCinetix@gmail.com', 'Hoạt động');
 

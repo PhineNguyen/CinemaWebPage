@@ -4,20 +4,13 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Trang chủ</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="CSS/footer.css" />
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
-  <!-- Slick Carousel -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" href="CSS/Home.css" />
 </head>
 <footer>
     <div class="f1">
-      <h3>CINETIX Việt Nam</h3>
+      <h3>Skibidi Việt Nam</h3>
       <ul>
         <li>Giới thiệu</li>
         <li>Tiện ích Online</li>
@@ -52,13 +45,13 @@
       <h3>Chăm sóc khách hàng</h3>
       <ul>
         <li>Hotline: 1900 1357</li>
-        <li>Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày bao gồm bao gồm cả lễ Tết)</li>
-        <li>Email hỗ trợ: hoidap@cinetix.vn</li>
+        <li>Giờ làm việc: 8:00 - 22:00</li>
+        <li>Email hỗ trợ: hoidap@skibidi.vn</li>
       </ul>
     </div>
 
     <div class="f5">
-      <p class="company-name">CÔNG TY TNHH CINETIX VIỆT NAM</p>
-      <img class="company-logo" src="pic/LOGO.png" alt="Logo company" />
+      <p class="company-name">CÔNG TY TNHH SKIBIDI VIỆT NAM</p>
+      <img class="company-logo" src="pic/LOGO.png" alt="Logo công ty" />
     </div>
   </footer>
