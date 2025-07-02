@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS cinemawebpage;
 USE cinemawebpage;
 
 -- Bảng người dùng
-CREATE TABLE users (
+CREATE  TABLE IF NOT EXISTS  users (
     id VARCHAR(100) PRIMARY KEY,
     user_name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE users (
 );
 
 -- Bảng phim
-CREATE TABLE movies (
+CREATE TABLE IF NOT EXISTS  movies (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     descript TEXT,
@@ -37,7 +37,7 @@ CREATE TABLE movies (
 );
 
 -- Bảng rạp
-CREATE TABLE cinemas (
+CREATE TABLE IF NOT EXISTS  cinemas (
     id VARCHAR(100) PRIMARY KEY,
     ci_name VARCHAR(100) NOT NULL,
     ci_code VARCHAR(50) UNIQUE,  -- ví dụ: "hbt", "tanbinh"
@@ -49,7 +49,7 @@ CREATE TABLE cinemas (
 );
 
 -- Bảng phòng chiếu
-CREATE TABLE rooms (
+CREATE TABLE IF NOT EXISTS  rooms (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cinema_id VARCHAR(100),
     room_number VARCHAR(50) NOT NULL,
@@ -59,48 +59,31 @@ CREATE TABLE rooms (
 );
 
 -- Bảng ghế
-CREATE TABLE seats (
+CREATE TABLE IF NOT EXISTS  seats (
     id INT PRIMARY KEY,  -- ví dụ: R1A1
     room_id INT,
     seat_row CHAR(1),
     seat_number INT,
     seat_type ENUM('Ghế thường','Ghế VIP','Ghế đôi') DEFAULT 'Ghế thường',
     price_seat_type DECIMAL(10,0) NOT NULL,
-    seat_status ENUM('Đã đặt','Ghế trống') DEFAULT 'Ghế trống',
+    seat_status ENUM('Ghế đã đặt','Ghế trống') DEFAULT 'Ghế trống',
     FOREIGN KEY (room_id) REFERENCES rooms(id)
 );
 
-CREATE TABLE foods (
-    id VARCHAR(100) PRIMARY KEY,
-    namef VARCHAR(100) NOT NULL,
-    descript TEXT,
-    food_images VARCHAR(255),
-    price DECIMAL(10,0) NOT NULL,
-    available BOOLEAN DEFAULT TRUE
-);
 
-CREATE TABLE food_variants (
-  variant_id INT AUTO_INCREMENT PRIMARY KEY,
-  food_id VARCHAR(10),
-  size VARCHAR(10),  		-- 'small' or 'large'
-  flavor VARCHAR(100),
-  price INT,
-  FOREIGN KEY (food_id) REFERENCES foods(id)
-);
 
-CREATE TABLE showtimes (
+CREATE TABLE IF NOT EXISTS  showtimes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     movie_id INT,
     room_id INT,
     show_date DATE,
     show_time TIME,
-    price DECIMAL(10,0),
     FOREIGN KEY (movie_id) REFERENCES movies(id),
     FOREIGN KEY (room_id) REFERENCES rooms(id)
 );
 
 -- Bảng thanh toán
-CREATE TABLE payments (
+CREATE TABLE IF NOT EXISTS  payments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     payment_method ENUM('Tiền mặt', 'Banking', 'Momo', 'ZaloPay') DEFAULT 'Tiền mặt',
     payment_time DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -108,7 +91,7 @@ CREATE TABLE payments (
 );
 
 -- Bảng đặt vé
-CREATE TABLE bookings (
+CREATE TABLE IF NOT EXISTS  bookings (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id VARCHAR(100),
     showtime_id INT,
@@ -122,7 +105,7 @@ CREATE TABLE bookings (
 );
 
 -- Bảng chi tiết đặt vé
-CREATE TABLE booking_details (
+CREATE TABLE IF NOT EXISTS  booking_details (
     id INT AUTO_INCREMENT PRIMARY KEY,
     booking_id INT,
     seat_id INT,
@@ -131,7 +114,7 @@ CREATE TABLE booking_details (
 );
 
 -- Bảng vé
-CREATE TABLE tickets (
+CREATE TABLE IF NOT EXISTS  tickets (
     ticket_id INT AUTO_INCREMENT PRIMARY KEY,
     booking_detail_id INT NOT NULL,
     ticket_code VARCHAR(20) NOT NULL UNIQUE,
@@ -141,7 +124,7 @@ CREATE TABLE tickets (
 );
 
 -- Bảng đồ ăn
-CREATE TABLE foods (
+CREATE TABLE IF NOT EXISTS  foods (
     id VARCHAR(100) PRIMARY KEY,
     namef VARCHAR(100) NOT NULL,
     descript TEXT,
@@ -149,19 +132,18 @@ CREATE TABLE foods (
     price DECIMAL(10,0) NOT NULL,
     available BOOLEAN DEFAULT TRUE
 );
-
--- Biến thể đồ ăn (size nhỏ/lớn)
-CREATE TABLE food_variants (
-    variant_id INT AUTO_INCREMENT PRIMARY KEY,
-    food_id VARCHAR(100),
-    size VARCHAR(10), -- small, medium, large
-    flavor VARCHAR(10),
-    price INT,
-    FOREIGN KEY (food_id) REFERENCES foods(id)
+CREATE TABLE IF NOT EXISTS  food_variants (
+  variant_id INT AUTO_INCREMENT PRIMARY KEY,
+  food_id VARCHAR(10),
+  size VARCHAR(10),  		-- 'small' or 'large'
+  flavor VARCHAR(100),
+  price INT,
+  FOREIGN KEY (food_id) REFERENCES foods(id)
 );
 
+
 -- Đặt đồ ăn theo đơn đặt vé
-CREATE TABLE food_orders (
+CREATE TABLE IF NOT EXISTS  food_orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     booking_id INT,
     food_id VARCHAR(100),

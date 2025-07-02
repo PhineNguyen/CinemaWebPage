@@ -176,6 +176,10 @@ h2 {
   scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
+
+
+/* Responsive: 2 cột cho tablet, 1 cột cho mobile */
+
 /*Cấu hính scrollbar cho trình duyệt*/
 .movie::-webkit-scrollbar {
   height: 6px;
@@ -190,6 +194,70 @@ h2 {
   background: transparent;
 }
 
+.movie-active{
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px 10px;
+  padding: 20px 0 0 0;
+  max-width: 750px;
+  margin: 0 auto 30px auto;
+  justify-items: center;
+  align-items: stretch;
+}
+.movie-active-item{
+  background-color: var(--bg-dark);
+  border-radius:8px;
+  overflow:hidden;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+.movie-active-item:hover {
+  transform: scale(1.05);
+}
+.movie-active-item img {
+  width:100%;
+  height: auto;
+  display:block;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.pagination a,
+.pagination strong {
+  padding: 6px 12px;
+  background: none;
+  border: 1px solid var(--highlight);
+  text-decoration: none;
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+  font-weight: 500;
+}
+
+/* Trang hiện tại */
+.pagination strong {
+  background-color: var(--highlight);
+  color: black;
+  font-weight: bold;
+}
+
+/* Hiệu ứng hover */
+.pagination a:hover {
+  background-color: var(--highlight);
+  color: var(--bg-dark);
+}
+
+/* Nút điều hướng << >> nổi bật hơn */
+.pagination a:first-child,
+.pagination a:last-child {
+  color: white;;
+  font-weight: bold;
+}
 /*từng item phim*/
 .movie-item {
   position: relative;
@@ -226,6 +294,7 @@ h2 {
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
+  flex-direction: column;
   gap: 10px;
   opacity: 0;
   pointer-events: none;
@@ -235,11 +304,15 @@ h2 {
 .movie-item:hover .button {
   opacity: 1;
   pointer-events: auto;
+
 }
 
-/*nút chi tiết và đặt vé*/
+
+
 .button a {
-  flex: 1;
+  width: 100%;
+  margin: 0;
+  flex: unset;
   text-align: center;
   padding: 10px 6px;
   font-size: 15px;
@@ -254,7 +327,9 @@ h2 {
   font-weight: bold;
   transition: background-color 0.3s;
 }
-
+.button a:hover {
+  background-color: #d4aa0069;
+}
 /* Footer */
 
 
@@ -330,6 +405,7 @@ footer img {
   object-fit: cover;
   flex-shrink: 0;
 }
+
 
 /* Responsive nhỏ */
 /* hỗ trợ giao diện nhỏ */
