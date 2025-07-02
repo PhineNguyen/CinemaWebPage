@@ -1,93 +1,103 @@
 body {
-  background-color: #111;
-  color: white;
-  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #f1f1f1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
 }
 
 .content {
-  padding: 30px;
+  padding: 40px 20px;
   max-width: 1000px;
   margin: auto;
 }
 
 .lich {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: bold;
   color: #ffc107;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
 }
 
 .date-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 25px;
 }
 
 .date-tab {
-  background-color: #333;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 5px;
+  background-color: #2c2c2c;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
   text-decoration: none;
-  transition: 0.3s;
+  text-align: center;
+  font-size: 14px;
+  min-width: 70px;
+  transition: background-color 0.3s, color 0.3s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
 .date-tab.active,
 .date-tab:hover {
   background-color: #ffc107;
-  color: black;
+  color: #000;
+  font-weight: bold;
 }
 
 .filters {
-  margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .filter-select {
-  margin-right: 10px;
-  padding: 6px 12px;
-  border-radius: 4px;
+  margin: 0 10px 10px 0;
+  padding: 8px 14px;
+  border-radius: 6px;
   border: none;
-  font-size: 14px;
+  font-size: 15px;
+  background-color: #333;
+  color: white;
+  appearance: none;
+}
+
+.filter-select:focus {
+  outline: none;
+  background-color: #444;
 }
 
 .cinema {
-  margin-bottom: 30px;
-  border-bottom: 1px solid #333;
+  margin-bottom: 40px;
   padding-bottom: 20px;
+  border-bottom: 1px solid #333;
 }
 
 .cinema h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 22px;
   color: #ffc107;
-}
-
-.format-title {
-  font-weight: bold;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  color: #ccc;
+  margin-bottom: 12px;
 }
 
 .times {
-  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .time-btn {
-  background-color: white;
-  color: black;
-  border: none;
-  padding: 6px 12px;
-  margin: 4px 6px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: 0.2s;
+  background-color: #fff;
+  color: #000;
+  padding: 8px 14px;
+  border-radius: 6px;
   font-size: 14px;
+  text-decoration: none;
+  transition: 0.3s;
 }
 
 .time-btn:hover {
   background-color: #ffc107;
+  color: black;
 }
