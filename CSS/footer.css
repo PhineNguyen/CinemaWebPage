@@ -1,69 +1,65 @@
+/*Biến toàn cục CSS*/
+:root {
+  --bg-dark: #292929; /*Màu nền chính của web*/
+  --bg-footer: #222; /*Màu nền cho footer*/
+  --highlight: #EBB802; /*Màu vàng của button và đường kẻ*/
+  --text-light: white; /*Màu chữ sáng*/
+  --poster-hover-opacity: 0.3; /*Độ mờ khi di chuột vào*/
+  --scrollbar-thumb: rgba(255, 255, 255, 0.2); /*Màu thanh cuộn ngang*/
+}
 
-    body {
-      background-color: #111;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
-    .content {
-      padding: 30px;
-    }
-    .lich {
-      font-size: 26px;
-      font-weight: bold;
-      color: #ffc107;
-    }
-    .date-tabs {
-      display: flex;
-      margin: 20px 0;
-      gap: 10px;
-    }
-    .date-tab {
-      background: none;
-      color: white;
-      border: 1px solid gray;
-      padding: 8px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      text-align: center;
-    }
-    .date-tab.active {
-      background-color: #ffc107;
-      color: black;
-      font-weight: bold;
-    }
-    .filters {
-      margin: 10px 0 20px 0;
-    }
-    .filter-select {
-      padding: 5px 10px;
-      margin-right: 10px;
-    }
-    .cinema {
-      margin-bottom: 30px;
-      border-bottom: 1px solid #444;
-      padding-bottom: 20px;
-    }
-    .cinema h3 {
-      color: #ffc107;
-      font-size: 20px;
-    }
-    .format-title {
-      font-weight: bold;
-      margin-top: 10px;
-      margin-bottom: 5px;
-    }
-    .times {
-      margin-bottom: 10px;
-    }
-    .time-btn {
-      background-color: white;
-      color: black;
-      border: none;
-      padding: 6px 12px;
-      margin: 4px;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-    .time-btn:hover {
-      background-color: #ffc107;
-    }
+footer {
+  background-color: var(--bg-footer);
+  color: var(--text-light);
+  padding: 30px 20px;
+  display: flex;
+  gap: 20px;
+}
+
+footer div {
+  flex: 1;
+}
+
+footer h3 {
+  color: var(--highlight);
+  margin-bottom: 10px;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer ul li {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+footer ul li:hover {
+  color: var(--highlight);
+}
+
+.f3 ul li img {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.f5 {
+  text-align: center;
+  color: var(--highlight);
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.company-logo {
+  width: 60px;
+  margin-top: 10px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+  }
+}

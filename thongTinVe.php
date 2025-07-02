@@ -12,6 +12,13 @@ include('connect.php') ?>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+  <nav class="nav-item">
+    <a href="home.php">PHIM</a>
+    <a href="rapCinetix.php">RẠP CINETIX</a>
+    <a href="giave.php">GIÁ VÉ</a>
+    <a href="lienhe.php">LIÊN HỆ</a>
+  </nav> 
+  
   <div class="success-container">
     <h1><i class="fa-solid fa-circle-check" style="color: #00cc66;"></i></h1>
     <h1>THANH TOÁN THÀNH CÔNG!</h1>

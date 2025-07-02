@@ -14,7 +14,7 @@
     position: relative; /* cần thiết để định vị nút close bên trong */
 }
 p{
-    font-weight:bold; font-size: 20px; margin-top: 40px;
+    font-weight:bold; font-size: 20px; margin-top: 40px; color: black;
 }
 .timer{
     font-weight:bold; font-size: 16px;

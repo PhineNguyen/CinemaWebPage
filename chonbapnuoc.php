@@ -11,6 +11,13 @@ include('header.php');
   <link rel="stylesheet" href="CSS/chonbapnuoc.css">
 </head>
 <body>
+    <nav class="nav-item">
+    <a href="home.php">PHIM</a>
+    <a href="rapCinetix.php">RẠP CINETIX</a>
+    <a href="giave.php">GIÁ VÉ</a>
+    <a href="lienhe.php">LIÊN HỆ</a>
+  </nav>
+
   <div class="main-contain">
     <div class="header">Combo - Bắp nước</div>
 
@@ -31,7 +38,7 @@ include('header.php');
                       <p class="combo-price">' . number_format($row["price"], 0, ',', '.') . 'đ</p>
                   </div>
                   <div class="quantity-controls">
-                      <button class="minus">-</button>
+                      <button class="minus" disabled>-</button>
                       <div class="quantity-display">0</div>
                       <button class="plus">+</button>
                   </div>
@@ -61,7 +68,7 @@ include('header.php');
                       <p class="combo-price">' . number_format($row["price"], 0, ',', '.') . 'đ</p>
                   </div>
                   <div class="quantity-controls">
-                      <button class="minus">-</button>
+                      <button class="minus" disabled>-</button>
                       <div class="quantity-display">0</div>
                       <button class="plus">+</button>
                   </div>
@@ -105,7 +112,7 @@ include('header.php');
                       <p class="combo-price">' . number_format($row["price"], 0, ',', '.') . 'đ</p>
                   </div>
                   <div class="quantity-controls">
-                      <button class="minus">-</button>
+                      <button class="minus" disabled>-</button>
                       <div class="quantity-display">0</div>
                       <button class="plus">+</button>
                   </div>

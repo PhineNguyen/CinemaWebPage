@@ -42,21 +42,35 @@ $(document).ready(function () {
   // Nút +
   $('.plus').click(function () {
     const $display = $(this).siblings('.quantity-display');
+    const $minusBtn = $(this).siblings('.minus');
+
     let quantity = parseInt($display.text());
     quantity++;
     $display.text(quantity);
+
+    if (quantity > 0) {
+      $minusBtn.prop('disabled', false);
+    }
+
     updateTotal();
   });
 
   // Nút -
   $('.minus').click(function () {
     const $display = $(this).siblings('.quantity-display');
+    const $minusBtn = $(this);
+
     let quantity = parseInt($display.text());
     if (quantity > 0) {
       quantity--;
       $display.text(quantity);
-      updateTotal();
     }
+
+    if (quantity === 0) {
+      $minusBtn.prop('disabled', true);
+    }
+
+    updateTotal();
   });
 
   // Thay đổi checkbox
@@ -74,47 +88,6 @@ $(document).ready(function () {
 
   // Nút tiếp tục
   $('#continue').click(function () {
-    const selectedItems = [];
-
-    $('.combo-item').each(function () {
-      const $item = $(this);
-      const quantity = parseInt($item.find('.quantity-display').text());
-      if (quantity === 0) return;
-
-      const name = $item.find('h3').text().trim();
-      const basePrice = parseInt($item.find('.combo-price').text().replace(/[^\d]/g, ''));
-      let extraPrice = 0;
-      let size = '';
-
-      const $options = $item.next('.flavor-options');
-      const sizeLon = $options.find('input[type="checkbox"][value="lon"]:checked');
-      if (sizeLon.length) {
-        extraPrice += parseInt(sizeLon.data('price')) || 0;
-        size = '(Size lớn)';
-      }
-
-      const sizeNho = $options.find('input[type="checkbox"][value="nho"]:checked');
-      if (sizeNho.length && name === "Coca Cola") {
-        extraPrice -= parseInt(sizeNho.data('price')) || 0;
-        size = '(Size nhỏ)';
-      }
-
-      selectedItems.push({
-        name: name + ' ' + size,
-        quantity: quantity,
-        price: basePrice + extraPrice
-      });
-    });
-
-    const comboTotal = selectedItems.reduce((sum, item) => sum + item.quantity * item.price, 0);
-
-    // Lưu vào localStorage
-    localStorage.setItem('comboData', JSON.stringify({
-      items: selectedItems,
-      total: comboTotal
-    }));
-
-    // Chuyển lại trang chọn ghế
-    window.location.href = 'chonghe.php?from_combo=1';
+    window.location.href = 'thanhtoan.php';
   });
 });

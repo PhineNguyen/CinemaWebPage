@@ -53,6 +53,7 @@ body {
 .combo-info {
   flex-grow: 1;
   padding: 0 8px;
+  color: #1e1e1e;
 }
 
 .combo-info h3 {
@@ -82,9 +83,9 @@ body {
 .minus, .plus {
   width: 28px;
   height: 28px;
-  border: 2px solid #ff9f43;   /* viền màu cam */
+  border: 2px solid var(--highlight);   /* viền màu cam */
   background: white;           /* nền trắng */
-  color: #ff9f43;              /* chữ màu cam */
+  color: var(--highlight);              /* chữ màu cam */
   font-weight: bold;
   font-size: 16px;
   border-radius: 50%;
@@ -92,10 +93,16 @@ body {
 }
 
 .minus:hover, .plus:hover {
-  background: #ff9f43;
+  background: var(--highlight);
   color: white;
 }
 
+.minus:disabled {
+  cursor: auto;
+  opacity: 0.6; 
+  background-color: white;
+  color: var(--highlight);
+}
 
 .quantity-display {
   width: 20px;
@@ -164,6 +171,7 @@ body {
 
 .continue-btn:first-child:hover {
   background: #666;
+  opacity: 0.4;
 }
 
 .continue-btn:last-child {
@@ -172,7 +180,8 @@ body {
 }
 
 .continue-btn:last-child:hover {
-  background: rgba(255, 237, 78, 0.918);
+  background: var(--highlight);
+  opacity: 0.4;
 }
 
 #combo-bapnuoc {

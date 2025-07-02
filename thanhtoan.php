@@ -7,6 +7,13 @@ if (isset($_SESSION['paid_success']) && $_SESSION['paid_success'] === true) {
     unset($_SESSION['paid_success']); // Hủy session 
     header("Location: Home.php");
 }
+
+// Lấy giá vé
+$sql = "SELECT total_amount FROM bookings WHERE id = 5";
+$result = $conn->query($sql);
+$ticketPrice = 0;
+if ($row = $result->fetch_assoc()) {
+    $ticketPrice = $row['total_amount'];}
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -18,6 +25,13 @@ if (isset($_SESSION['paid_success']) && $_SESSION['paid_success'] === true) {
 </head>
 
 <body>
+  <nav class="nav-item">
+    <a href="home.php">PHIM</a>
+    <a href="rapCinetix.php">RẠP CINETIX</a>
+    <a href="giave.php">GIÁ VÉ</a>
+    <a href="lienhe.php">LIÊN HỆ</a>
+  </nav>
+  
   <div class="payment-container">
     <h2>Thanh toán</h2>
 
@@ -99,7 +113,7 @@ if (isset($_SESSION['paid_success']) && $_SESSION['paid_success'] === true) {
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                 ?>
-                    <div class="combo-box">
+                    <div class="combo-box" data-price="<?php echo $row['price']; ?>">
                       <img src="<?php echo $row['food_images']; ?>" alt="Combo">
                       <div class="combo-info">
                         <div>
@@ -135,33 +149,16 @@ if (isset($_SESSION['paid_success']) && $_SESSION['paid_success'] === true) {
         </div>
     </div>
     <!-- Tổng tiền -->
-      <div class="summary" >
-        <?php
-          $sql = "SELECT 
-            b.id AS booking_id,
-            (SUM(b.total_amount) + IFNULL(SUM(f.price * fo.quantity), 0))AS tam_tinh
-          FROM bookings b
-          JOIN booking_details bd ON b.id = bd.booking_id
-          JOIN seats s ON bd.seat_id = s.id
-          LEFT JOIN food_orders fo ON b.id = fo.booking_id
-          LEFT JOIN foods f ON fo.food_id = f.id
-          WHERE b.id = 5
-          GROUP BY b.id;
-          ";
-          $result = $conn->query($sql);
-          if ($row = $result->fetch_assoc()) {
-            echo "<p class='total'>Tạm tính: <strong>".number_format($row['tam_tinh'], 0, ',', '.')."đ</strong></p>";
-          }
-        ?>
-        <label class="terms">
-          <input type="checkbox"> Tôi đồng ý với điều khoản sử dụng và mua vé cho người có độ tuổi phù hợp
-        </label>
-        <!-- Nút back và confirm -->
-        <div class="button-row">
-          <button class="back-btn">Quay lại</button>
-          <button class="confirm-btn">Xác nhận</button>
-        </div>
+    <div class="summary" data-ticket-price="<?php echo $ticketPrice; ?>">
+      <p class="total">Tạm tính: <strong id="total-amount">0đ</strong></p>
+      <label class="terms">
+        <input type="checkbox" id="agreeTerms"> Tôi đồng ý với điều khoản sử dụng và mua vé cho người có độ tuổi phù hợp
+      </label>
+      <div class="button-row">
+        <button class="back-btn">Quay lại</button>
+        <button class="confirm-btn" id="confirmBtn" disabled>Xác nhận</button>
       </div>
+    </div>
   </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
