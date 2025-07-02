@@ -8,8 +8,7 @@ include("header.php");
   <meta charset="UTF-8">
   <title>Chi tiết phim</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="CSS/chitietphim.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <link rel="stylesheet" href="CSS/chitietphim.css?v=2.1">
 </head>
 <body>
   <nav class="nav-item">
@@ -44,12 +43,14 @@ include("header.php");
             <p><strong>Ngôn ngữ:</strong> <?php echo $phim['lgs']; ?></p>
             <p><strong>Rated:</strong> <?php echo $phim['age_rating']; ?></p>
             <a href="chonlichchieu.php?id=<?php echo $id; ?>" class="btn-buy">🎟 Mua vé</a>
-        </div>
+        
+          </div>
+     
     </div>
 
     <div class="mag">
-        <div class="section-title" style="font-size:25px">Giới Thiệu</div>
-        <div class="movie-detail">
+        <div class="section-title" style="font-size:25px; margin-top: 20px;">Giới Thiệu</div>
+        <div class="movie-description">
             <p><?php echo $phim['descript']; ?></p>
         </div>
     </div>
@@ -61,7 +62,7 @@ include("header.php");
     ?>
 
     <?php if (!empty($embed_url)): ?>
-    <label style="font-weight:bold; font-size:20px;">Trailer</label>
+    <label style="font-weight:bold; font-size:25px;">Trailer</label>
     <div class="movie-trailer" style="margin-top: 20px; text-align: center;">
         <iframe 
             width="560" 
@@ -84,6 +85,7 @@ include("header.php");
     }
     ?>
   </div>
+
 </body>
 </html>
-<?php include("footer.php"); ?>
+<?php include('footer.php')?>

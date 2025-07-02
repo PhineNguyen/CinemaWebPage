@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST["password"]);
 
     // Truy vấn người dùng theo email
-    $sql = "SELECT * FROM users WHERE email = ? and RO_LO ='user')";
+    $sql = "SELECT * FROM users WHERE email = ? and RO_LO ='user'";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
