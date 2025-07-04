@@ -69,7 +69,7 @@ $(document).ready(function () {
     $('<input>').attr({
       type: 'hidden',
       name: 'showtime_id',
-      value: SHOWTIME_ID
+      value: SHOWTIME_ID, // Gán từ PHP sang JS
     }).appendTo(form);
 
     form.appendTo('body').submit();

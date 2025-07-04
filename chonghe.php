@@ -52,7 +52,6 @@ $info = mysqli_fetch_assoc($info_result);
   <meta charset="UTF-8">
   <title>Đặt vé xem phim</title>
   <link rel="stylesheet" href="CSS/chonghe.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <nav class="nav-item">
@@ -69,12 +68,15 @@ echo "<!-- room_id: $room_id -->";
 $stmt_seats = mysqli_prepare($conn, "
     SELECT seat_row, seat_number, seat_type, seat_status 
     FROM seats 
-    WHERE room_id = ? 
+    WHERE room_id = ?
     ORDER BY seat_row, seat_number
 ");
 mysqli_stmt_bind_param($stmt_seats, 'i', $room_id);
 mysqli_stmt_execute($stmt_seats);
 $seats_result = mysqli_stmt_get_result($stmt_seats);
+if (mysqli_num_rows($seats_result) === 0) {
+    echo "<p style='color:red;'>Không có ghế nào cho phòng này.</p>";
+}
 
 $current_row = '';
 while ($seat = mysqli_fetch_assoc($seats_result)) {
@@ -149,8 +151,8 @@ echo '</div>'; // Kết thúc sơ đồ
 <div class="continue-btn">
   <button class="button-continute">Tiếp tục</button>
 </div>
-
-
+<script> const SHOWTIME_ID = "<?= htmlspecialchars($showtime_id) ?>";</script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="js/chonghe.js"></script>
 </body>
 </html>
