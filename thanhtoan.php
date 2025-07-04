@@ -15,13 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['foods'])) {
 // Thông tin ghế và suất chiếu từ Post (chonbapnuoc.js)
 $seats = $_POST['seats'] ?? '';
 $showtime_id = $_POST['showtime_id'] ?? '';
-$ticket_price = $_POST['ticket_price'] ?? 0;
-if (is_numeric($ticket_price)) {
-    echo number_format((float)$ticket_price, 0, ',', '.');
-} else {
-    echo '0đ';
-}
-
+$total_price = $_POST['total_price'] ?? 0;
 // Tính tổng tiền combo/bắp nước
 $totalFood = 0;
 if (!empty($foods)) {
@@ -32,8 +26,8 @@ if (!empty($foods)) {
     }
 }
 // Tổng tiền cuối cùng
-$ticket_price = (float)$ticket_price; // ép kiểu chắc chắn
-$totalAmount = $ticket_price + $totalFood;
+$total_price = (float)$total_price; // ép kiểu chắc chắn
+$totalAmount = $total_price + $totalFood;
 
 
 // Lấy thông tin suất chiếu từ showtime_id
@@ -168,6 +162,11 @@ if ($showtime_id) {
     </div>
   </div>
 </body>
+<script>
+  const TOTAL = "<?= htmlspecialchars($total_price) ?>";
+  const SEATS = "<?= htmlspecialchars($seats) ?>";
+  const SHOWTIME_ID = "<?= htmlspecialchars($showtime_id) ?>";
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/thanhtoan.js"></script>
 </html>

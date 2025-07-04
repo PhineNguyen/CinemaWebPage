@@ -156,6 +156,13 @@ $('#continue').click(function (e) {
   name: 'ticket_price',
   value: typeof SEAT_PRICE !== 'undefined' ? SEAT_PRICE : ''// biến này lấy từ server hoặc giữ lại từ bước trước
 }).appendTo(form);
+   
+$('<input>').attr({
+  type: 'hidden',
+  name: 'total_price',
+  value: TOTAL
+}).appendTo(form);
+
 
   form.appendTo('body').submit();
 });

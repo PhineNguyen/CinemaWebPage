@@ -60,8 +60,8 @@ $(document).ready(function () {
 
     $('<input>').attr({
       type: 'hidden',
-      name: 'ticket_price', // nên dùng tên rõ ràng
-      value: ticket_price
+      name: 'total_price', // nên dùng tên rõ ràng
+      value: total
     }).appendTo(form);
 
     form.appendTo('body').submit();

@@ -4,8 +4,10 @@ include('header.php');
 
 $seats = $_POST['seats'] ?? '';
 $showtime_id = $_POST['showtime_id'] ?? '';
-$ticket_price = $_POST['ticket_price'] ?? 0;
-
+$total_price = $_POST['total_price'] ?? 0;
+echo '<pre>';
+print_r($_POST);
+echo '</pre>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,7 +149,7 @@ $ticket_price = $_POST['ticket_price'] ?? 0;
     </div>
   </div>
     <script>
-    const SEAT_PRICE = "<?= htmlspecialchars($ticket_price) ?>";
+    const TOTAL = "<?= htmlspecialchars($total_price) ?>";
     const SEATS = "<?= htmlspecialchars($seats) ?>";
     const SHOWTIME_ID = "<?= htmlspecialchars($showtime_id) ?>";
 </script>

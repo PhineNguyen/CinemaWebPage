@@ -76,6 +76,7 @@ $stmt_seats = mysqli_prepare($conn, "
 mysqli_stmt_bind_param($stmt_seats, 'i', $room_id);
 mysqli_stmt_execute($stmt_seats);
 $seats_result = mysqli_stmt_get_result($stmt_seats);
+
 if (mysqli_num_rows($seats_result) === 0) {
     echo "<p style='color:red;'>Không có ghế nào cho phòng này.</p>";
 }
