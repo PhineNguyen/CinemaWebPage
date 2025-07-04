@@ -1,6 +1,11 @@
 <?php
 include('connect.php');
 include('header.php');
+
+$seats = $_POST['seats'] ?? '';
+$showtime_id = $_POST['showtime_id'] ?? '';
+$ticket_price = $_POST['ticket_price'] ?? 0;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,11 +27,11 @@ include('header.php');
     <div class="header">Combo - Bắp nước</div>
 
     <?php
-      $sql = "SELECT * FROM foods id LIMIT 1,2";
-      $result = $conn->query($sql);
+      $sql_cb = "SELECT * FROM foods id LIMIT 1,2";
+      $combo = $conn->query($sql_cb);
 
-      if ($result->num_rows > 0) {
-          while($row = $result->fetch_assoc()) {
+      if ($combo->num_rows > 0) {
+          while($row = $combo->fetch_assoc()) {
               echo '
               <div class="combo-item" id="combo-bapnuoc">
                   <div class="combo-icon">
@@ -88,7 +93,7 @@ include('header.php');
     <div class="header" >Nước</div>
 
     <?php
-      $sql_bap = "SELECT 
+      $sql_nuoc = "SELECT 
                     f.*, 
                     fv_lon.price AS size_lon_price,
                     fv_nho.price AS size_nho_price
@@ -98,10 +103,10 @@ include('header.php');
                     food_variants fv_lon ON f.id = fv_lon.food_id AND fv_lon.size = 'Lớn'
                 LEFT JOIN 
                     food_variants fv_nho ON f.id = fv_nho.food_id AND fv_nho.size = 'Nhỏ';";
-      $result_bap = $conn->query($sql_bap);
+      $result_nuoc = $conn->query($sql_nuoc);
 
-      if ($result_bap->num_rows > 0) {
-          while($row = $result_bap->fetch_assoc()) {
+      if ($result_nuoc->num_rows > 0) {
+          while($row = $result_nuoc->fetch_assoc()) {
               echo '
               <div class="combo-item" id="nuoc" >
                   <div class="combo-icon">
@@ -136,11 +141,16 @@ include('header.php');
 
     <!-- Nút -->
     <div class="combo-footer">
-      <button class="continue-btn" id="back">Quay lại</button>
+      <button class="continue-btn"id="back">Quay lại</button>
       <button class="continue-btn"id="continue">Tiếp tục</button>
+  
     </div>
   </div>
-
+    <script>
+    const SEAT_PRICE = "<?= htmlspecialchars($ticket_price) ?>";
+    const SEATS = "<?= htmlspecialchars($seats) ?>";
+    const SHOWTIME_ID = "<?= htmlspecialchars($showtime_id) ?>";
+</script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="js/chonbapnuoc.js"></script>
 </body>

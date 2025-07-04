@@ -1,4 +1,4 @@
-<?php  
+<?php
 include('header.php');
 include('connect.php');
 session_start();
@@ -7,13 +7,59 @@ if (isset($_SESSION['paid_success']) && $_SESSION['paid_success'] === true) {
     unset($_SESSION['paid_success']); // Hủy session 
     header("Location: Home.php");
 }
+$foods = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['foods'])) {
+    $foods = json_decode($_POST['foods'], true);
+    $_SESSION['foods'] = $foods; // nếu muốn lưu lại
+}
+// Thông tin ghế và suất chiếu từ Post (chonbapnuoc.js)
+$seats = $_POST['seats'] ?? '';
+$showtime_id = $_POST['showtime_id'] ?? '';
+$ticket_price = $_POST['ticket_price'] ?? 0;
+if (is_numeric($ticket_price)) {
+    echo number_format((float)$ticket_price, 0, ',', '.');
+} else {
+    echo '0đ';
+}
 
-// Lấy giá vé
-$sql = "SELECT total_amount FROM bookings WHERE id = 5";
-$result = $conn->query($sql);
-$ticketPrice = 0;
-if ($row = $result->fetch_assoc()) {
-    $ticketPrice = $row['total_amount'];}
+// Tính tổng tiền combo/bắp nước
+$totalFood = 0;
+if (!empty($foods)) {
+    foreach ($foods as $item) {
+        if (!empty($item['price']) && !empty($item['qty'])) {
+            $totalFood += $item['price'] * $item['qty'];
+        }
+    }
+}
+// Tổng tiền cuối cùng
+$ticket_price = (float)$ticket_price; // ép kiểu chắc chắn
+$totalAmount = $ticket_price + $totalFood;
+
+
+// Lấy thông tin suất chiếu từ showtime_id
+$showtimeInfo = [];
+if ($showtime_id) {
+    $sql = "SELECT 
+                st.show_time, 
+                st.show_date, 
+                mv.title AS ten_phim, 
+                mv.image_url AS poster, 
+                mv.lgs AS dinh_dang, 
+                rm.room_number AS phong_chieu, 
+                ci.ci_name AS rap
+            FROM showtimes st
+            JOIN movies mv ON st.movie_id = mv.id
+            JOIN rooms rm ON st.room_id = rm.id
+            JOIN cinemas ci ON rm.cinema_id = ci.id
+            WHERE st.id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $showtime_id);
+    $stmt->execute();
+    $resultShow = $stmt->get_result();
+    if ($resultShow && $resultShow->num_rows > 0) {
+        $showtimeInfo = $resultShow->fetch_assoc();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -44,113 +90,74 @@ if ($row = $result->fetch_assoc()) {
         
         <div class="ticket-section">
           <!-- Thông tin vé -->
-          <?php
-            $sql = "SELECT 
-                      ci.ci_name AS rap,
-                      mv.title AS ten_phim,
-                      mv.image_url AS poster,
-                      DATE_FORMAT(st.show_time, '%H:%i') AS gio_bat_dau,
-                      DATE_FORMAT(st.show_date, '%d/%m/%Y') AS ngay_chieu,
-                      mv.lgs AS dinh_dang,
-                      rm.room_number AS phong_chieu,
-                      s.id AS so_ghe
-                    FROM tickets t
-                    JOIN booking_details bd ON t.booking_detail_id = bd.id
-                    JOIN seats s ON bd.seat_id = s.id
-                    JOIN bookings b ON bd.booking_id = b.id
-                    JOIN showtimes st ON b.showtime_id = st.id
-                    JOIN movies mv ON st.movie_id = mv.id
-                    JOIN rooms rm ON st.room_id = rm.id
-                    JOIN cinemas ci ON rm.cinema_id = ci.id
-                    LIMIT 1";
-                    
-            $result = $conn->query($sql);
-            if ($result && $result->num_rows > 0) {
-              while ($row = $result->fetch_assoc()) {
-          ?>
+          <?php if (!empty($showtimeInfo)): ?>
             <div class="ticket-infor">
-              <img src="<?php echo htmlspecialchars($row['poster']); ?>" alt="<?php echo htmlspecialchars($row['ten_phim']); ?>">
+              <img src="<?php echo htmlspecialchars($showtimeInfo['poster']); ?>" alt="<?php echo htmlspecialchars($showtimeInfo['ten_phim']); ?>">
               <div class="ticket-details">
-                <h4><?php echo htmlspecialchars($row['rap']); ?></h4>
-                <p><?php echo htmlspecialchars($row['ten_phim']); ?></p>
+                <h4><?php echo htmlspecialchars($showtimeInfo['rap']); ?></h4>
+                <p><?php echo htmlspecialchars($showtimeInfo['ten_phim']); ?></p>
                 <div class="ticket-info">
-                  <div><strong>Thời gian:</strong><br><?php echo $row['gio_bat_dau']; ?><br><?php echo $row['ngay_chieu']; ?></div>
-                  <div><strong>Định dạng:</strong><br><?php echo htmlspecialchars($row['dinh_dang']); ?></div>
-                  <div><strong>Phòng chiếu:</strong><br><?php echo htmlspecialchars($row['phong_chieu']); ?></div>
-                  <div><strong>Số ghế:</strong><br><?php echo htmlspecialchars($row['so_ghe']); ?></div>
+                  <div><strong>Thời gian:</strong><br>
+                    <?php 
+                      echo date('H:i', strtotime($showtimeInfo['show_time'])) . "<br>" . date('d/m/Y', strtotime($showtimeInfo['show_date']));
+                    ?>
+                  </div>
+                  <div><strong>Định dạng:</strong><br><?php echo htmlspecialchars($showtimeInfo['dinh_dang']); ?></div>
+                  <div><strong>Phòng chiếu:</strong><br><?php echo htmlspecialchars($showtimeInfo['phong_chieu']); ?></div>
+                  <div><strong>Số ghế:</strong><br><?php echo htmlspecialchars($seats); ?></div>
                 </div>
               </div>
             </div>
-          <?php
-              }
-            } else {
-              echo "<p>Không có vé nào được tìm thấy.</p>";
-            }
-          ?>
+          <?php else: ?>
+            <p>Không có thông tin suất chiếu.</p>
+          <?php endif; ?>
         </div>
 
         <!-- Combo -->
-            <div class="combo-section">
-              <h3>Combo bắp nước</h3>
-              <?php
-              $sql = "
-                  SELECT 
-                      b.id AS booking_id,
-                      f.namef AS combo_name,
-                      f.food_images,
-                      f.price,
-                      f.descript,
-                      fo.quantity,
-                      (fo.quantity * f.price) AS total_price
-                  FROM bookings b
-                  JOIN food_orders fo ON b.id = fo.booking_id
-                  JOIN foods f ON fo.food_id = f.id
-                  GROUP BY b.id
-                  LIMIT 1 OFFSET 3
-              ";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                ?>
-                    <div class="combo-box" data-price="<?php echo $row['price']; ?>">
-                      <img src="<?php echo $row['food_images']; ?>" alt="Combo">
-                      <div class="combo-info">
-                        <div>
-                          <strong><?php echo htmlspecialchars($row['combo_name']); ?></strong><br>
-                          <small><?php echo $row['descript']; ?></small>
-                        </div>
-                        <div class="combo-price"><?php echo number_format($row['price'], 0, ',', '.'); ?>đ</div>
-                      </div>
-                      <div class="quantity-box">
-                        <button class="minus">-</button>
-                        <div class="quantity-display"><?php echo $row['quantity']; ?></div>
-                        <button class="plus">+</button>
-                      </div>
-                    </div>
-                <?php
-                    }
-                } else {
-                    echo "<p>Không có combo nào được đặt.</p>";
+        <div class="combo-section">
+          <h3>Combo bắp nước</h3>
+          <?php
+          if (!empty($foods)) {
+            foreach ($foods as $item) {
+                echo '<div class="combo-box">';
+                if (!empty($item['name'])) {
+                    echo '<strong>' . htmlspecialchars($item['name']) . '</strong> ';
                 }
-              ?>
-            </div>
-      </div>
-        <!-- Phương thức thanh toán -->
-        <div class="payment">
-          <div class="payment-methods">
-            <h3>Phương thức thanh toán</h3>
-            <label><input type="radio" name="payment" checked>Thẻ ATM ( thẻ nội địa )</label><br>
-            <label><input type="radio" name="payment"> Thẻ quốc tế ( Visa, Master, Amex, JCB)</label><br>
-            <label><input type="radio" name="payment"> VNPay</label><br>
-            <label><input type="radio" name="payment"> Momo</label><br>
-            <label><input type="radio" name="payment"> ZaloPay</label>
-          </div>
+                if (!empty($item['qty'])) {
+                    echo 'x' . intval($item['qty']);
+                }
+                if (!empty($item['flavor'])) {
+                    echo ' - Vị: ' . htmlspecialchars($item['flavor']);
+                }
+                if (!empty($item['size']) && is_array($item['size']) && count($item['size']) > 0) {
+                    echo ' - Size: ' . implode(', ', array_map('htmlspecialchars', $item['size']));
+                }
+                echo '</div>';
+            }
+          } else {
+              echo "<p>Không có combo/bắp/nước nào được chọn.</p>";
+          }
+          ?>
         </div>
+      </div>
+      <!-- Phương thức thanh toán -->
+      <div class="payment">
+        <div class="payment-methods">
+          <h3>Phương thức thanh toán</h3>
+          <label><input type="radio" name="payment" checked>Thẻ ATM ( thẻ nội địa )</label><br>
+          <label><input type="radio" name="payment"> Thẻ quốc tế ( Visa, Master, Amex, JCB)</label><br>
+          <label><input type="radio" name="payment"> VNPay</label><br>
+          <label><input type="radio" name="payment"> Momo</label><br>
+          <label><input type="radio" name="payment"> ZaloPay</label>
+        </div>
+      </div>
     </div>
     <!-- Tổng tiền -->
-    <div class="summary" data-ticket-price="<?php echo $ticketPrice; ?>">
-      <p class="total">Tạm tính: <strong id="total-amount">0đ</strong></p>
+    <div class="summary" data-ticket-price="<?php echo $totalAmount; ?>">
+  <p class="total">Tạm tính: <strong id="total-amount">
+    <?php echo number_format($totalAmount, 0, ',', '.') . 'đ'; ?>
+  </strong></p>
+
       <label class="terms">
         <input type="checkbox" id="agreeTerms"> Tôi đồng ý với điều khoản sử dụng và mua vé cho người có độ tuổi phù hợp
       </label>

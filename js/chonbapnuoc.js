@@ -83,11 +83,81 @@ $(document).ready(function () {
 
   // Nút quay lại
   $('#back').click(function () {
-    window.location.href = 'chonghe.php';
+    window.location.href = 'Home.php';
   });
 
   // Nút tiếp tục
-  $('#continue').click(function () {
-    window.location.href = 'thanhtoan.php';
+ // Nút tiếp tục
+$('#continue').click(function (e) {
+  e.preventDefault();
+
+  // Thu thập dữ liệu món đã chọn
+  let foods = [];
+  $('.combo-item').each(function () {
+    const $item = $(this);
+    const qty = parseInt($item.find('.quantity-display').text());
+    if (qty > 0) {
+      let name = $item.find('h3').text().trim();
+      let price = $item.find('.combo-price').text().replace(/[^\d]/g, '');
+      let type = $item.attr('id');
+      let flavor = '';
+      let size = [];
+
+      // Bắp: lấy hương vị
+      if (type === 'bap') {
+        flavor = $item.next('.flavor-options').find('input[name="bap_flavor"]:checked').val() || '';
+      }
+      // Nước: lấy size
+      if (type === 'nuoc') {
+        $item.next('.flavor-options').find('input[name="size_flavor"]:checked').each(function () {
+          size.push($(this).val());
+        });
+      }
+
+      foods.push({
+        type: type,
+        name: name,
+        qty: qty,
+        price: price,
+        flavor: flavor,
+        size: size
+      });
+    }
   });
+
+  // Gửi qua form ẩn
+  const form = $('<form>', {
+    method: 'POST',
+    action: 'thanhtoan.php'
+  });
+
+  $('<input>').attr({
+    type: 'hidden',
+    name: 'foods',
+    value: JSON.stringify(foods)
+  }).appendTo(form);
+
+  // Gửi thêm dữ liệu ghế và suất chiếu
+  $('<input>').attr({
+    type: 'hidden',
+    name: 'seats',
+    value: typeof SEATS !== 'undefined' ? SEATS : ''
+  }).appendTo(form);
+
+  $('<input>').attr({
+    type: 'hidden',
+    name: 'showtime_id',
+    value: typeof SHOWTIME_ID !== 'undefined' ? SHOWTIME_ID : ''
+  }).appendTo(form);
+  
+  
+  $('<input>').attr({
+  type: 'hidden',
+  name: 'ticket_price',
+  value: typeof SEAT_PRICE !== 'undefined' ? SEAT_PRICE : ''// biến này lấy từ server hoặc giữ lại từ bước trước
+}).appendTo(form);
+
+  form.appendTo('body').submit();
+});
+
 });
