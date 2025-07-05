@@ -25,6 +25,9 @@ if (!empty($foods)) {
         }
     }
 }
+echo'<pre>';
+print_r($_POST);
+echo '</pre>';
 // Tổng tiền cuối cùng
 $total_price = (float)$total_price; // ép kiểu chắc chắn
 $totalAmount = $total_price + $totalFood;
@@ -157,7 +160,7 @@ if ($showtime_id) {
       </label>
       <div class="button-row">
         <button class="back-btn">Quay lại</button>
-        <button class="confirm-btn" id="confirmBtn" disabled>Xác nhận</button>
+        <button class="confirm-btn" id="confirmBtn"  disabled>Xác nhận</button>
       </div>
     </div>
   </div>

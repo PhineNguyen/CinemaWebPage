@@ -1,7 +1,21 @@
 <?php session_start();
 $_SESSION['paid_success'] = true; //Gán biến xác nhận thanh toán thành công
 include('header.php');
-include('connect.php') ?>
+include('connect.php');
+
+
+$ticket_infor = $_POST['ticket_infor'] ?? '';
+$seats = $_POST['seats'] ?? '';
+$showtime_id = $_POST['showtime_id'] ?? '';
+$total_price = $_POST['total_price'] ?? 0;
+$foods = $_SESSION['foods'] ?? [];  // nếu muốn lưu lại
+ if(is_string($foods)){
+  $foods = json_decode($foods, true);
+ }echo '<pre>';
+print_r($_POST);
+echo '</pre>';
+
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -75,6 +89,7 @@ include('connect.php') ?>
           <p><strong>Phòng chiếu:</strong> <?php echo htmlspecialchars($row['phong_chieu']); ?></p>
           <p><strong>Số ghế:</strong> <?php echo htmlspecialchars($row['so_ghe']); ?></p>
           <p><strong>Số vé:</strong> 01</p>
+          <p><strong>Giá vé:</strong> <span class="price"><?php echo number_format($total_price, 0, ',', '.'); ?>đ</span></p>
           <small class="note">Đưa mã này cho nhân viên soát vé để nhận vé vào rạp</small>
         </div>
 
@@ -91,6 +106,12 @@ include('connect.php') ?>
     </div>
   </div>
 </body>
+<script>
+  const TICKET_INFOR = "<?= htmlspecialchars($ticket_infor) ?>";
+  const TOTAL = "<?= htmlspecialchars($total_price) ?>";
+  const SEATS = "<?= htmlspecialchars($seats) ?>";
+  const SHOWTIME_ID = "<?= htmlspecialchars($showtime_id) ?>";
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/thongTinVe.js"></script>
 </html>

@@ -5,9 +5,6 @@ include('header.php');
 $seats = $_POST['seats'] ?? '';
 $showtime_id = $_POST['showtime_id'] ?? '';
 $total_price = $_POST['total_price'] ?? 0;
-echo '<pre>';
-print_r($_POST);
-echo '</pre>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
