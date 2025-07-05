@@ -23,7 +23,6 @@
     <a href="" class="active">PHIM</a>
     <a href="#" id="rap-cinetix-tab">RẠP CINETIX</a>
     <a href="#" id="gia-ve-tab">GIÁ VÉ</a>
-    <a href="#" id="lien-he-tab">LIÊN HỆ</a>
   </nav>
 
   <div id="main-content">
@@ -79,10 +78,12 @@
 
   <div id="rap-cinetix-content" style="display:none;"></div>
   <div id="gia-ve-content" style="display:none;"></div>
+  <div id="lichsu-modal-container"></div>
   <!-- JS -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="js/Home.js"></script>
   <script src="js/rolltab.js"></script>
+  <script src="js/lichsu-modal.js"></script>
 </body>
 
 </html>

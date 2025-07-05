@@ -1,0 +1,147 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.history-modal-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.history-modal {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  width: 600px;
+  max-width: 95vw;
+  padding-bottom: 30px;
+  overflow: hidden;
+}
+
+.history-header {
+  background: #ffc107;
+  color: #222;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 18px 0 10px 0;
+  letter-spacing: 1px;
+  border-bottom: 8px solid #222;
+}
+
+.history-content {
+  display: flex;
+  padding: 30px 20px 0 20px;
+  min-height: 250px;
+}
+
+.history-left {
+  flex: 0 0 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 20px;
+}
+
+.history-avatar {
+  width: 110px;
+  height: 110px;
+  background: #ddd;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.history-username {
+  color: #222;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.history-divider {
+  width: 1px;
+  background: #bbb;
+  margin: 0 18px;
+  min-height: 220px;
+}
+
+.history-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.history-info {
+  color: #222;
+  font-size: 1rem;
+  margin-bottom: 18px;
+}
+
+.history-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.history-btn {
+  background: #ffc107;
+  color: #222;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 22px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-right: 10px;
+  margin-bottom: 0;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.history-btn.main {
+  margin-bottom: 8px;
+  width: 220px;
+}
+
+.history-btn-group {
+  display: flex;
+  gap: 10px;
+}
+
+.history-btn:hover {
+  background: #222;
+  color: #ffc107;
+}
+
+.history-empty {
+  color: #444;
+  font-size: 1.1rem;
+  margin-top: 30px;
+  text-align: center;
+  font-style: italic;
+}
+
+@media (max-width: 700px) {
+  .history-modal {
+    width: 98vw;
+    padding: 0 2vw 30px 2vw;
+  }
+  .history-content {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 5px 0 5px;
+  }
+  .history-divider {
+    display: none;
+  }
+  .history-left {
+    margin-right: 0;
+    margin-bottom: 18px;
+  }
+}
