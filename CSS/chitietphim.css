@@ -76,9 +76,9 @@ body {
     }
     .movie-description p {
       font-size: 15px;
-      line-height: 0.1;
+      line-height: 1.6;
       color: #ccc;
-      margin-top:0;
+      margin-top:10px;
     }
     .trailer iframe {
       width: 100%;

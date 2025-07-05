@@ -169,7 +169,7 @@ h2 {
   flex-wrap: nowrap;
   overflow-x: auto;
   gap: 20px;
-  padding: 20px 20px 0 20px;
+  padding: 10px 20px 0 20px;
   max-width: 850px;
   margin: auto;
   scrollbar-width: thin;

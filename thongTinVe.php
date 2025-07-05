@@ -39,29 +39,29 @@ echo '</pre>';
 
     <div class="ticket-card">
       <?php
-        $sql = "SELECT 
-                  ci.ci_name AS rap,
-                  mv.title AS ten_phim,
-                  mv.image_url AS poster,
-                  mv.lgs AS dinh_dang,
-                  t.ticket_code AS ma_ve,
-                  DATE_FORMAT(st.show_time, '%H:%i') AS gio_bat_dau,
-                  DATE_FORMAT(st.show_date, '%d/%m/%Y') AS ngay_chieu,
-                  rm.room_number AS phong_chieu,
-                  s.id AS so_ghe
-                FROM tickets t
-                JOIN booking_details bd ON t.booking_detail_id = bd.id
-                JOIN seats s ON bd.seat_id = s.id
-                JOIN bookings b ON bd.booking_id = b.id
-                JOIN showtimes st ON b.showtime_id = st.id
-                JOIN movies mv ON st.movie_id = mv.id
-                JOIN rooms rm ON st.room_id = rm.id
-                JOIN cinemas ci ON rm.cinema_id = ci.id
-                LIMIT 1";
-
-        $result = $conn->query($sql);
-        if ($result && $result->num_rows > 0) {
-          while ($row = $result->fetch_assoc()) {
+        $showtimeInfo = [];
+        if ($showtime_id) {
+            $sql = "SELECT 
+                        st.show_time, 
+                        st.show_date, 
+                        mv.title AS ten_phim, 
+                        mv.image_url AS poster, 
+                        mv.lgs AS dinh_dang, 
+                        rm.room_number AS phong_chieu, 
+                        ci.ci_name AS rap
+                    FROM showtimes st
+                    JOIN movies mv ON st.movie_id = mv.id
+                    JOIN rooms rm ON st.room_id = rm.id
+                    JOIN cinemas ci ON rm.cinema_id = ci.id
+                    WHERE st.id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $showtime_id);
+            $stmt->execute();
+            $resultShow = $stmt->get_result();
+            if ($resultShow && $resultShow->num_rows > 0) {
+                $showtimeInfo = $resultShow->fetch_assoc();
+            }
+        }
       ?>
       <div class="ticket-header">
         <div class="cinema-info">
@@ -97,10 +97,6 @@ echo '</pre>';
         </div>
       </div>
       <?php
-          }
-        } else {
-          echo "<p>Không có vé nào được tìm thấy.</p>";
-        }
       ?>
     </div>
   </div>

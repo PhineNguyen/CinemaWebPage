@@ -62,7 +62,7 @@ if ($showtime_id) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Thanh toán</title>
-  <link rel="stylesheet" href="CSS/thanhtoan.css">
+  <link rel="stylesheet" href="CSS/thanhtoan.css?v=2">
 </head>
 
 <body>

@@ -23,7 +23,7 @@ $_SESSION['paid_success'] = true;
 <head>
   <meta charset="UTF-8">
   <title>QR Thanh Toán</title>
-  <link rel="stylesheet" href="CSS/maQRthanhtoan.css">
+  <link rel="stylesheet" href="CSS/maQRthanhtoan.css?v=2">
 </head>
 <body>
   <nav class="nav-item">
