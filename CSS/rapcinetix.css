@@ -34,11 +34,11 @@ body {
   user-select: none;
 }
 .cinema-item.selected, .cinema-item:active {
-  color: #e53935;
-  border-color: #e53935;
+  color: #ffc107;
+  border-color: #ffc107;
 }
 .cinema-item:hover {
-  color: #e53935;
+  color: #ffc107;
 }
 .cinema-detail {
   margin: 0 auto;
@@ -59,14 +59,14 @@ body {
 }
 .cinema-detail .detail-item.selected, .cinema-detail .detail-item:active {
   color: #fff;
-  background: #e53935;
+  background: #ffc107;
   border-radius: 8px;
   padding: 10px 0;
   font-weight: bold;
-  box-shadow: 0 2px 8px #e5393555;
+  box-shadow: 0 2px 8px #7d5e01;
 }
 .cinema-detail .detail-item:hover {
-  color: #e53935;
+  color: #ffc107;
 }
 .cinema-box {
   display: none !important;
@@ -97,7 +97,7 @@ body {
   min-width: 250px;
 }
 .btn-red {
-  background: #e53935;
+  background: #ffc107;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -109,7 +109,7 @@ body {
   transition: background 0.2s;
 }
 .btn-red:hover {
-  background: #b71c1c;
+  background: #ffc107;
 }
 .now-showing-title {
   font-size: 2rem;
