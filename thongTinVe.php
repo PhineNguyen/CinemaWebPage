@@ -1,10 +1,9 @@
 <?php session_start();
-$_SESSION['paid_success'] = true; //Gán biến xác nhận thanh toán thành công
+//$_SESSION['paid_success'] = true; //Gán biến xác nhận thanh toán thành công
 include('header.php');
 include('connect.php');
 
 
-$ticket_infor = $_POST['ticket_infor'] ?? '';
 $seats = $_POST['seats'] ?? '';
 $showtime_id = $_POST['showtime_id'] ?? '';
 $total_price = $_POST['total_price'] ?? 0;
@@ -66,7 +65,7 @@ echo '</pre>';
       ?>
       <div class="ticket-header">
         <div class="cinema-info">
-          <img src="pic/Doraemon_Movie_2025_Poster.jpg" alt="Logo Cinetix" class="cinema-logo">
+          <!--<img src="pic/Doraemon_Movie_2025_Poster.jpg" alt="Logo Cinetix" class="cinema-logo">-->
           <div>
             <h3><?php echo htmlspecialchars($row['rap']); ?></h3>
             <p class="movie-title"><?php echo htmlspecialchars($row['ten_phim']); ?></p>
@@ -107,7 +106,6 @@ echo '</pre>';
   </div>
 </body>
 <script>
-  const TICKET_INFOR = "<?= htmlspecialchars($ticket_infor) ?>";
   const TOTAL = "<?= htmlspecialchars($total_price) ?>";
   const SEATS = "<?= htmlspecialchars($seats) ?>";
   const SHOWTIME_ID = "<?= htmlspecialchars($showtime_id) ?>";

@@ -13,10 +13,7 @@ $foods = $_SESSION['foods'] ?? [];  // nếu muốn lưu lại
  if(is_string($foods)){
   $foods = json_decode($foods, true);
  }
-echo '<pre>';
-print_r($_POST);
-print_r($_SESSION);
-echo '</pre>';
+
 
 // Gán session để xác nhận đã thanh toán
 $_SESSION['paid_success'] = true;
@@ -36,36 +33,48 @@ $_SESSION['paid_success'] = true;
     <a href="lienhe.php">LIÊN HỆ</a>
   </nav>
 
-  <div>
-
+  <div class="qr-container">
     <h2>Quét mã QR để thanh toán</h2>
-    <!-- <img src="pic/qrcode-default.png" alt="Mã QR" style="max-width: 300px;"> -->
-    <?php 
-    if (!empty($foods)) {
-            foreach ($foods as $item) {
-                echo '<div class="combo-box">';
-                if (!empty($item['name'])) {
-                    echo '<strong>' . htmlspecialchars($item['name']) . '</strong> ';
-                }
-                if (!empty($item['qty'])) {
-                    echo 'x' . intval($item['qty']);
-                }
-                if (!empty($item['flavor'])) {
-                    echo ' - Vị: ' . htmlspecialchars($item['flavor']);
-                }
-                if (!empty($item['size']) && is_array($item['size']) && count($item['size']) > 0) {
-                    echo ' - Size: ' . implode(', ', array_map('htmlspecialchars', $item['size']));
-                }
-                echo '</div>';
-            }
-          } else {
-              echo "<p>Không có combo/bắp/nước nào được chọn.</p>";
-          }
-?>
-    <p class="timer" style="font-size: 20px; color: red;">0:05</p>
+    <img src="pic/qrcode-default.png" alt="Mã QR" style="max-width: 300px;">
+
+    <p><strong>Ghế:</strong> <?= htmlspecialchars($seats) ?></p>
+    <p><strong>Tổng tiền:</strong> <?= number_format($total_price, 0, ',', '.') ?>đ</p>
+
+    <?php if (!empty($foods)): ?>
+      <div>
+        <h3>Combo đã chọn:</h3>
+        <ul>
+        <?php foreach ($foods as $item): ?>
+          <li>
+            <?= htmlspecialchars($item['name'] ?? ''); ?>
+            x<?= intval($item['qty'] ?? 0); ?>
+            <?= !empty($item['flavor']) ? ' - Vị: ' . htmlspecialchars($item['flavor']) : ''; ?>
+            <?= !empty($item['size']) && is_array($item['size']) ? ' - Size: ' . implode(', ', array_map('htmlspecialchars', $item['size'])) : ''; ?>
+          </li>
+        <?php endforeach; ?>
+        </ul>
+      </div>
+    <?php endif; ?>
+
+    <form method="POST" action="thongTinVe.php">
+      <input type="hidden" name="seats" value="<?= htmlspecialchars($seats) ?>">
+      <input type="hidden" name="showtime_id" value="<?= htmlspecialchars($showtime_id) ?>">
+      <input type="hidden" name="total_price" value="<?= htmlspecialchars($total_price) ?>">
+      <input type="hidden" name="foods" value='<?= json_encode($foods) ?>'>
+    </form>.    <form method="POST" action="thongTinVe.php">
+      <input type="hidden" name="seats" value="<?= htmlspecialchars($seats) ?>">
+      <input type="hidden" name="showtime_id" value="<?= htmlspecialchars($showtime_id) ?>">
+      <input type="hidden" name="total_price" value="<?= htmlspecialchars($total_price) ?>">
+      <input type="hidden" name="foods" value='<?= json_encode($foods) ?>'>
+    </form>
+
+    <script>
+      setTimeout(function () {
+        document.querySelector('form').submit();
+      }, 5000);
+    </script>
+
   </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script  src="js/maQRthanhtoan.js"></script> 
 </body>
 </html>
 <?php include('footer.php'); ?>

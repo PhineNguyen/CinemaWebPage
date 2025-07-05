@@ -10,7 +10,7 @@
 </head>
 <footer>
     <div class="f1">
-      <h3>Skibidi Việt Nam</h3>
+      <h3>CINETIX Việt Nam</h3>
       <ul>
         <li>Giới thiệu</li>
         <li>Tiện ích Online</li>
@@ -46,12 +46,12 @@
       <ul>
         <li>Hotline: 1900 1357</li>
         <li>Giờ làm việc: 8:00 - 22:00</li>
-        <li>Email hỗ trợ: hoidap@skibidi.vn</li>
+        <li>Email hỗ trợ: hoidap@Cinetix.vn</li>
       </ul>
     </div>
 
     <div class="f5">
-      <p class="company-name">CÔNG TY TNHH SKIBIDI VIỆT NAM</p>
+      <p class="company-name">CÔNG TY TNHH CINETIX VIỆT NAM</p>
       <img class="company-logo" src="pic/LOGO.png" alt="Logo công ty" />
     </div>
   </footer>
