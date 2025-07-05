@@ -8,6 +8,9 @@ if (!isset($_SESSION['user']) || ($_SESSION['ro_lo'] !== 'admin' && $_SESSION['r
 
 include('../connect.php');
 include('header_admin.php');
+include('handle_delete.php');
+// Gọi hàm xử lý xóa phim
+handleDelete('movies', 'id', 'delete_movies_id', 'quanlyphim.php', $conn);
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -36,12 +39,12 @@ include('header_admin.php');
     $total_movies = $total_row['total'];
     $total_pages = ceil($total_movies / $limit);
     
-    $sql = "SELECT title, image_url, release_date, genre, lgs, age_rating, status FROM movies LIMIT $offset, $limit";
+    $sql = "SELECT id, title, image_url, release_date, genre, lgs, age_rating, status FROM movies LIMIT $offset, $limit";
     $results = mysqli_query($conn, $sql);
     if($results && mysqli_num_rows($results) > 0){
     echo '<main class="main-content">
     <div class="buttons">
-    <button><i class="fa-solid fa-plus"></i><span>Thêm </span></button>
+    <button id="btn3"><i class="fa-solid fa-plus"></i><span>Thêm </span></button>
     </div>
 
     <table>
@@ -70,9 +73,12 @@ include('header_admin.php');
                 <td>" . $movieDetails['status'] . "</td>
                 <td>
                 <div class='action-buttons'>
-                    <button class='btn-edit'><i class='fa-solid fa-wrench'></i> Sửa</button>
-                    <button class='btn-delete'><i class='fa-solid fa-trash'></i> Xóa</button>
-                    </div>
+                    <button class='btn-edit' id='edit2' data-id='{$movieDetails['id']}'><i class='fa-solid fa-wrench'></i> Sửa</button>
+                    <form method='post'>
+                        <input type='hidden' name='delete_movies_id' value='{$movieDetails['id']}'>
+                        <button type='submit' class='btn-delete'><i class='fa-solid fa-trash'></i> Xóa</button>
+                    </form>
+                </div>
                 </td>
               </tr>";
     }

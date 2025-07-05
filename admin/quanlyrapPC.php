@@ -8,6 +8,10 @@ if (!isset($_SESSION['user']) || !in_array($_SESSION['ro_lo'], ['admin', 'employ
 
 include('../connect.php');
 include('header_admin.php');
+include('handle_delete.php');
+// Gọi xử lý xóa
+handleDelete('cinemas', 'id', 'delete_rap_id', 'quanlyrapPC.php', $conn);
+handleDelete('rooms', 'id', 'delete_room_id', 'quanlyrapPC.php', $conn);
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -68,8 +72,11 @@ if ($ciList && mysqli_num_rows($ciList) > 0) {
                 <td>{$row['ci_status']}</td>
                 <td>
                     <div class='action-buttons'>
-                        <button class='btn-edit'><i class='fa-solid fa-pencil-alt'></i> Sửa</button>
-                        <button class='btn-delete'><i class='fa-solid fa-trash'></i> Xóa</button>
+                        <button class='btn-edit' id='edit3' data-id='{$row['id']}'><i class='fa-solid fa-pencil-alt'></i> Sửa</button>
+                        <form method='post'>
+                            <input type='hidden' name='delete_rap_id' value='{$row['id']}'>
+                            <button type='submit' class='btn-delete'><i class='fa-solid fa-trash'></i> Xóa</button>
+                        </form>
                     </div>
                 </td>
               </tr>";
@@ -160,7 +167,10 @@ if ($roomList && mysqli_num_rows($roomList) > 0) {
                 <td>{$row['room_status']}</td>
                 <td>
                     <div class='action-buttons'>
-                        <button class='btn-delete'><i class='fa-solid fa-trash'></i> Xóa</button>
+                        <form method='post'>
+                            <input type='hidden' name='delete_room_id' value='{$row['room_id']}'>
+                            <button type='submit' class='btn-delete'><i class='fa-solid fa-trash'></i> Xóa</button>
+                        </form>
                     </div>
                 </td>
               </tr>";
@@ -211,4 +221,6 @@ if ($total_pages_rooms > 1) {
     </main>
   </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../js/admin_profile.js"></script>
 </html>

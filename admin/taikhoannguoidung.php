@@ -5,6 +5,9 @@ if (!isset($_SESSION['user']) || ($_SESSION['ro_lo'] !== 'admin' && $_SESSION['r
 }
 include('../connect.php');
 include('header_admin.php');
+include('handle_delete.php');
+// Gọi hàm xử lý xóa người dùng
+handleDelete('users', 'id', 'delete_user_id', 'taikhoannguoidung.php', $conn);
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -50,7 +53,7 @@ $results = mysqli_query($conn, $sql);
 if ($results && mysqli_num_rows($results) > 0) {
     echo '<main class="main-content">';
     echo '<div class="buttons">';
-    echo '<button><i class="fa-solid fa-plus"></i><span> Thêm </span></button>';
+    echo '<button id="btn"><i class="fa-solid fa-plus"></i><span> Thêm </span></button>';
     echo '</div>';
     echo '<table>';
     echo '<thead>
@@ -78,8 +81,11 @@ if ($results && mysqli_num_rows($results) > 0) {
                 <td>{$row['status']}</td>
                 <td>
                    <div class='action-buttons'>
-                    <button class='btn-delete'><i class='fa-solid fa-trash'></i> Xóa</button>
-                </div>
+                        <form method='post'>
+                            <input type='hidden' name='delete_user_id' value='{$row['user_id']}'>
+                            <button type='submit' class='btn-delete'><i class='fa-solid fa-trash'></i> Xóa</button>
+                        </form>
+                    </div>
                 </td>
               </tr>";
     }
