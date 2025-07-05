@@ -3,15 +3,18 @@ session_start();
 include('header.php');
 include('connect.php');
 
+// Nhận dữ liệu từ POST & SESSION
 $seats = $_POST['seats'] ?? '';
 $showtime_id = $_POST['showtime_id'] ?? '';
 $total_price = $_POST['total_price'] ?? 0;
 $foods = $_SESSION['foods'] ?? [];
 
+// Chuẩn hóa mảng combo
 if (is_string($foods)) {
     $foods = json_decode($foods, true);
 }
 
+// Lấy thông tin suất chiếu
 $showtimeInfo = [];
 if ($showtime_id) {
     $sql = "SELECT 
@@ -36,12 +39,23 @@ if ($showtime_id) {
     }
 }
 
+// Tính mã vé và số vé
 $ma_ve = strtoupper(uniqid('V'));
-$so_ghe = is_array($seats) ? implode(', ', $seats) : $seats;
-$so_ve = is_array($seats) ? count($seats) : 1;
+
+// Chuẩn hóa số ghế
+if (is_string($seats)) {
+    $seats = array_filter(array_map('trim', explode(',', $seats)));
+} elseif (!is_array($seats)) {
+    $seats = [];
+}
+$so_ghe = implode(', ', $seats);
+$so_ve = count($seats);
+
+// Sinh QR code
 $qr_data = urlencode("Mã vé: $ma_ve\nPhim: " . $showtimeInfo['ten_phim'] . "\nGhế: $so_ghe\nThời gian: " . $showtimeInfo['show_time']);
 $qr_url = "https://api.qrserver.com/v1/create-qr-code/?data=$qr_data&size=150x150";
 ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -104,4 +118,5 @@ $qr_url = "https://api.qrserver.com/v1/create-qr-code/?data=$qr_data&size=150x15
 
 </body>
 </html>
+
 <?php include('footer.php'); ?>
