@@ -34,8 +34,11 @@ body {
       border-radius: 10px;
     }
     .movie-detail {
+      display:flex;
+      flex-direction: column;
       padding: 0;
       margin: 0;
+  
     }
     .movie-detail h2{
       margin-top:100px;
@@ -50,22 +53,32 @@ body {
       padding: 0;
     }
     .btn-buy {
+      display: flex;
+      justify-content: center;
+      text-align:center;
       margin-top: 10px;
+      width:100px;
       background: #ffc107;
       color: #000;
-      padding: 8px 16px;
+      text-decoration: none;
+      padding: 8px 30px;
       border: none;
       border-radius: 5px;
       font-weight: bold;
       cursor: pointer;
     }
-    .description, .trailer {
-      margin-bottom: 30px;
+    .btn-buy:hover {
+      background: #e0a800;
     }
-    .description p {
-      font-size: 14px;
-      line-height: 1.6;
+
+    .movie-description, .trailer {
+      margin-bottom: 40px;
+    }
+    .movie-description p {
+      font-size: 15px;
+      line-height: 0.1;
       color: #ccc;
+      margin-top:0;
     }
     .trailer iframe {
       width: 100%;
@@ -73,3 +86,7 @@ body {
       border: none;
       border-radius: 10px;
     }
+    .section-title{
+      font-size:25px;
+      margin-top: 20px;
+    } 

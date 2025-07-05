@@ -1,143 +1,214 @@
-  :root {
-    --bg-dark: #292929;
-    --bg-footer: #222;
-    --highlight: #EBB802;
-    --text-light: white;
-    --poster-hover-opacity: 0.3;
-  }
+:root {
+  --bg-dark: #292929;
+  --bg-footer: #222;
+  --highlight: #EBB802;
+  --text-light: white;
+  --poster-hover-opacity: 0.3;
+}
 
-  body {
-    background-color: var(--bg-dark);
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  .screen {
-    background: #ccc;
-    padding: 10px;
-    margin: 20px auto;
-    text-align: center;
-    font-weight: bold;
-    border-radius: 90px;
-    width: 60%;
-  }
-  .seat-container {
-    background-color: grey;
-    text-align: center;
-    margin: 10px;
-  }
-  .seat-row {
-    display: flex;
-    justify-content: center;
-  }
-  .seat {
-    width: 60px;
-    height: 40px;
-    margin: 4px;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    position: relative;
-    border: 2px solid transparent;
-  }
-  .seat-available:hover{
-    background-color: #EBB802;
-  }
-  .seat-available-pic { background-color: #eee; border-color: #ccc; }
-  .seat-booked { background-color: #d9534f; color: white; cursor: not-allowed; }
-  .seat-selected { background-color: #5bc0de; color: white; }
-  .seat-special { border-style: dashed; border-color: #EBB802; width: 150px; }
-  .seat-vip { border: 2px solid #EBB802; }
+body {
+  background-color: var(--bg-dark);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
-  .seating-container {
-    position: relative;
-    display: inline-block;
-    padding: 20px;
-  }
-  .legend{
-    display:flex;
-    justify-content: center;
-    gap: 30px;
-  }
-  .legend .legend-item{
-    display:flex;
-    align-items: center;
-    width:200px;
+.screen {
+  background: #ccc;
+  padding: 10px;
+  margin: 20px auto;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 90px;
+  width: 60%;
+  letter-spacing: 2px;
+}
 
-    color: white;
-    font-size:15px;
-    padding: 5px;
-    margin: 10px;
+.seat-container {
+  background-color: #444;
+  text-align: center;
+  margin: 10px auto;
+  border-radius: 10px;
+  padding-bottom: 20px;
+  max-width: 1100px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+}
 
-  }
-  #vip_zone {
-    border: 3px solid red;
-    position: absolute;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .Bill{
-    border:solid 2px white;
-  }
-  .continue-btn{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
- 
-  }
-  .button-continute{
-    width:200px;
-    height: 35px;
-    font-weight: bold;
-    border:none;
-    border-radius: 50px;
-  }
-  .button-continute:hover{
-    background-color: #EBB802;
-  }
-  .ticket {
-    display: flex;
-    justify-items: center;
-    background-color: black;
-    color: white;
-    padding: 15px;
- 
-    border-radius: 10px;
-    max-width: 1000px;
-    margin-bottom: 20px;
-    font-family: 'Segoe UI', sans-serif;
-  }
+.seating-container {
+  position: relative;
+  display: inline-block;
+  padding: 20px 10px 10px 10px;
+  background: #333;
+  border-radius: 10px;
+}
 
-  .ticket-poster img {
-    width: 120px;
-    height: auto;
-    border-radius: 5px;
-  }
+.seat-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
 
-  .ticket-info {
-    display: flex;
-    flex: 1;
-    margin-left: 20px;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
+.seat {
+  width: 60px;
+  height: 40px;
+  margin: 4px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid transparent;
+  background-color: #eee;
+  color: #222;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  font-size: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
 
-  .info-left, .info-mid, .info-right {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    font-size: 14px;
-  }
+.seat-available:hover,
+.seat-available:focus {
+  background-color: var(--highlight);
+  color: #222;
+  border-color: var(--highlight);
+  outline: none;
+}
 
-  .info-mid span,
-  .info-right span {
-    color: #bbb;
-    margin-right: 4px;
-  }
+.seat-booked {
+  background-color: #d9534f !important;
+  color: white !important;
+  cursor: not-allowed;
+  border-color: #b52b27;
+  opacity: 0.7;
+}
 
-  .info-right i.icon-info {
-    color: #39f;
-    margin-left: 5px;
-    cursor: pointer;
-  }
+.seat-selected {
+  background-color: #5bc0de !important;
+  color: white !important;
+  border-color: #39f;
+}
 
+.seat-special {
+  border-style: dashed;
+  border-color: var(--highlight);
+  width: 120px;
+  background: #fffbe6;
+}
+
+.seat-vip {
+  border: 2px solid var(--highlight);
+  background: #fff8e1;
+}
+
+.seat-normal {
+  border: 2px solid #bbb;
+}
+
+.seat-available-pic {
+  background-color: #eee;
+  border-color: #ccc;
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px 0 10px 0;
+}
+
+.legend .legend-item {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  color: white;
+  font-size: 15px;
+  padding: 5px;
+  margin: 10px;
+  gap: 10px;
+}
+
+.legend .seat {
+  width: 32px;
+  height: 24px;
+  margin: 0 8px 0 0;
+  font-size: 13px;
+  box-shadow: none;
+}
+
+.continue-btn {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.button-continute {
+  width: 200px;
+  height: 40px;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  background: var(--highlight);
+  color: #222;
+  font-size: 16px;
+  transition: background 0.2s;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.button-continute:hover {
+  background-color: #ffd700;
+}
+
+.ticket {
+  display: flex;
+  background-color: #181818;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 1000px;
+  margin: 20px auto;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+}
+
+.ticket-poster img {
+  width: 120px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.ticket-info {
+  display: flex;
+  flex: 1;
+  margin-left: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.info-left,
+.info-mid,
+.info-right {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.info-left div:first-child {
+  font-size: 18px;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+}
+
+.info-mid span,
+.info-right span {
+  color: #bbb;
+  margin-right: 4px;
+}
+
+.info-right i.icon-info {
+  color: #39f;
+  margin-left: 5px;
+  cursor: pointer;
+}

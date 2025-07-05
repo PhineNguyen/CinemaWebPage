@@ -1,6 +1,6 @@
 <?php
-    include("connect.php");
-    include("header.php");
+include("connect.php");
+include("header.php");
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -8,24 +8,27 @@
   <meta charset="UTF-8">
   <title>Chi tiết phim</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="CSS/chitietphim.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <link rel="stylesheet" href="CSS/chitietphim.css?v=2.1">
 </head>
 <body>
   <nav class="nav-item">
-    <a href="#">PHIM</a>
-    <a href="#">RẠP CINETIX</a>
-    <a href="#">GIÁ VÉ</a>
-    <a href="#">LIÊN HỆ</a>
+    <a href="Home.php">PHIM</a>
+    <a href="rapCinetix.php">RẠP CINETIX</a>
+    <a href="giave.php">GIÁ VÉ</a>
+    <a href="lienhe.php">LIÊN HỆ</a>
   </nav>
 
-<!-- chi tiết phim -->
-<div class="container">
+  <!-- chi tiết phim -->
+  <div class="container">
     <?php
-        $sql = "SELECT title, image_url, release_date, genre, director, actor, age_rating, duration, lgs, descript, trailer_url FROM movies LIMIT 1";
+    if (isset($_GET['id'])) {
+        $id = (int)$_GET['id']; // Lấy ID phim từ URL, đảm bảo an toàn
+
+        $sql = "SELECT title, image_url, release_date, genre, director, actor, age_rating, duration, lgs, descript, trailer_url FROM movies WHERE id = $id";
         $result = mysqli_query($conn, $sql);
+
         if ($result && mysqli_num_rows($result) > 0) {
-            while ($phim = mysqli_fetch_assoc($result)) {
+            $phim = mysqli_fetch_assoc($result);
     ?>
     <div class="section-title" style="font-size:30px">Nội dung phim</div>
     <div class="movie-info">
@@ -39,30 +42,27 @@
             <p><strong>Thời lượng:</strong> <?php echo $phim['duration']; ?> phút</p>
             <p><strong>Ngôn ngữ:</strong> <?php echo $phim['lgs']; ?></p>
             <p><strong>Rated:</strong> <?php echo $phim['age_rating']; ?></p>
-            <button class="btn-buy">🎟 Mua vé</button>
+            <a href="chonlichchieu.php?id=<?php echo $id; ?>" class="btn-buy">🎟 Mua vé</a>
+        
+          </div>
+     
+    </div>
+
+    <div class="mag">
+        <div class="section-title" style="font-size:25px; margin-top: 20px;">Giới Thiệu</div>
+        <div class="movie-description">
+            <p><?php echo $phim['descript']; ?></p>
         </div>
     </div>
- <div class="mag">
-   <div class="section-title"style="font-size:25px">Giới Thiệu</div>
-  <div class="movie-detail">
-      <p><?php echo $phim['descript'];?></p>
-  </div>
- </div>
-   <?php
-   
-// Lấy URL gốc
-$original_url = $phim['trailer_url'];
 
-// Chuyển đổi sang dạng nhúng
-$embed_url = preg_replace(
-    "/watch\?v=([a-zA-Z0-9_-]+)/",
-    "embed/$1",
-    $original_url
-);
-?>
+    <?php
+    // Lấy URL gốc trailer
+    $original_url = $phim['trailer_url'];
+    $embed_url = preg_replace("/watch\?v=([a-zA-Z0-9_-]+)/", "embed/$1", $original_url);
+    ?>
 
-<?php if (!empty($embed_url)): ?>
-    <label style="font-weight:bold; font-size:20px;">Trailer</label>
+    <?php if (!empty($embed_url)): ?>
+    <label style="font-weight:bold; font-size:25px;">Trailer</label>
     <div class="movie-trailer" style="margin-top: 20px; text-align: center;">
         <iframe 
             width="560" 
@@ -74,20 +74,18 @@ $embed_url = preg_replace(
             style="border: solid 1px white; width: 100%; max-width: 720px; border-radius: 10px; display: inline-block;">
         </iframe>
     </div>
-<?php endif; ?>
+    <?php endif; ?>
 
     <?php
-            }
         } else {
-            echo "<p>Không có dữ liệu phim để hiển thị.</p>";
+            echo "<p style='color:white;'>Không tìm thấy phim.</p>";
         }
+    } else {
+        echo "<p style='color:white;'>Thiếu ID phim trong URL.</p>";
+    }
     ?>
-</div>
+  </div>
 
 </body>
 </html>
-<?php
-
-    include("footer.php");
-
-?>
+<?php include('footer.php')?>

@@ -1,35 +1,69 @@
 $(document).ready(function () {
-  const $vipSeats = $('.seat-vip');
-  if ($vipSeats.length === 0) return;
+  let selectedSeats = [];
 
-  let top = Infinity, left = Infinity, right = 0, bottom = 0;
+  function calculateTotal() {
+    let total = 0;
+    selectedSeats.forEach(s => {
+      total += BASE_TICKET_PRICE + s.extra;
+    });
+    return total;
+  }
 
-  const $container = $('.seating-container');
-  const containerRect = $container[0].getBoundingClientRect();
+  $('.seat-available').on('click', function () {
+    const $seat = $(this);
+    const seatCode = $seat.text().trim();
+    const isSelected = $seat.hasClass('seat-selected');
+    const extraPrice = parseInt($seat.data('price')) || 0;
 
-  $vipSeats.each(function () {
-    const rect = this.getBoundingClientRect();
+    if (isSelected) {
+      $seat.removeClass('seat-selected');
+      selectedSeats = selectedSeats.filter(s => s.code !== seatCode);
+    } else {
+      $seat.addClass('seat-selected');
+      selectedSeats.push({ code: seatCode, extra: extraPrice });
+    }
 
-    const relTop = rect.top - containerRect.top;
-    const relLeft = rect.left - containerRect.left;
-    const relRight = rect.right - containerRect.left;
-    const relBottom = rect.bottom - containerRect.top;
+    // Cập nhật danh sách ghế hiển thị
+    $('#selected-seats-list').text(
+      selectedSeats.length > 0 ? selectedSeats.map(s => s.code).join(', ') : 'Không có'
+    );
 
-    if (relTop < top) top = relTop;
-    if (relLeft < left) left = relLeft;
-    if (relRight > right) right = relRight;
-    if (relBottom > bottom) bottom = relBottom;
+    // Cập nhật tổng tiền hiển thị
+    const total = calculateTotal();
+    $('#ticket-total').text(total.toLocaleString('vi-VN') + ' đ');
   });
 
-  const $zone = $('<div>', { id: 'vip_zone' }).css({
-    position: 'absolute',
-    top: `${top - 5}px`,
-    left: `${left - 5}px`,
-    width: `${right - left + 10}px`,
-    height: `${bottom - top + 10}px`,
-    border: '2px dashed red', // bạn có thể tùy chỉnh thêm
-    pointerEvents: 'none'
-  });
+  $('.button-continute').on('click', function () {
+    if (selectedSeats.length === 0) {
+      alert("Vui lòng chọn ít nhất một ghế.");
+      return;
+    }
 
-  $container.append($zone);
+    const total = calculateTotal(); // ✅ Lấy tổng tiền từ hàm
+
+    const form = $('<form>', {
+      method: 'POST',
+      action: 'chonbapnuoc.php'
+    });
+
+    $('<input>').attr({
+      type: 'hidden',
+      name: 'seats',
+      value: selectedSeats.map(s => s.code).join(',')
+    }).appendTo(form);
+
+    $('<input>').attr({
+      type: 'hidden',
+      name: 'showtime_id',
+      value: SHOWTIME_ID
+    }).appendTo(form);
+
+    $('<input>').attr({
+      type: 'hidden',
+      name: 'total_price', // nên dùng tên rõ ràng
+      value: total
+    }).appendTo(form);
+
+    form.appendTo('body').submit();
+  });
 });

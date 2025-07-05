@@ -32,6 +32,45 @@
     font-weight: bold;
     color:#222;
 }
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-update{
+  width:100px;
+  height: 40px;
+  background-color: var(--highlight);
+  color: var(--bg-dark);
+  font-weight: bold;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-update:hover {
+  background-color: #e0a800;
+}
+
+
+.btn-delete {
+  width:100px;
+  height: 40px;
+  background-color: var(--highlight);
+  color: var(--bg-dark);
+  font-weight: bold;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-delete:hover {
+  background-color: #e0a800;
+}
 .main-content table {
   width: 100%;
   border-collapse: collapse;
@@ -55,19 +94,111 @@
   justify-content: center;
   gap: 10px;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 
-.pagination a, .pagination strong {
-  padding: 6px 12px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  text-decoration: none;
-  color: #333;
-  border-radius: 4px;
-}
-
+.pagination a,
 .pagination strong {
-  background-color: #333;
+  padding: 6px 12px;
+  background: none;
+  border: 1px solid var(--highlight);
+  text-decoration: none;
   color: white;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+  font-weight: 500;
 }
 
+/* Trang hiện tại */
+.pagination strong {
+  background-color: var(--highlight);
+  color: black;
+  font-weight: bold;
+}
+
+/* Hiệu ứng hover */
+.pagination a:hover {
+  background-color: var(--highlight);
+  color: var(--bg-dark);
+}
+
+/* Nút điều hướng << >> nổi bật hơn */
+.pagination a:first-child,
+.pagination a:last-child {
+  color: white;;
+  font-weight: bold;
+}
+
+/* Ẩn bấm nếu disabled (tuỳ thêm class bằng PHP nếu muốn) */
+.pagination .disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.pagination_cinemas,
+.pagination_rooms {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+/*quanlyrapPC*/
+.pagination_cinemas a, .pagination_rooms a,
+.pagination_cinemas strong, .pagination_rooms strong {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--highlight);
+  text-decoration: none;
+  background:none;
+  color: white;
+  transition: background-color 0.2s, color 0.2s;
+  font-weight: 500;
+}
+
+/* Trang hiện tại */
+.pagination_cinemas strong,
+.pagination_rooms strong {
+  background-color: var(--highlight);
+  color: var(--bg-dark);
+  font-weight: bold;
+}
+
+/* Hover hiệu ứng */
+.pagination_cinemas a:hover,
+.pagination_rooms a:hover {
+  background-color: var(--highlight);
+  color: #000;
+}
+
+/* Nút đầu/cuối (<< >>) hoặc trang 1/trang cuối nổi bật hơn */
+.pagination_cinemas a:first-child,
+.pagination_cinemas a:last-child,
+.pagination_rooms a:first-child,
+.pagination_rooms a:last-child {
+  color: white;;
+  font-weight: bold;
+}
+
+.btn-add-cinema {
+   text-decoration: none;
+    color: var(--text-light);
+    background-color: var(--highlight);
+    padding: 0 20px;
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    font-weight: bold;
+    color:#222;
+}
+.btn-add-room{
+   text-decoration: none;
+    color: var(--text-light);
+    background-color: var(--highlight);
+    padding: 0 20px;
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    font-weight: bold;
+    color:#222;
+}

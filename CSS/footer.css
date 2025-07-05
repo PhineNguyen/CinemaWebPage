@@ -1,18 +1,27 @@
+/*Biến toàn cục CSS*/
+:root {
+  --bg-dark: #292929; /*Màu nền chính của web*/
+  --bg-footer: #222; /*Màu nền cho footer*/
+  --highlight: #EBB802; /*Màu vàng của button và đường kẻ*/
+  --text-light: white; /*Màu chữ sáng*/
+  --poster-hover-opacity: 0.3; /*Độ mờ khi di chuột vào*/
+  --scrollbar-thumb: rgba(255, 255, 255, 0.2); /*Màu thanh cuộn ngang*/
+}
+
 footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 20px;
   background-color: var(--bg-footer);
   color: var(--text-light);
-  border-top: solid 1px var(--text-light);
+  padding: 30px 20px;
+  display: flex;
+  gap: 20px;
 }
 
 footer div {
-  margin-bottom: 15px;
+  flex: 1;
 }
 
 footer h3 {
+  color: var(--highlight);
   margin-bottom: 10px;
 }
 
@@ -22,26 +31,35 @@ footer ul {
 }
 
 footer ul li {
-  display: flex;
-  align-items: center;
   margin-bottom: 5px;
+  font-size: 14px;
 }
 
-footer img {
-  width: 30px;
-  height: 30px;
-  margin-right: 5px;
+footer ul li:hover {
+  color: var(--highlight);
 }
 
-/*Tên công ty và logo*/
-.company-name {
-  font-size: large;
+.f3 ul li img {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.f5 {
+  text-align: center;
+  color: var(--highlight);
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-top: 5px;
 }
 
 .company-logo {
-  width: 600px;
-  max-width: 250px;
-  height: auto;
+  width: 60px;
+  margin-top: 10px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+  }
 }

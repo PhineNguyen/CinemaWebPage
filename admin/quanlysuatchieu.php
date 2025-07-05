@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['user']) || !in_array($_SESSION['ro_lo'], ['admin', 'employee'])) {
+    exit();
+}
+
 include('../connect.php');
 include('header_admin.php');
 ?>
@@ -25,13 +30,11 @@ if ($page < 1) $page = 1;
 
 $offset = ($page - 1) * $limit;
 
-// Tính tổng số bản ghi để phân trang
 $total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM showtimes");
 $total_row = mysqli_fetch_assoc($total_result);
 $total_records = $total_row['total'];
 $total_pages = ceil($total_records / $limit);
 
-// Truy vấn dữ liệu có JOIN 3 bảng
 $sql = "SELECT 
     movies.title AS title, 
     movies.image_url AS image_url, 
@@ -51,8 +54,6 @@ if ($results && mysqli_num_rows($results) > 0) {
     echo '<main class="main-content">';
     echo '<div class="buttons">';
     echo '<button><i class="fa-solid fa-plus"></i><span> Thêm </span></button>';
-    echo '<button><i class="fa-solid fa-minus"></i><span> Xóa</span></button>';
-    echo '<button><i class="fa-solid fa-wrench"></i><span> Sửa</span></button>';
     echo '</div>';
 
     echo '<table>';
@@ -65,7 +66,7 @@ if ($results && mysqli_num_rows($results) > 0) {
                 <th>Ngày chiếu</th>
                 <th>Giờ chiếu</th>
                 <th>Phòng</th>
-                <th>Trạng thái</th>
+                <th></th>
             </tr>
           </thead>';
     echo '<tbody>';
@@ -73,36 +74,56 @@ if ($results && mysqli_num_rows($results) > 0) {
     while ($row = mysqli_fetch_assoc($results)) {
         echo "<tr>
                 <td><input type='checkbox' class='checkItem'></td>
-                <td>{$row['title']}</td>
-                <td><img src='{$row['image_url']}' width='100'></td>
-                <td>{$row['ticket_price']}đ</td>
-                <td>{$row['show_date']}</td>
-                <td>{$row['show_time']}</td>
-                <td>{$row['room_number']}</td>
-                <td>{$row['status']}</td>
+                <td>" . htmlspecialchars($row['title']) . "</td>
+                <td><img src='" . htmlspecialchars($row['image_url']) . "' width='100'></td>
+                <td>" . number_format($row['ticket_price'], 0, ',', '.') . " VNĐ</td>
+                <td>" . htmlspecialchars($row['show_date']) . "</td>
+                <td>" . htmlspecialchars($row['show_time']) . "</td>
+                <td>" . htmlspecialchars($row['room_number']) . "</td>
+                <td>
+                <div class='action-buttons'>
+                    <button class='btn-edit'><i class='fa-solid fa-pencil-alt'></i> Sửa</button>
+                    <button class='btn-delete'><i class='fa-solid fa-trash'></i> Xóa</button>
+                </div>
+                </td>    
               </tr>";
     }
 
     echo '</tbody></table>';
 
-    // Hiển thị phân trang
     if ($total_pages > 1) {
-        echo '<div class="pagination">';
-        if ($page > 1) {
-            echo '<a href="?page=' . ($page - 1) . '">Trang trước</a>';
-        }
-        for ($i = 1; $i <= $total_pages; $i++) {
-            if ($i == $page) {
-                echo '<strong>' . $i . '</strong>';
-            } else {
-                echo '<a href="?page=' . $i . '">' . $i . '</a>';
-            }
-        }
-        if ($page < $total_pages) {
-            echo '<a href="?page=' . ($page + 1) . '">Trang sau</a>';
-        }
-        echo '</div>';
+    echo '<div class="pagination">';
+    if ($page > 1) {
+        echo '<a href="?page=' . ($page - 1) . '"><<</a>';
     }
+
+    $max_links = 4; // Số trang muốn hiển thị
+    $start = max(1, $page - floor($max_links / 2));
+    $end = min($total_pages, $start + $max_links - 1);
+
+    if ($start > 1) {
+        echo '<a href="?page=1">1</a>';
+        if ($start > 2) echo '<span>...</span>';
+    }
+
+    for ($i = $start; $i <= $end; $i++) {
+        if ($i == $page) {
+            echo '<strong>' . $i . '</strong>';
+        } else {
+            echo '<a href="?page=' . $i . '">' . $i . '</a>';
+        }
+    }
+
+    if ($end < $total_pages) {
+        if ($end < $total_pages - 1) echo '<span>...</span>';
+        echo '<a href="?page=' . $total_pages . '">' . $total_pages . '</a>';
+    }
+
+    if ($page < $total_pages) {
+        echo '<a href="?page=' . ($page + 1) . '">>></a>';
+    }
+    echo '</div>';
+}
 
     echo '</main>';
 } else {
@@ -110,9 +131,7 @@ if ($results && mysqli_num_rows($results) > 0) {
 }
 ?>
   </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
-<script src="/adminjs/sidebar.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../js/admin_profile.js"></script>
 </body>
-
 </html>

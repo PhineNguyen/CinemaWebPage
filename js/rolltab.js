@@ -1,6 +1,6 @@
 $(document).ready(function () {
   const $navTabs = $('.nav-item a');
-  const $tabHome = $('#tab-home');
+  const $tabHome = $('.nav-item a[href=""]');
   const $tabRap = $('#rap-cinetix-tab');
   const $tabGiaVe = $('#gia-ve-tab');
   const $tabLienhe = $('#lien-he-tab');
@@ -9,12 +9,12 @@ $(document).ready(function () {
   const $rapContent = $('#rap-cinetix-content');
   const $giaVeContent = $('#gia-ve-content');
   const $lienHeContent = $('#lien-he-content');
-  
+
   // PHIM (Trang chủ)
   $tabHome.on('click', function (e) {
     e.preventDefault();
     $navTabs.removeClass('active');
-    $tabHome.addClass('active');
+    $(this).addClass('active');
 
     $rapContent.hide();
     $giaVeContent.hide();
@@ -26,7 +26,7 @@ $(document).ready(function () {
   $tabRap.on('click', function (e) {
     e.preventDefault();
     $navTabs.removeClass('active');
-    $tabRap.addClass('active');
+    $(this).addClass('active');
 
     $mainContent.hide();
     $giaVeContent.hide();
@@ -43,7 +43,7 @@ $(document).ready(function () {
   $tabGiaVe.on('click', function (e) {
     e.preventDefault();
     $navTabs.removeClass('active');
-    $tabGiaVe.addClass('active');
+    $(this).addClass('active');
 
     $mainContent.hide();
     $rapContent.hide();
@@ -55,23 +55,7 @@ $(document).ready(function () {
     });
   });
 
-  // LIÊN HỆ
-  $tabLienhe.on('click', function (e) {
-    e.preventDefault();
-    $navTabs.removeClass('active');
-    $tabLienhe.addClass('active');
-
-    $mainContent.hide();
-    $rapContent.hide();
-    $giaVeContent.hide();
-
-    $lienHeContent.html('<div class="loading">Đang tải...</div>').show();
-    $.get('lienhe.php', function (html) {
-      $lienHeContent.html(html);
-    });
-  });
-
-  // Hàm khởi tạo sau khi tải rạp
+  // Khởi tạo chi tiết rạp
   function initializeRapCinetixScript() {
     const cinemaDetails = {
       "Hồ Chí Minh": ["CINETIX GO! Quận 1", "CINETIX VINCOM Thủ Đức"],
@@ -166,7 +150,7 @@ $(document).ready(function () {
     }
   }
 
-  // Cuộn phim
+  // Cuộn danh sách phim
   window.scrollMovies = function (direction) {
     const $movieList = $('#movie-list');
     if (!$movieList.length) return;
