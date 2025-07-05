@@ -1,41 +1,92 @@
-.qr-popup{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+   :root {
+  --bg-dark: #292929; /*Màu nền chính của web*/
+  --bg-footer: #0000009c; /*Màu nền cho footer*/
+  --highlight: #EBB802; /*Màu vàng của button và đường kẻ*/
+  --text-light: white; /*Màu chữ sáng*/
+  --poster-hover-opacity: 0.3; /*Độ mờ khi di chuột vào*/
+  --scrollbar-thumb: rgba(255, 255, 255, 0.2); /*Màu thanh cuộn ngang*/
 }
-.qr-box{
-    background-color: white;
-    text-align: center;
-    border-radius: 10px;
-    width: 400px;
-    height: 400px;
-    margin: 50px;
-    padding: -10px;
-    position: relative; /* cần thiết để định vị nút close bên trong */
+/* Đặt nền và font cho toàn trang */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-dark);
+  color: #333;
 }
-p{
-    font-weight:bold; font-size: 20px; margin-top: 40px; color: black;
-}
-.timer{
-    font-weight:bold; font-size: 16px;
-    margin-top: -10px;
-}
-.qr-img{
-    margin-left: 450px;
-    width: 250px;
-    height: 250px;
-}
-.close-btn{
-    position: absolute;
-    right: 10px;
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #333;
-}
-.timer{
-  color: white;
+
+/* Navbar */
+.nav-item {
+  background-color: #20232a;
+  padding: 15px 20px;
   text-align: center;
+}
+
+.nav-item a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-item a:hover {
+  color: #61dafb;
+}
+
+/* Container chính */
+.qr-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* canh giữa theo chiều ngang */
+  justify-content: center; /* canh giữa theo chiều dọc */
+  height: 85vh;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Tiêu đề */
+.qr-container h2 {
+  margin-bottom: 25px;
+  font-size: 28px;
+  color: var(--text-light);
+  font-weight: bold;
+}
+
+/* Hình QR */
+.qr-container img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  border: 30px solid rgba(255, 255, 255, 0.259);
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* Danh sách combo nếu có */
+.qr-container ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 15px;
+}
+
+.qr-container li {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .qr-container h2 {
+    font-size: 22px;
+  }
+
+  .qr-container img {
+    max-width: 200px;
+  }
+
+  .nav-item a {
+    display: inline-block;
+    margin: 5px 10px;
+  }
 }

@@ -24,7 +24,7 @@ $movie_id = $_GET['id'] ?? ''; // lấy từ chitietphim.php
 <head>
   <meta charset="UTF-8">
   <title>Chọn lịch chiếu</title>
-  <link rel="stylesheet" href="CSS/chonlichchieu.css">
+  <link rel="stylesheet" href="CSS/chonlichchieu.css?v=2.1">
 </head>
 <body>
   <nav class="nav-item">

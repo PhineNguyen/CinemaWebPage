@@ -37,24 +37,7 @@ $_SESSION['paid_success'] = true;
     <h2>Quét mã QR để thanh toán</h2>
     <img src="pic/qrcode-default.png" alt="Mã QR" style="max-width: 300px;">
 
-    <p><strong>Ghế:</strong> <?= htmlspecialchars($seats) ?></p>
-    <p><strong>Tổng tiền:</strong> <?= number_format($total_price, 0, ',', '.') ?>đ</p>
 
-    <?php if (!empty($foods)): ?>
-      <div>
-        <h3>Combo đã chọn:</h3>
-        <ul>
-        <?php foreach ($foods as $item): ?>
-          <li>
-            <?= htmlspecialchars($item['name'] ?? ''); ?>
-            x<?= intval($item['qty'] ?? 0); ?>
-            <?= !empty($item['flavor']) ? ' - Vị: ' . htmlspecialchars($item['flavor']) : ''; ?>
-            <?= !empty($item['size']) && is_array($item['size']) ? ' - Size: ' . implode(', ', array_map('htmlspecialchars', $item['size'])) : ''; ?>
-          </li>
-        <?php endforeach; ?>
-        </ul>
-      </div>
-    <?php endif; ?>
 
     <form method="POST" action="thongTinVe.php">
       <input type="hidden" name="seats" value="<?= htmlspecialchars($seats) ?>">
