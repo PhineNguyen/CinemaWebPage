@@ -13,9 +13,10 @@ $(document).ready(function () {
       clearInterval(countdown);
 
       // ✅ Giả sử bạn có biến toàn cục SEATS và SHOWTIME_ID hoặc lấy từ DOM
-      const seats = typeof SEATS !== 'undefined' ? SEATS : $('#seats-data').val() || '';
-      const showtime_id = typeof SHOWTIME_ID !== 'undefined' ? SHOWTIME_ID : $('#showtime-id').val() || '';
-      const total_price = $('#total-amount').text().replace(/[^\d]/g, '') || 0;
+      const SEATS = $('#seats-data').val(); // hoặc dữ liệu từ sessionStorage/localStorage
+      const SHOWTIME_ID = $('#showtime-id').val();
+      const total_price = $('#total-amount').text().replace(/[^\d]/g, ''); // loại bỏ 'đ'
+      
 
       // ✅ Lấy danh sách foods từ DOM (nếu có combo)
       const foods = [];
@@ -40,8 +41,8 @@ $(document).ready(function () {
         action: 'thongTinVe.php'
       });
 
-      $form.append($('<input>', { type: 'hidden', name: 'seats', value: seats }));
-      $form.append($('<input>', { type: 'hidden', name: 'showtime_id', value: showtime_id }));
+      $form.append($('<input>', { type: 'hidden', name: 'seats', value: SEATS }));
+      $form.append($('<input>', { type: 'hidden', name: 'showtime_id',  value: typeof SHOWTIME_ID !== 'undefined' ? SHOWTIME_ID : '' }));
       $form.append($('<input>', { type: 'hidden', name: 'total_price', value: total_price }));
       $form.append($('<input>', { type: 'hidden', name: 'foods', value: JSON.stringify(foods) }));
 
