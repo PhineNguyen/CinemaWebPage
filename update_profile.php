@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $new_phone = $_POST['phone'] ?? '';
   $new_email = $_POST['email'] ?? '';
 
-  // Kiểm tra dữ liệu (bạn có thể thêm validate sâu hơn tại đây)
+  // Kiểm tra dữ liệu 
   if (empty($new_name) || empty($new_phone) || empty($new_email)) {
     $_SESSION['update_message'] = "<span style='color:red;'>Vui lòng điền đầy đủ thông tin.</span>";
     header("Location: infor_admin.php");
