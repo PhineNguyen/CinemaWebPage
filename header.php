@@ -28,7 +28,6 @@
             <div class="admin-icon"><i class="fa-solid fa-user"></i></div>
             <div class="mucluc">
                 <a href="infor_admin.php"><i class="fa-solid fa-circle-user"></i> Tài khoản</a>
-                <a href="#"><i class="fa-solid fa-gear"></i> Cài đặt</a>
                 <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
             </div>
         </div>';
