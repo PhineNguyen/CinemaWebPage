@@ -33,10 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             exit();
         } else {
-            $error = "❌ Mật khẩu không đúng.";
+            $error = "Mật khẩu không đúng.";
         }
     } else {
-        $error = "❌ Tài khoản không tồn tại hoặc không đúng quyền.";
+        $error = "Tài khoản không tồn tại .";
     }
 }
 ?>
