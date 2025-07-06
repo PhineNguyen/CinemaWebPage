@@ -76,7 +76,7 @@ $ticket_price = $info['ticket_price'];
 <head>
   <meta charset="UTF-8">
   <title>Đặt vé xem phim</title>
-  <link rel="stylesheet" href="CSS/chonghe.css">
+  <link rel="stylesheet" href="CSS/chonghe.css?v=2.1">
 </head>
 <body>
   <!-- Menu điều hướng dạng tab -->

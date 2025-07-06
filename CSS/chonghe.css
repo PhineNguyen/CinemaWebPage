@@ -128,9 +128,9 @@ body {
 
 
 .legend .seat {
-  width: 32px;
-  height: 24px;
-  margin: 0 8px 0 0;
+  width: 52px;
+  height: 36px;
+  margin: 0 8px 0 55px;
   font-size: 13px;
   box-shadow: none;
   background-color: #eee;
