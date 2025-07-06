@@ -1,6 +1,7 @@
 $(document).ready(function () {
   let selectedSeats = [];
 
+  // Tính tổng tiền
   function calculateTotal() {
     let total = 0;
     selectedSeats.forEach(s => {
@@ -9,6 +10,7 @@ $(document).ready(function () {
     return total;
   }
 
+  // Xử lý chọn / bỏ chọn ghế
   $('.seat-available').on('click', function () {
     const $seat = $(this);
     const seatCode = $seat.text().trim();
@@ -23,23 +25,24 @@ $(document).ready(function () {
       selectedSeats.push({ code: seatCode, extra: extraPrice });
     }
 
-    // Cập nhật danh sách ghế hiển thị
     $('#selected-seats-list').text(
       selectedSeats.length > 0 ? selectedSeats.map(s => s.code).join(', ') : 'Không có'
     );
 
-    // Cập nhật tổng tiền hiển thị
     const total = calculateTotal();
     $('#ticket-total').text(total.toLocaleString('vi-VN') + ' đ');
   });
 
+  // Bấm nút "Tiếp tục"
   $('.button-continute').on('click', function () {
     if (selectedSeats.length === 0) {
       alert("Vui lòng chọn ít nhất một ghế.");
       return;
     }
 
-    // ✅ Chuẩn bị dữ liệu đặt ghế
+    const $button = $(this);
+    $button.prop('disabled', true).text('Đang xử lý...');
+
     const seatDataForAjax = selectedSeats.map(codeObj => {
       const code = codeObj.code;
       return {
@@ -53,16 +56,26 @@ $(document).ready(function () {
     formData.append('showtime_id', SHOWTIME_ID);
     formData.append('seats', JSON.stringify(seatDataForAjax));
 
-    // ✅ Gửi yêu cầu đặt ghế
+    // Gửi yêu cầu đặt ghế
     fetch(window.location.href, {
       method: 'POST',
       body: formData
     })
     .then(res => res.text())
     .then(msg => {
-      console.log(msg); // Thông báo đặt ghế thành công
+      console.log(msg);
 
-      // ✅ Sau khi đặt ghế thành công → Gửi form sang chonbapnuoc.php
+      // ✅ Hiệu ứng khóa ghế
+      selectedSeats.forEach(s => {
+        $(`.seat:contains(${s.code})`)
+          .removeClass('seat-selected seat-available')
+          .addClass('seat-booked')
+          .prop('disabled', true);
+      });
+
+      alert("Đặt ghế thành công!");
+
+      // ✅ Gửi sang chonbapnuoc.php
       const total = calculateTotal();
 
       const form = $('<form>', {
@@ -93,6 +106,7 @@ $(document).ready(function () {
     .catch(err => {
       alert('Lỗi đặt ghế!');
       console.error(err);
+      $button.prop('disabled', false).text('Tiếp tục');
     });
   });
 });
