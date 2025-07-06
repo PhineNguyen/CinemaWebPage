@@ -1,14 +1,8 @@
 const cinemaDetails = {
-  "Hồ Chí Minh": ["CINETIX GO! Quận 1", "CINETIX VINCOM Thủ Đức"],
-  "Hà Nội": ["CINETIX GO! Hoàn Kiếm", "CINETIX VINCOM Long Biên"],
-  "Đà Nẵng": ["CINETIX GO! Hải Châu"],
-  "Cần Thơ": ["CINETIX GO! Ninh Kiều"],
-  "Đồng Nai": ["CINETIX VINCOM Biên Hòa"],
-  "Tiền Giang": ["CINETIX GO! Mỹ Tho", "CINETIX VINCOM Mỹ Tho"],
-  "Bình Dương": ["CINETIX GO! Thủ Dầu Một"],
-  "Vũng Tàu": ["CINETIX GO! Vũng Tàu"],
-  "Bạc Liêu": ["CINETIX GO! Bạc Liêu"],
-  "Nghệ An": ["CINETIX GO! Vinh"]
+  "Bến Tre": ["Cinetix Bến Tre 1"],
+  "Hồ Chí Minh": ["Cinetix TP.HCM 1"],
+  "Hà Nội": ["Cinetix Hà Nội 1"],
+  "Trà Vinh": ["Cinetix Trà Vinh 1"],
 };
 
 const cinemaItems = document.querySelectorAll('.cinema-item');

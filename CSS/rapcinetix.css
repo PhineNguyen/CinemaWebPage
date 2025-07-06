@@ -224,3 +224,10 @@ body {
   background: #f7b500;
   transform: translateY(-2px);
 }
+/* Ẩn thanh cuộn ngang của movie-list trên mọi trình duyệt */
+#movie-list {
+  scrollbar-width: none; /* Firefox */
+}
+#movie-list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}

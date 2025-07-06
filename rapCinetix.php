@@ -10,16 +10,10 @@
   <div class="cinema-list-container">
     <h1 class="cinema-title">CINETIX</h1>
     <div class="cinema-list">
-      <div class="cinema-item">Hồ Chí Minh</div>
+      <div class="cinema-item">Bến Tre</div>
+      <div class="cinema-item">TP. Hồ Chí Minh</div>
       <div class="cinema-item">Hà Nội</div>
-      <div class="cinema-item">Đà Nẵng</div>
-      <div class="cinema-item">Cần Thơ</div>
-      <div class="cinema-item">Đồng Nai</div>
-      <div class="cinema-item">Tiền Giang</div>
-      <div class="cinema-item">Bình Dương</div>
-      <div class="cinema-item">Vũng Tàu</div>
-      <div class="cinema-item">Bạc Liêu</div>
-      <div class="cinema-item">Nghệ An</div>
+      <div class="cinema-item">Trà Vinh</div>
     </div>
     <div id="cinema-detail-container"></div>
     <!-- Phần info sẽ được js tự động thêm vào dưới đây -->
