@@ -41,9 +41,11 @@ $(document).ready(function () {
   bindRedirect('#btn', 'form_add_user.php');
   bindRedirect('#btn2', 'form_add_hr.php');
   bindRedirect('#btn3', 'form_add_film.php');
+  bindRedirect('#btn4', 'form_add_showtime.php');
   bindRedirect('.btn-add-cinema', 'form_add_cinema.php');
   bindRedirect('.btn-add-room', 'form_add_room.php');
   bindRedirect('.btn-edit', 'form_edit_user.php');
   bindRedirect('#edit2', 'form_edit_film.php');
   bindRedirect('#edit3', 'form_edit_cinema.php');
+  bindRedirect('#edit4', 'form_edit_showtime.php');
 });

@@ -72,7 +72,9 @@ if ($ciList && mysqli_num_rows($ciList) > 0) {
                 <td>{$row['ci_status']}</td>
                 <td>
                     <div class='action-buttons'>
+                        
                         <button class='btn-edit' id='edit3' data-id='{$row['id']}'><i class='fa-solid fa-pencil-alt'></i> Sửa</button>
+                        
                         <form method='post'>
                             <input type='hidden' name='delete_rap_id' value='{$row['id']}'>
                             <button type='submit' class='btn-delete'><i class='fa-solid fa-trash'></i> Xóa</button>

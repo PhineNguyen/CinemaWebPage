@@ -6,6 +6,9 @@ if (!isset($_SESSION['user']) || !in_array($_SESSION['ro_lo'], ['admin', 'employ
 
 include('../connect.php');
 include('header_admin.php');
+include('handle_delete.php');
+// Gọi hàm xử lý xóa lịch chiếu
+handleDelete('showtimes', 'id', 'delete_suatchieu_id', 'quanlysuatchieu.php', $conn);
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -42,7 +45,8 @@ $sql = "SELECT
     movies.status AS status,
     rooms.room_number AS room_number, 
     showtimes.show_date AS show_date, 
-    showtimes.show_time AS show_time
+    showtimes.show_time AS show_time,
+    showtimes.id AS id
 FROM showtimes
 JOIN movies ON showtimes.movie_id = movies.id
 JOIN rooms ON showtimes.room_id = rooms.id
@@ -53,7 +57,7 @@ $results = mysqli_query($conn, $sql);
 if ($results && mysqli_num_rows($results) > 0) {
     echo '<main class="main-content">';
     echo '<div class="buttons">';
-    echo '<button><i class="fa-solid fa-plus"></i><span> Thêm </span></button>';
+    echo '<button id="btn4"><i class="fa-solid fa-plus"></i><span> Thêm </span></button>';
     echo '</div>';
 
     echo '<table>';
@@ -82,8 +86,13 @@ if ($results && mysqli_num_rows($results) > 0) {
                 <td>" . htmlspecialchars($row['room_number']) . "</td>
                 <td>
                 <div class='action-buttons'>
-                    <button class='btn-edit'><i class='fa-solid fa-pencil-alt'></i> Sửa</button>
-                    <button class='btn-delete'><i class='fa-solid fa-trash'></i> Xóa</button>
+                    
+                    <button class='btn-edit' id='edit4' data-id='{$row['id']}'><i class='fa-solid fa-pencil-alt'></i> Sửa</button>
+                    
+                    <form method='post'>
+                        <input type='hidden' name='delete_suatchieu_id' value='{$row['id']}'>
+                        <button type='submit' class='btn-delete'><i class='fa-solid fa-trash'></i> Xóa</button>
+                    </form>
                 </div>
                 </td>    
               </tr>";
