@@ -88,9 +88,10 @@ body {
 
 .seat-special {
   border-style: dashed;
+  border-width: 3px;
   border-color: var(--highlight);
   width: 120px;
-  background: #fffbe6;
+  background: #f3e59d;
 }
 
 .seat-vip {
@@ -125,12 +126,41 @@ body {
   gap: 10px;
 }
 
+
 .legend .seat {
   width: 32px;
   height: 24px;
   margin: 0 8px 0 0;
   font-size: 13px;
   box-shadow: none;
+  background-color: #eee;
+  color: #222;
+  border: 2px solid transparent;
+}
+
+.legend .seat-booked {
+  background-color: #d9534f !important;
+  color: white !important;
+  border-color: #b52b27;
+  opacity: 0.7;
+}
+.legend .seat-selected {
+  background-color: #5bc0de !important;
+  color: white !important;
+  border-color: #39f;
+}
+.legend .seat-special {
+  background: #f3e59d;
+  border-style: dashed;
+  border-width: 3px;
+  border-color: var(--highlight);
+}
+.legend .seat-vip {
+  border: 2px solid var(--highlight);
+  background: #fff8e1;
+}
+.legend .seat-normal {
+  border: 2px solid #bbb;
 }
 
 .continue-btn {
@@ -211,4 +241,10 @@ body {
   color: #39f;
   margin-left: 5px;
   cursor: pointer;
+}
+.legend .seat.seat-special {
+  background: #f3e59d;
+  border-style: dashed;
+  border-width: 3px;
+  border-color: var(--highlight);
 }

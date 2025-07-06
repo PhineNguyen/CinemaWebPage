@@ -73,7 +73,9 @@ handleDelete('movies', 'id', 'delete_movies_id', 'quanlyphim.php', $conn);
                 <td>" . $movieDetails['status'] . "</td>
                 <td>
                 <div class='action-buttons'>
+                   
                     <button class='btn-edit' id='edit2' data-id='{$movieDetails['id']}'><i class='fa-solid fa-wrench'></i> Sửa</button>
+                    
                     <form method='post'>
                         <input type='hidden' name='delete_movies_id' value='{$movieDetails['id']}'>
                         <button type='submit' class='btn-delete'><i class='fa-solid fa-trash'></i> Xóa</button>

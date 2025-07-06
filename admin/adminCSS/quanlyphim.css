@@ -39,8 +39,16 @@
   gap: 10px;
 }
 
-.btn-update{
-  width:100px;
+/* Đảm bảo form không phá vỡ layout flex */
+.action-buttons form {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+/* Nút Sửa */
+.btn-edit {
+  width: 100px;
   height: 40px;
   background-color: var(--highlight);
   color: var(--bg-dark);
@@ -51,13 +59,15 @@
   cursor: pointer;
   transition: background 0.2s;
 }
-.btn-update:hover {
-  background-color: #e0a800;
+
+.btn-edit:hover {
+  background-color: var(--highlight);
+  opacity: 0.9;
 }
 
-
+/* Nút Xóa */
 .btn-delete {
-  width:100px;
+  width: 100px;
   height: 40px;
   background-color: var(--highlight);
   color: var(--bg-dark);
@@ -68,9 +78,12 @@
   cursor: pointer;
   transition: background 0.2s;
 }
+
 .btn-delete:hover {
-  background-color: #e0a800;
+  background-color: var(--highlight);
+  opacity: 0.9;
 }
+
 .main-content table {
   width: 100%;
   border-collapse: collapse;
