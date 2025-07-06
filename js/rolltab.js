@@ -1,6 +1,6 @@
 $(document).ready(function () {
   const $navTabs = $('.nav-item a');
-  const $tabHome = $('.nav-item a[href=""]');
+  const $tabHome = $('#tab-home');
   const $tabRap = $('#rap-cinetix-tab');
   const $tabGiaVe = $('#gia-ve-tab');
   const $tabLienhe = $('#lien-he-tab');
@@ -20,6 +20,21 @@ $(document).ready(function () {
     $giaVeContent.hide();
     $lienHeContent.hide();
     $mainContent.show();
+  });
+  // LIÊN HỆ
+  $tabLienhe.on('click', function (e) {
+    e.preventDefault();
+    $navTabs.removeClass('active');
+    $(this).addClass('active');
+
+    $mainContent.hide();
+    $rapContent.hide();
+    $giaVeContent.hide();
+
+    $lienHeContent.html('<div class="loading">Đang tải...</div>').show();
+    $.get('lienhe.php', function (html) {
+      $lienHeContent.html(html);
+    });
   });
 
   // RẠP CINETIX
