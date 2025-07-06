@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $genre = trim($_POST['genre']);
     $language = trim($_POST['language']);
     $age_limit = trim($_POST['age_limit']);
-    $status = 'Đang chiếu'; // Mặc định là đang chiếu
+    $status = $_POST['status']; // Lấy trạng thái từ select
 
     $stmt = $conn->prepare("INSERT INTO movies (title, image_url, release_date, genre, lgs, age_rating, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("sssssss", $film_name, $poster, $release_year, $genre, $language, $age_limit, $status);
@@ -56,9 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="age_limit">Giới hạn độ tuổi:</label>
         <input type="text" name="age_limit" id="age_limit" required>
 
-         <label for="status">Trạng thái:</label>
-        <select name="account_status" id="status" disabled>
-            <option value="active" selected >Đang chiếu</option>
+        <label for="status">Trạng thái:</label>
+        <select name="status" id="status" required>
+            <option value="Đang chiếu" selected>Đang chiếu</option>
+            <option value="Sắp chiếu">Sắp chiếu</option>
         </select>
 
         <button type="submit"><i class="fa fa-save"></i> Lưu </button>

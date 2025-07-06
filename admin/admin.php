@@ -35,7 +35,7 @@ include('header_admin.php');
                   FROM bookings b
                   JOIN booking_details bd ON b.id = bd.booking_id
                   JOIN showtimes s ON b.showtime_id = s.id
-                  WHERE b.status = 'paid'
+                  WHERE b.status = 'Đã thanh toán'
                     AND MONTH(s.show_date) = $month
                     AND YEAR(s.show_date) = $year";
   $result_tickets = mysqli_query($conn, $sql_tickets);
@@ -45,7 +45,7 @@ include('header_admin.php');
   // Doanh thu trong ngày
   $sql_daily = "SELECT SUM(total_amount) AS daily_revenue
                 FROM bookings
-                WHERE status = 'paid'
+                WHERE status = 'Đã thanh toán'
                   AND DATE(booking_time) = CURDATE()";
   $result_daily = mysqli_query($conn, $sql_daily);
   $row_daily = mysqli_fetch_assoc($result_daily);
@@ -54,7 +54,7 @@ include('header_admin.php');
   // Doanh thu trong tháng
   $sql_monthly = "SELECT SUM(total_amount) AS monthly_revenue
                   FROM bookings
-                  WHERE status = 'paid'
+                  WHERE status = 'Đã thanh toán'
                     AND booking_time BETWEEN DATE_FORMAT(NOW(), '%Y-%m-01') AND LAST_DAY(NOW())";
   $result_monthly = mysqli_query($conn, $sql_monthly);
   $row_monthly = mysqli_fetch_assoc($result_monthly);
@@ -75,7 +75,7 @@ include('header_admin.php');
       </div>
 
       <div class="card">
-        <div>Doanh thu trong ngày (<?php echo date('d/m/Y'); ?>)</div>
+        <div>Doanh thu trong ngày (<?php echo date('m/d/Y'); ?>)</div>
         <h2><?php echo number_format($dailyRevenue, 0, ',', '.'); ?> VNĐ</h2>
       </div>
 
@@ -114,28 +114,21 @@ include('header_admin.php');
         </thead>
         <tbody>
           <?php
-          $sql = "
+         $sql = "
             SELECT 
               m.title,
-              COUNT(DISTINCT bd.id) AS tickets_sold,
-              IFNULL(SUM(
-                CASE 
-                  WHEN st.price_seat_type IS NOT NULL THEN st.price_seat_type
-                  ELSE 0
-                END
-              ), 0) + IFNULL(SUM(fo.quantity * f.price), 0) AS total_revenue
-            FROM showtimes s
+              COUNT(t.ticket_id) AS tickets_sold,
+              SUM(t.total_price) AS total_revenue
+            FROM tickets t
+            JOIN showtimes s ON t.showtime_id = s.id
             JOIN movies m ON s.movie_id = m.id
-            LEFT JOIN bookings b ON b.showtime_id = s.id AND b.status = 'paid'
-            LEFT JOIN booking_details bd ON bd.booking_id = b.id
-            LEFT JOIN seats st ON bd.seat_id = st.id
-            LEFT JOIN food_orders fo ON fo.booking_id = b.id
-            LEFT JOIN foods f ON fo.food_id = f.id
-            WHERE s.show_date = '$selectedDate'
+            WHERE DATE(s.show_date) = '$selectedDate'
             GROUP BY m.id, m.title
+            HAVING tickets_sold > 0
             ORDER BY m.title ASC
           ";
-          $result = mysqli_query($conn, $sql);
+
+         $result = mysqli_query($conn, $sql);
 
           if ($result && mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
@@ -146,8 +139,9 @@ include('header_admin.php');
               echo "</tr>";
             }
           } else {
-            echo "<tr><td colspan='3'>Không có dữ liệu cho ngày này.</td></tr>";
+            echo "<tr><td colspan='3'>Không có phim nào được bán vé trong ngày này.</td></tr>";
           }
+
           ?>
         </tbody>
       </table>

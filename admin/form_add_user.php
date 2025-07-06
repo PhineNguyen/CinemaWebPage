@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="text" name="phone_number" id="phone" required>
 
         <label for="role">Vai trò:</label>
-        <select id="role" disabled>
+        <select id="role" required>
             <option selected>Người dùng</option>
         </select>
 
