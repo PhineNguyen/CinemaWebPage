@@ -81,7 +81,7 @@ $ticket_price = $info['ticket_price'];
 <body>
   <!-- Menu điều hướng dạng tab -->
   <nav class="nav-item">
-    <a href="#" id="tab-home" class="active">PHIM</a>
+    <a href="#" id="tab-home" class="active">CHỌN GHẾ</a>
     <a href="#" id="rap-cinetix-tab">RẠP CINETIX</a>
     <a href="#" id="gia-ve-tab">GIÁ VÉ</a>
     <a href="#" id="lien-he-tab">LIÊN HỆ</a>

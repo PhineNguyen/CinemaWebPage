@@ -17,7 +17,7 @@ $total_price = $_POST['total_price'] ?? 0;
 <body>
     <!-- Menu điều hướng dạng tab -->
     <nav class="nav-item">
-      <a href="#" id="tab-home" class="active">PHIM</a>
+      <a href="#" id="tab-home" class="active">BẮP NƯỚC</a>
       <a href="#" id="rap-cinetix-tab">RẠP CINETIX</a>
       <a href="#" id="gia-ve-tab">GIÁ VÉ</a>
       <a href="#" id="lien-he-tab">LIÊN HỆ</a>
