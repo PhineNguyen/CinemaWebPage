@@ -96,6 +96,14 @@ body{
   font-weight: bold;
 }
 
+.sidebar a.active {
+  background: var(--highlight);
+  color: #222 !important;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #0002;
+}
+
 /* Nội dung chính */
 .main-content {
   grid-area: main;
