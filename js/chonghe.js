@@ -39,31 +39,60 @@ $(document).ready(function () {
       return;
     }
 
-    const total = calculateTotal(); // ✅ Lấy tổng tiền từ hàm
-
-    const form = $('<form>', {
-      method: 'POST',
-      action: 'chonbapnuoc.php'
+    // ✅ Chuẩn bị dữ liệu đặt ghế
+    const seatDataForAjax = selectedSeats.map(codeObj => {
+      const code = codeObj.code;
+      return {
+        row: code.match(/[A-Z]/i)[0],
+        number: parseInt(code.match(/\d+/)[0])
+      };
     });
 
-    $('<input>').attr({
-      type: 'hidden',
-      name: 'seats',
-      value: selectedSeats.map(s => s.code).join(',')
-    }).appendTo(form);
+    const formData = new FormData();
+    formData.append('action', 'book_seats');
+    formData.append('showtime_id', SHOWTIME_ID);
+    formData.append('seats', JSON.stringify(seatDataForAjax));
 
-    $('<input>').attr({
-      type: 'hidden',
-      name: 'showtime_id',
-      value: SHOWTIME_ID
-    }).appendTo(form);
+    // ✅ Gửi yêu cầu đặt ghế
+    fetch(window.location.href, {
+      method: 'POST',
+      body: formData
+    })
+    .then(res => res.text())
+    .then(msg => {
+      console.log(msg); // Thông báo đặt ghế thành công
 
-    $('<input>').attr({
-      type: 'hidden',
-      name: 'total_price', // nên dùng tên rõ ràng
-      value: total
-    }).appendTo(form);
+      // ✅ Sau khi đặt ghế thành công → Gửi form sang chonbapnuoc.php
+      const total = calculateTotal();
 
-    form.appendTo('body').submit();
+      const form = $('<form>', {
+        method: 'POST',
+        action: 'chonbapnuoc.php'
+      });
+
+      $('<input>').attr({
+        type: 'hidden',
+        name: 'seats',
+        value: selectedSeats.map(s => s.code).join(',')
+      }).appendTo(form);
+
+      $('<input>').attr({
+        type: 'hidden',
+        name: 'showtime_id',
+        value: SHOWTIME_ID
+      }).appendTo(form);
+
+      $('<input>').attr({
+        type: 'hidden',
+        name: 'total_price',
+        value: total
+      }).appendTo(form);
+
+      form.appendTo('body').submit();
+    })
+    .catch(err => {
+      alert('Lỗi đặt ghế!');
+      console.error(err);
+    });
   });
 });

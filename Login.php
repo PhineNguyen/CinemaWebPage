@@ -1,42 +1,45 @@
 <?php
-// Bắt đầu phiên làm việc và kết nối CSDL
 session_start();
 include("connect.php");
 include("header.php");
 
-// Khởi tạo biến lỗi rỗng
 $error = "";
-// Xử lý khi form được gửi đi
+
+// Xử lý form đăng nhập
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
     $password = trim($_POST["password"]);
 
-    // Truy vấn người dùng theo email
-    $sql = "SELECT * FROM users WHERE email = ? and RO_LO ='user'";
+    // Lấy người dùng có email này và vai trò là "user"
+    $sql = "SELECT * FROM users WHERE email = ? AND RO_LO = 'user'";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Kiểm tra kết quả
+    // Kiểm tra thông tin người dùng
     if ($result && $result->num_rows == 1) {
         $user = $result->fetch_assoc();
 
-        // Kiểm tra mật khẩu (có thể dùng password_verify nếu có hash)
+        // So sánh mật khẩu (ở đây chưa dùng hash, nên so sánh chuỗi thường)
         if ($password === $user['pass_word']) {
             $_SESSION["user"] = $user;
-            header("Location: Home.php");
+
+            // Chuyển hướng nếu có redirect
+            if (isset($_GET['redirect'])) {
+                header("Location: " . $_GET['redirect']);
+            } else {
+                header("Location: Home.php");
+            }
             exit();
         } else {
-            $error = "Mật khẩu không đúng.";
+            $error = "❌ Mật khẩu không đúng.";
         }
     } else {
-        $error = "Tài khoản không tồn tại.";
+        $error = "❌ Tài khoản không tồn tại hoặc không đúng quyền.";
     }
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -44,7 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="CSS/LoRe.css"> <!-- File CSS riêng -->
   <title>Đăng nhập</title>
-  
 </head>
 <body>
   <div class="login-container">
@@ -54,19 +56,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <p class="error"><?php echo $error; ?></p>
     <?php endif; ?>
 
-    <form method="post" action="login.php" autocomplete="off">
+    <form method="post" action="login.php<?php echo isset($_GET['redirect']) ? '?redirect=' . urlencode($_GET['redirect']) : ''; ?>" autocomplete="off">
       <label for="email">Email</label>
-      <input type="email" id="email" name="email"  required>
+      <input type="email" id="email" name="email" required>
+      
       <label for="password">Mật khẩu</label>
       <input type="password" id="password" name="password" required>
+      
       <button type="submit">Đăng nhập</button>
     </form>
 
-    <p class="register-link">Chưa có tài khoản? <a href="register.php" style="color:white">Đăng ký</a></p>
+    <p class="register-link">Chưa có tài khoản? 
+      <a href="register.php<?php echo isset($_GET['redirect']) ? '?redirect=' . urlencode($_GET['redirect']) : ''; ?>" style="color:white">Đăng ký</a>
+    </p>
   </div>
-       <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-       <script src="./js/login_admin.js"></script> 
 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="./js/login_admin.js"></script>
 </body>
 </html>
-  <?php include("footer.php"); ?>
+<?php include("footer.php"); ?>

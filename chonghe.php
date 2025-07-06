@@ -2,6 +2,38 @@
 include("connect.php");
 include("header.php");
 
+// 👉 Xử lý đặt ghế khi gửi POST từ JavaScript
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'book_seats') {
+    $seats_raw = $_POST['seats'] ?? '[]';
+    $seats = json_decode($seats_raw, true);
+    $showtime_id = $_POST['showtime_id'] ?? '';
+
+    if (empty($seats) || !$showtime_id) {
+        http_response_code(400);
+        echo "Dữ liệu không hợp lệ.";
+        exit;
+    }
+
+    $stmt = mysqli_prepare($conn, "
+        UPDATE seats 
+        SET seat_status = 'Ghế đã đặt'
+        WHERE seat_row = ? AND seat_number = ? AND room_id = (
+            SELECT room_id FROM showtimes WHERE id = ?
+        )
+    ");
+
+    foreach ($seats as $seat) {
+        $row = $seat['row'];
+        $number = $seat['number'];
+        mysqli_stmt_bind_param($stmt, "sis", $row, $number, $showtime_id);
+        mysqli_stmt_execute($stmt);
+    }
+
+    echo "Đặt ghế thành công!";
+    exit;
+}
+
+// 👉 Phần giao diện chọn ghế
 $showtime_id = $_GET['showtime_id'] ?? '';
 if (!$showtime_id) {
     echo "<p style='color: white;'>Thiếu thông tin suất chiếu.</p>";
@@ -46,7 +78,6 @@ mysqli_stmt_execute($stmt_info);
 $info_result = mysqli_stmt_get_result($stmt_info);
 $info = mysqli_fetch_assoc($info_result);
 $ticket_price = $info['ticket_price'];
-
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -66,7 +97,6 @@ $ticket_price = $info['ticket_price'];
 <div class="seat-container">
 <?php
 echo '<div class="screen">Màn hình</div><div class="seating-container">';
-echo "<!-- room_id: $room_id -->";
 $stmt_seats = mysqli_prepare($conn, "
     SELECT seat_row, seat_number, seat_type, seat_status, price_seat_type
     FROM seats 
@@ -90,20 +120,15 @@ while ($seat = mysqli_fetch_assoc($seats_result)) {
     $seat_price_type = (int)$seat['price_seat_type'];
 
     switch ($seat_type) {
-        case 'Ghế đôi':
-            $type_class = 'special';
-            break;
-        case 'Ghế VIP':
-            $type_class = 'vip';
-            break;
-        default:
-            $type_class = 'normal';
+        case 'Ghế đôi': $type_class = 'special'; break;
+        case 'Ghế VIP': $type_class = 'vip'; break;
+        default: $type_class = 'normal';
     }
 
     $status_class = ($seat_status === 'Ghế đã đặt') ? 'booked' : 'available';
 
     if ($seat_row !== $current_row) {
-        if ($current_row !== '') echo '</div>'; // đóng hàng cũ
+        if ($current_row !== '') echo '</div>';
         echo '<div class="seat-row">';
         $current_row = $seat_row;
     }
@@ -120,13 +145,8 @@ while ($seat = mysqli_fetch_assoc($seats_result)) {
         data-price='$seat_price_type'
         title='Phụ phí: " . number_format($seat_price_type, 0, ',', '.') . " đ'>$seat_code</button>";
 }
-
-// ✅ Đóng hàng cuối cùng
 if ($current_row !== '') echo '</div>';
-
-// ✅ Đóng sơ đồ tổng thể
 echo '</div>';
-
 ?>
 </div>
 

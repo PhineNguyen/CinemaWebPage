@@ -7,6 +7,7 @@ include('connect.php');
 $seats = $_POST['seats'] ?? '';
 $showtime_id = $_POST['showtime_id'] ?? '';
 $total_price = $_POST['total_price'] ?? 0;
+$total_price = (int)$total_price;
 $foods = $_SESSION['foods'] ?? [];
 
 // Chuẩn hóa mảng combo
@@ -40,7 +41,7 @@ if ($showtime_id) {
 }
 
 // Tính mã vé và số vé
-$ma_ve = strtoupper(uniqid('V'));
+$ma_ve = 'V' . strtoupper(bin2hex(random_bytes(4)));
 
 // Chuẩn hóa số ghế
 if (is_string($seats)) {
@@ -54,7 +55,57 @@ $so_ve = count($seats);
 // Sinh QR code
 $qr_data = urlencode("Mã vé: $ma_ve\nPhim: " . $showtimeInfo['ten_phim'] . "\nGhế: $so_ghe\nThời gian: " . $showtimeInfo['show_time']);
 $qr_url = "https://api.qrserver.com/v1/create-qr-code/?data=$qr_data&size=150x150";
+
+// Ghi thông tin vé vào CSDL
+$checkSql = "SELECT id FROM showtimes WHERE id = ?";
+$checkStmt = $conn->prepare($checkSql);
+$checkStmt->bind_param("s", $showtime_id);
+$checkStmt->execute();
+$checkResult = $checkStmt->get_result();
+
+if ($checkResult && $checkResult->num_rows > 0) {
+    // Ghi thông tin vé vào bảng tickets
+    $sqlInsert = "INSERT INTO tickets (ticket_code, showtime_id, seats, quantity, total_price, issue_time) 
+                  VALUES (?, ?, ?, ?, ?, NOW())";
+    $stmtInsert = $conn->prepare($sqlInsert);
+
+    if ($stmtInsert) {
+        $stmtInsert->bind_param("sssii", $ma_ve, $showtime_id, $so_ghe, $so_ve, $total_price);
+        if (!$stmtInsert->execute()) {
+            echo "❌ Lỗi khi ghi vé vào CSDL: " . $stmtInsert->error;
+        }
+        $stmtInsert->close();
+    } else {
+        echo "❌ Lỗi prepare INSERT tickets: " . $conn->error;
+    }
+} else {
+    echo "❌ Không tìm thấy suất chiếu với ID: $showtime_id";
+}
+$checkStmt->close();
+
+// Ghi combo đồ ăn vào bảng food_order
+if (!empty($foods)) {
+    foreach ($foods as $food) {
+        $food_id = $food['id'] ?? null;
+        $quantity = $food['quantity'] ?? 0;
+
+        if ($food_id && $quantity > 0) {
+            $sqlFood = "INSERT INTO food_order (booking_id, food_id, quantity) VALUES (?, ?, ?)";
+            $stmtFood = $conn->prepare($sqlFood);
+            if ($stmtFood) {
+                $stmtFood->bind_param("sii", $ma_ve, $food_id, $quantity);
+                if (!$stmtFood->execute()) {
+                    echo "❌ Lỗi khi ghi combo vào food_order: " . $stmtFood->error;
+                }
+                $stmtFood->close();
+            } else {
+                echo "❌ Lỗi prepare INSERT food_order: " . $conn->error;
+            }
+        }
+    }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="vi">
