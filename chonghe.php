@@ -134,6 +134,7 @@ if ($current_row !== '') echo '</div>';
 <div class="legend">
   <div class="legend-item"><div class="seat seat-booked"></div> Ghế đã đặt</div>
   <div class="legend-item"><div class="seat seat-available-pic seat-normal"></div> Ghế thường</div>
+  <div class="legend-item"><div class="seat seat-available-pic seat-vip"></div> Ghế VIP</div>
   <div class="legend-item"><div class="seat seat-selected"></div> Ghế bạn chọn</div>
   <div class="legend-item"><div class="seat seat-available-pic seat-special"></div> Ghế đôi</div>
 </div>
