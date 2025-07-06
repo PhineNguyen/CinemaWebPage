@@ -16,11 +16,6 @@
       <a href="quanlysuatchieu.php"><i class="fa-solid fa-clock"></i><span>Quản lý suất chiếu</span></a>
       <a href="quanlyrapPC.php"><i class="fa-solid fa-building"></i><span>Quản lý rạp & Phòng chiếu</span></a>
     <?php endif; ?>
-    <?php if ($role === 'employee'): ?>
-      <a href="xemSuatChieu.php"><i class="fa-solid fa-film"></i><span>Xem suất chiếu</span></a>
-      <a href="datVe.php"><i class="fa-solid fa-clock"></i><span>Đặt vé</span></a>
-      <a href="hoTroKhachHang.php"><i class="fa-solid fa-film"></i><span>Hỗ trợ khách hàng</span></a>
-    <?php endif; ?>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
