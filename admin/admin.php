@@ -75,7 +75,7 @@ include('header_admin.php');
       </div>
 
       <div class="card">
-        <div>Doanh thu trong ngày (<?php echo date('d/m/Y'); ?>)</div>
+        <div>Doanh thu trong ngày (<?php echo date('m/d/Y'); ?>)</div>
         <h2><?php echo number_format($dailyRevenue, 0, ',', '.'); ?> VNĐ</h2>
       </div>
 
