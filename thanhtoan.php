@@ -1,7 +1,8 @@
 <?php
+session_start();
 include('header.php');
 include('connect.php');
-session_start();
+
 // Kiểm tra nếu đã thanh toán thành công, chuyển hướng về trang chủ
 if (isset($_SESSION['paid_success']) && $_SESSION['paid_success'] === true) {
     unset($_SESSION['paid_success']); // Hủy session 
