@@ -66,14 +66,16 @@ if ($showtime_id) {
 </head>
 
 <body>
+  <!-- Menu điều hướng dạng tab -->
   <nav class="nav-item">
-    <a href="home.php">PHIM</a>
-    <a href="rapCinetix.php">RẠP CINETIX</a>
-    <a href="giave.php">GIÁ VÉ</a>
-    <a href="lienhe.php">LIÊN HỆ</a>
+    <a href="#" id="tab-home" class="active">PHIM</a>
+    <a href="#" id="rap-cinetix-tab">RẠP CINETIX</a>
+    <a href="#" id="gia-ve-tab">GIÁ VÉ</a>
+    <a href="#" id="lien-he-tab">LIÊN HỆ</a>
   </nav>
-  
-  <div class="payment-container">
+
+  <div id="main-content">
+    <div class="payment-container">
     <h2>Thanh toán</h2>
 
     <!-- Thông tin đặt vé -->
@@ -161,7 +163,13 @@ if ($showtime_id) {
         <button class="confirm-btn" id="confirmBtn"  disabled>Xác nhận</button>
       </div>
     </div>
+    </div>
   </div>
+
+  <!-- Các vùng nội dung động giống Home -->
+  <div id="rap-cinetix-content" style="display:none;"></div>
+  <div id="gia-ve-content" style="display:none;"></div>
+  <div id="lien-he-content" style="display:none;"></div>
 </body>
 <script>
   const TOTAL = "<?= htmlspecialchars($total_price) ?>";
@@ -170,5 +178,7 @@ if ($showtime_id) {
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/thanhtoan.js"></script>
+<script src="js/Home.js"></script>
+<script src="js/rolltab.js"></script>
 </html>
 <?php include('footer.php') ?>

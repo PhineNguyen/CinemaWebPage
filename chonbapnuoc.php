@@ -15,14 +15,16 @@ $total_price = $_POST['total_price'] ?? 0;
   <link rel="stylesheet" href="CSS/chonbapnuoc.css">
 </head>
 <body>
+    <!-- Menu điều hướng dạng tab -->
     <nav class="nav-item">
-    <a href="home.php">PHIM</a>
-    <a href="rapCinetix.php">RẠP CINETIX</a>
-    <a href="giave.php">GIÁ VÉ</a>
-    <a href="lienhe.php">LIÊN HỆ</a>
-  </nav>
+      <a href="#" id="tab-home" class="active">PHIM</a>
+      <a href="#" id="rap-cinetix-tab">RẠP CINETIX</a>
+      <a href="#" id="gia-ve-tab">GIÁ VÉ</a>
+      <a href="#" id="lien-he-tab">LIÊN HỆ</a>
+    </nav>
 
-  <div class="main-contain">
+    <div id="main-content">
+      <div class="main-contain">
     <div class="header">Combo - Bắp nước</div>
 
     <?php
@@ -144,14 +146,24 @@ $total_price = $_POST['total_price'] ?? 0;
       <button class="continue-btn"id="continue">Tiếp tục</button>
   
     </div>
-  </div>
+      </div>
+    </div>
+
+    <!-- Các vùng nội dung động giống Home -->
+    <div id="rap-cinetix-content" style="display:none;"></div>
+    <div id="gia-ve-content" style="display:none;"></div>
+    <div id="lien-he-content" style="display:none;"></div>
+
+    <!-- JS -->
     <script>
-    const TOTAL = "<?= htmlspecialchars($total_price) ?>";
-    const SEATS = "<?= htmlspecialchars($seats) ?>";
-    const SHOWTIME_ID = "<?= htmlspecialchars($showtime_id) ?>";
-</script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="js/chonbapnuoc.js"></script>
+      const TOTAL = "<?= htmlspecialchars($total_price) ?>";
+      const SEATS = "<?= htmlspecialchars($seats) ?>";
+      const SHOWTIME_ID = "<?= htmlspecialchars($showtime_id) ?>";
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/chonbapnuoc.js"></script>
+    <script src="js/Home.js"></script>
+    <script src="js/rolltab.js"></script>
 </body>
 </html>
 <?php include('footer.php'); ?>

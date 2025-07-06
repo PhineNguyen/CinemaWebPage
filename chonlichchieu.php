@@ -36,132 +36,146 @@ $movie_id = $_GET['id'] ?? ''; // ID phim truyền từ chi tiết phim
   <link rel="stylesheet" href="CSS/chonlichchieu.css?v=2.1">
 </head>
 <body>
-<nav class="nav-item">
-  <a href="home.php">PHIM</a>
-  <a href="rapCinetix.php">RẠP CINETIX</a>
-  <a href="giave.php">GIÁ VÉ</a>
-  <a href="lienhe.php">LIÊN HỆ</a>
-</nav>
 
-<div class="content">
-  <p class="lich">Lịch chiếu</p>
+  <!-- Menu điều hướng dạng tab -->
+  <nav class="nav-item">
+    <a href="#" id="tab-home" class="active">PHIM</a>
+    <a href="#" id="rap-cinetix-tab">RẠP CINETIX</a>
+    <a href="#" id="gia-ve-tab">GIÁ VÉ</a>
+    <a href="#" id="lien-he-tab">LIÊN HỆ</a>
+  </nav>
 
-  <!-- Tabs ngày -->
-  <div class="date-tabs">
-    <?php foreach ($dates as $d): ?>
-      <a href="?date=<?= $d['date'] ?><?= $movie_id ? '&id=' . $movie_id : '' ?>" class="date-tab <?= $d['date'] === $current_date ? 'active' : '' ?>">
-        <?= $d['label'] ?><br><?= $d['short'] ?>
-      </a>
-    <?php endforeach; ?>
-  </div>
+  <div id="main-content">
+    <div class="content">
+      <p class="lich">Lịch chiếu</p>
 
-  <!-- Bộ lọc -->
-  <div class="filters">
-    <form method="GET">
-      <input type="hidden" name="date" value="<?= htmlspecialchars($current_date) ?>">
-      <?php if ($movie_id): ?>
-        <input type="hidden" name="id" value="<?= htmlspecialchars($movie_id) ?>">
-      <?php endif; ?>
+      <!-- Tabs ngày -->
+      <div class="date-tabs">
+        <?php foreach ($dates as $d): ?>
+          <a href="?date=<?= $d['date'] ?><?= $movie_id ? '&id=' . $movie_id : '' ?>" class="date-tab <?= $d['date'] === $current_date ? 'active' : '' ?>">
+            <?= $d['label'] ?><br><?= $d['short'] ?>
+          </a>
+        <?php endforeach; ?>
+      </div>
 
-      <select name="city" class="filter-select">
-        <option value="">Toàn quốc</option>
-        <?php
-        $city_rs = mysqli_query($conn, "SELECT DISTINCT city FROM cinemas ORDER BY city");
-        while ($row = mysqli_fetch_assoc($city_rs)) {
-            $selected = ($city === $row['city']) ? 'selected' : '';
-            echo "<option value='{$row['city']}' $selected>{$row['city']}</option>";
-        }
-        ?>
-      </select>
+      <!-- Bộ lọc -->
+      <div class="filters">
+        <form method="GET">
+          <input type="hidden" name="date" value="<?= htmlspecialchars($current_date) ?>">
+          <?php if ($movie_id): ?>
+            <input type="hidden" name="id" value="<?= htmlspecialchars($movie_id) ?>">
+          <?php endif; ?>
 
-      <select name="cinema" class="filter-select">
-        <option value="">Tất cả rạp</option>
-        <?php
-        $cinema_rs = mysqli_query($conn, "SELECT id, ci_name FROM cinemas ORDER BY ci_name");
-        while ($row = mysqli_fetch_assoc($cinema_rs)) {
-            $selected = ($cinema_id === $row['id']) ? 'selected' : '';
-            echo "<option value='{$row['id']}' $selected>{$row['ci_name']}</option>";
-        }
-        ?>
-      </select>
+          <select name="city" class="filter-select">
+            <option value="">Toàn quốc</option>
+            <?php
+            $city_rs = mysqli_query($conn, "SELECT DISTINCT city FROM cinemas ORDER BY city");
+            while ($row = mysqli_fetch_assoc($city_rs)) {
+                $selected = ($city === $row['city']) ? 'selected' : '';
+                echo "<option value='{$row['city']}' $selected>{$row['city']}</option>";
+            }
+            ?>
+          </select>
 
-      <button type="submit" class="filter-select">Lọc</button>
-    </form>
-  </div>
+          <select name="cinema" class="filter-select">
+            <option value="">Tất cả rạp</option>
+            <?php
+            $cinema_rs = mysqli_query($conn, "SELECT id, ci_name FROM cinemas ORDER BY ci_name");
+            while ($row = mysqli_fetch_assoc($cinema_rs)) {
+                $selected = ($cinema_id === $row['id']) ? 'selected' : '';
+                echo "<option value='{$row['id']}' $selected>{$row['ci_name']}</option>";
+            }
+            ?>
+          </select>
 
-  <?php
-  // Truy vấn lịch chiếu
-  $sql = "
-    SELECT 
-      s.id AS showtime_id,
-      c.ci_name AS cinema_name,
-      s.show_time
-    FROM showtimes s
-    JOIN rooms r ON s.room_id = r.id
-    JOIN cinemas c ON r.cinema_id = c.id
-    JOIN movies m ON s.movie_id = m.id
-    WHERE s.show_date = ?
-  ";
+          <button type="submit" class="filter-select">Lọc</button>
+        </form>
+      </div>
 
-  $params = [$current_date];
-  $types = "s";
+      <?php
+      // Truy vấn lịch chiếu
+      $sql = "
+        SELECT 
+          s.id AS showtime_id,
+          c.ci_name AS cinema_name,
+          s.show_time
+        FROM showtimes s
+        JOIN rooms r ON s.room_id = r.id
+        JOIN cinemas c ON r.cinema_id = c.id
+        JOIN movies m ON s.movie_id = m.id
+        WHERE s.show_date = ?
+      ";
 
-  if (!empty($city)) {
-      $sql .= " AND c.city = ?";
-      $params[] = $city;
-      $types .= "s";
-  }
+      $params = [$current_date];
+      $types = "s";
 
-  if (!empty($cinema_id)) {
-      $sql .= " AND c.id = ?";
-      $params[] = $cinema_id;
-      $types .= "s";
-  }
-
-  if (!empty($movie_id)) {
-      $sql .= " AND m.id = ?";
-      $params[] = $movie_id;
-      $types .= "s";
-  }
-
-  $sql .= " ORDER BY c.ci_name, s.show_time";
-
-  $stmt = $conn->prepare($sql);
-  if ($stmt) {
-      $stmt->bind_param($types, ...$params);
-      $stmt->execute();
-      $result = $stmt->get_result();
-  } else {
-      echo "<p>Lỗi truy vấn lịch chiếu.</p>";
-      include('footer.php');
-      exit;
-  }
-
-  if ($result->num_rows === 0) {
-      echo "<p class='no-showtimes'>Không có lịch chiếu cho ngày này.</p>";
-  } else {
-      $cinemas = [];
-      while ($row = mysqli_fetch_assoc($result)) {
-          $cinema = $row['cinema_name'];
-          $cinemas[$cinema][] = [
-              'time' => substr($row['show_time'], 0, 5),
-              'showtime_id' => $row['showtime_id']
-          ];
+      if (!empty($city)) {
+          $sql .= " AND c.city = ?";
+          $params[] = $city;
+          $types .= "s";
       }
 
-      foreach ($cinemas as $cinema_name => $times) {
-          echo "<div class='cinema'>";
-          echo "<h3>" . htmlspecialchars($cinema_name) . "</h3>";
-          echo "<div class='times'>";
-          foreach ($times as $t) {
-              echo "<a href='chonghe.php?showtime_id=" . $t['showtime_id'] . "' class='time-btn'>" . htmlspecialchars($t['time']) . "</a>";
+      if (!empty($cinema_id)) {
+          $sql .= " AND c.id = ?";
+          $params[] = $cinema_id;
+          $types .= "s";
+      }
+
+      if (!empty($movie_id)) {
+          $sql .= " AND m.id = ?";
+          $params[] = $movie_id;
+          $types .= "s";
+      }
+
+      $sql .= " ORDER BY c.ci_name, s.show_time";
+
+      $stmt = $conn->prepare($sql);
+      if ($stmt) {
+          $stmt->bind_param($types, ...$params);
+          $stmt->execute();
+          $result = $stmt->get_result();
+      } else {
+          echo "<p>Lỗi truy vấn lịch chiếu.</p>";
+          include('footer.php');
+          exit;
+      }
+
+      if ($result->num_rows === 0) {
+          echo "<p class='no-showtimes'>Không có lịch chiếu cho ngày này.</p>";
+      } else {
+          $cinemas = [];
+          while ($row = mysqli_fetch_assoc($result)) {
+              $cinema = $row['cinema_name'];
+              $cinemas[$cinema][] = [
+                  'time' => substr($row['show_time'], 0, 5),
+                  'showtime_id' => $row['showtime_id']
+              ];
           }
-          echo "</div>";
-          echo "</div>";
+
+          foreach ($cinemas as $cinema_name => $times) {
+              echo "<div class='cinema'>";
+              echo "<h3>" . htmlspecialchars($cinema_name) . "</h3>";
+              echo "<div class='times'>";
+              foreach ($times as $t) {
+                  echo "<a href='chonghe.php?showtime_id=" . $t['showtime_id'] . "' class='time-btn'>" . htmlspecialchars($t['time']) . "</a>";
+              }
+              echo "</div>";
+              echo "</div>";
+          }
       }
-  }
-  ?>
-</div>
+      ?>
+    </div>
+  </div>
+
+  <!-- Các vùng nội dung động giống Home -->
+  <div id="rap-cinetix-content" style="display:none;"></div>
+  <div id="gia-ve-content" style="display:none;"></div>
+  <div id="lien-he-content" style="display:none;"></div>
+
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/Home.js"></script>
+  <script src="js/rolltab.js"></script>
 
 </body>
 </html>

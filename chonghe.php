@@ -79,98 +79,110 @@ $ticket_price = $info['ticket_price'];
   <link rel="stylesheet" href="CSS/chonghe.css">
 </head>
 <body>
-<nav class="nav-item">
-  <a href="home.php">PHIM</a>
-  <a href="rapCinetix.php">RẠP CINETIX</a>
-  <a href="giave.php">GIÁ VÉ</a>
-  <a href="lienhe.php">LIÊN HỊ</a>
-</nav>
+  <!-- Menu điều hướng dạng tab -->
+  <nav class="nav-item">
+    <a href="#" id="tab-home" class="active">PHIM</a>
+    <a href="#" id="rap-cinetix-tab">RẠP CINETIX</a>
+    <a href="#" id="gia-ve-tab">GIÁ VÉ</a>
+    <a href="#" id="lien-he-tab">LIÊN HỆ</a>
+  </nav>
 
-<div class="seat-container">
-  <div class="screen">Màn hình</div>
-  <div class="seating-container">
-<?php
-$stmt_seats = $conn->prepare("SELECT seat_row, seat_number, seat_type, seat_status, price_seat_type FROM seats WHERE room_id = ? ORDER BY seat_row, seat_number");
-$stmt_seats->bind_param('i', $room_id);
-$stmt_seats->execute();
-$seats_result = $stmt_seats->get_result();
+  <div id="main-content">
+    <div class="seat-container">
+      <div class="screen">Màn hình</div>
+      <div class="seating-container">
+      <?php
+      $stmt_seats = $conn->prepare("SELECT seat_row, seat_number, seat_type, seat_status, price_seat_type FROM seats WHERE room_id = ? ORDER BY seat_row, seat_number");
+      $stmt_seats->bind_param('i', $room_id);
+      $stmt_seats->execute();
+      $seats_result = $stmt_seats->get_result();
 
-$current_row = '';
-while ($seat = $seats_result->fetch_assoc()) {
-    $seat_row = $seat['seat_row'];
-    $seat_number = (int)$seat['seat_number'];
-    $seat_type = $seat['seat_type'];
-    $seat_status = $seat['seat_status'];
-    $seat_price_type = (int)$seat['price_seat_type'];
+      $current_row = '';
+      while ($seat = $seats_result->fetch_assoc()) {
+          $seat_row = $seat['seat_row'];
+          $seat_number = (int)$seat['seat_number'];
+          $seat_type = $seat['seat_type'];
+          $seat_status = $seat['seat_status'];
+          $seat_price_type = (int)$seat['price_seat_type'];
 
-    $type_class = match($seat_type) {
-        'Ghế đôi' => 'special',
-        'Ghế VIP' => 'vip',
-        default => 'normal'
-    };
-    $status_class = ($seat_status === 'Ghế đã đặt') ? 'booked' : 'available';
+          $type_class = match($seat_type) {
+              'Ghế đôi' => 'special',
+              'Ghế VIP' => 'vip',
+              default => 'normal'
+          };
+          $status_class = ($seat_status === 'Ghế đã đặt') ? 'booked' : 'available';
 
-    if ($seat_row !== $current_row) {
-        if ($current_row !== '') echo '</div>';
-        echo '<div class="seat-row">';
-        $current_row = $seat_row;
-    }
+          if ($seat_row !== $current_row) {
+              if ($current_row !== '') echo '</div>';
+              echo '<div class="seat-row">';
+              $current_row = $seat_row;
+          }
 
-    $seat_code = htmlspecialchars($seat_row . $seat_number);
-    $seat_class = "seat seat-$status_class seat-$type_class";
-    if ($status_class === 'available') $seat_class .= ' seat-available';
+          $seat_code = htmlspecialchars($seat_row . $seat_number);
+          $seat_class = "seat seat-$status_class seat-$type_class";
+          if ($status_class === 'available') $seat_class .= ' seat-available';
 
-    echo "<button class='$seat_class' 
-        data-row='$seat_row' 
-        data-number='$seat_number' 
-        data-price='$seat_price_type'
-        title='Phụ phí: " . number_format($seat_price_type, 0, ',', '.') . " đ'>$seat_code</button>";
-}
-if ($current_row !== '') echo '</div>';
-?>
-</div>
-</div>
-
-<div class="legend">
-  <div class="legend-item"><div class="seat seat-booked"></div> Ghế đã đặt</div>
-  <div class="legend-item"><div class="seat seat-available-pic seat-normal"></div> Ghế thường</div>
-  <div class="legend-item"><div class="seat seat-available-pic seat-vip"></div> Ghế VIP</div>
-  <div class="legend-item"><div class="seat seat-selected"></div> Ghế bạn chọn</div>
-  <div class="legend-item"><div class="seat seat-available-pic seat-special"></div> Ghế đôi</div>
-</div>
-
-<div class="ticket">
-  <div class="ticket-poster">
-    <img src="<?= htmlspecialchars($info['image_url']) ?>" alt="poster film">
-  </div>
-  <div class="ticket-info">
-    <div class="info-left"><div><?= htmlspecialchars($info['title']) ?></div></div>
-    <div class="info-mid">
-      <div><span>Rạp</span> <strong><?= htmlspecialchars($info['cinema_name']) ?></strong></div>
-      <div><span>Suất chiếu</span> 
-        <strong><?= date("H:i", strtotime($info['show_time'])) . ", " . date("d/m/Y", strtotime($info['show_date'])) ?></strong>
+          echo "<button class='$seat_class' 
+              data-row='$seat_row' 
+              data-number='$seat_number' 
+              data-price='$seat_price_type'
+              title='Phụ phí: " . number_format($seat_price_type, 0, ',', '.') . " đ'>$seat_code</button>";
+      }
+      if ($current_row !== '') echo '</div>';
+      ?>
       </div>
-      <div><span>Ghế bạn chọn:</span> <strong id="selected-seats-list">Không có</strong></div>
-      <div><span>Phòng chiếu</span> <strong><?= htmlspecialchars($info['room_number']) ?></strong></div>
     </div>
-    <div class="info-right">
-      <div><span>Giá vé</span> 
-      <strong id="ticket-price"><?= number_format($ticket_price, 0, ',', '.') ?> đ</strong> 
-      <i class="icon-info" title="Chưa bao gồm phụ phí ghế">ⓘ</i>
+
+    <div class="legend">
+      <div class="legend-item"><div class="seat seat-booked"></div> Ghế đã đặt</div>
+      <div class="legend-item"><div class="seat seat-available-pic seat-normal"></div> Ghế thường</div>
+      <div class="legend-item"><div class="seat seat-available-pic seat-vip"></div> Ghế VIP</div>
+      <div class="legend-item"><div class="seat seat-selected"></div> Ghế bạn chọn</div>
+      <div class="legend-item"><div class="seat seat-available-pic seat-special"></div> Ghế đôi</div>
     </div>
-      <div><span>Tổng</span> <strong id="ticket-total">0,00 đ</strong></div>
+
+    <div class="ticket">
+      <div class="ticket-poster">
+        <img src="<?= htmlspecialchars($info['image_url']) ?>" alt="poster film">
+      </div>
+      <div class="ticket-info">
+        <div class="info-left"><div><?= htmlspecialchars($info['title']) ?></div></div>
+        <div class="info-mid">
+          <div><span>Rạp</span> <strong><?= htmlspecialchars($info['cinema_name']) ?></strong></div>
+          <div><span>Suất chiếu</span> 
+            <strong><?= date("H:i", strtotime($info['show_time'])) . ", " . date("d/m/Y", strtotime($info['show_date'])) ?></strong>
+          </div>
+          <div><span>Ghế bạn chọn:</span> <strong id="selected-seats-list">Không có</strong></div>
+          <div><span>Phòng chiếu</span> <strong><?= htmlspecialchars($info['room_number']) ?></strong></div>
+        </div>
+        <div class="info-right">
+          <div><span>Giá vé</span> 
+          <strong id="ticket-price"><?= number_format($ticket_price, 0, ',', '.') ?> đ</strong> 
+          <i class="icon-info" title="Chưa bao gồm phụ phí ghế">ⓘ</i>
+        </div>
+          <div><span>Tổng</span> <strong id="ticket-total">0,00 đ</strong></div>
+        </div>
+      </div>
     </div>
+
+    <div class="continue-btn">
+      <button class="button-continute">Tiếp tục</button>
+    </div>
+
+    <script> const BASE_TICKET_PRICE = <?= (int)$ticket_price ?>; </script>
+    <script> const SHOWTIME_ID = "<?= htmlspecialchars($showtime_id) ?>"; </script>
   </div>
-</div>
 
-<div class="continue-btn">
-  <button class="button-continute">Tiếp tục</button>
-</div>
+  <!-- Các vùng nội dung động giống Home -->
+  <div id="rap-cinetix-content" style="display:none;"></div>
+  <div id="gia-ve-content" style="display:none;"></div>
+  <div id="lien-he-content" style="display:none;"></div>
 
-<script> const BASE_TICKET_PRICE = <?= (int)$ticket_price ?>; </script>
-<script> const SHOWTIME_ID = "<?= htmlspecialchars($showtime_id) ?>"; </script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="js/chonghe.js"></script>
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/chonghe.js"></script>
+  <script src="js/Home.js"></script>
+  <script src="js/rolltab.js"></script>
 </body>
 </html>
 <?php include("footer.php"); ?>

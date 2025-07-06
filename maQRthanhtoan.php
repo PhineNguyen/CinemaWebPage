@@ -26,14 +26,16 @@ $_SESSION['paid_success'] = true;
   <link rel="stylesheet" href="CSS/maQRthanhtoan.css?v=2">
 </head>
 <body>
+  <!-- Menu điều hướng dạng tab -->
   <nav class="nav-item">
-    <a href="home.php">PHIM</a>
-    <a href="rapCinetix.php">RẠP CINETIX</a>
-    <a href="giave.php">GIÁ VÉ</a>
-    <a href="lienhe.php">LIÊN HỆ</a>
+    <a href="#" id="tab-home" class="active">PHIM</a>
+    <a href="#" id="rap-cinetix-tab">RẠP CINETIX</a>
+    <a href="#" id="gia-ve-tab">GIÁ VÉ</a>
+    <a href="#" id="lien-he-tab">LIÊN HỆ</a>
   </nav>
 
-  <div class="qr-container">
+  <div id="main-content">
+    <div class="qr-container">
     <h2>Quét mã QR để thanh toán</h2>
     <img src="pic/qrcode-default.png" alt="Mã QR" style="max-width: 300px;">
 
@@ -51,13 +53,23 @@ $_SESSION['paid_success'] = true;
       <input type="hidden" name="foods" value='<?= json_encode($foods) ?>'>
     </form>
 
-    <script>
-      setTimeout(function () {
-        document.querySelector('form').submit();
-      }, 5000);
-    </script>
-
+      <script>
+        setTimeout(function () {
+          document.querySelector('form').submit();
+        }, 5000);
+      </script>
+    </div>
   </div>
+
+  <!-- Các vùng nội dung động giống Home -->
+  <div id="rap-cinetix-content" style="display:none;"></div>
+  <div id="gia-ve-content" style="display:none;"></div>
+  <div id="lien-he-content" style="display:none;"></div>
+
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="js/Home.js"></script>
+  <script src="js/rolltab.js"></script>
 </body>
 </html>
 <?php include('footer.php'); ?>
