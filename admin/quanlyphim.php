@@ -38,16 +38,28 @@ handleDelete('movies', 'id', 'delete_movies_id', 'quanlyphim.php', $conn);
     $total_movies = $total_row['total'];
     $total_pages = ceil($total_movies / $limit);
     
-    $sql = "SELECT id, title, image_url, release_date, genre, lgs, age_rating, status FROM movies LIMIT $offset, $limit";
+    // Xử lý tìm kiếm phim
+    $search = isset($_GET['search']) ? trim($_GET['search']) : '';
+    $where = '1';
+    if ($search !== '') {
+        $search_sql = mysqli_real_escape_string($conn, $search);
+        $where = "title LIKE '%$search_sql%' OR genre LIKE '%$search_sql%' OR lgs LIKE '%$search_sql%'";
+    }
+    $sql = "SELECT id, title, image_url, release_date, genre, lgs, age_rating, status FROM movies WHERE $where LIMIT $offset, $limit";
     $results = mysqli_query($conn, $sql);
     if($results && mysqli_num_rows($results) > 0){
-    echo '<main class="main-content">
-    <div class="buttons">
-    <button id="btn3"><i class="fa-solid fa-plus"></i><span>Thêm </span></button>
-    </div>
+    echo '<main class="main-content">';
+    // Form tìm kiếm phim và nút thêm
+    echo '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">';
+    echo '<form method="get" class="search-form" style="margin:0;">';
+    echo '<input type="text" name="search" placeholder="Tìm kiếm theo tên phim, thể loại, ngôn ngữ..." value="' . (isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '') . '" style="padding:6px 12px; width:260px;">';
+    echo '<button type="submit" style="padding:6px 16px; margin-left:8px;"><i class="fa fa-search"></i> Tìm kiếm</button>';
+    echo '</form>';
+    echo '<button id="btn3" style="padding:6px 16px;background:#ffc107;color:#212529;border:none;border-radius:4px;cursor:pointer;font-weight:600;"><i class="fa-solid fa-plus"></i><span> Thêm </span></button>';
+    echo '</div>';
 
-    <table>
-    <thead>
+    echo '<table>';
+    echo '<thead>
     <tr>
     <th>Tên phim</th>
     <th>Poster</th>
@@ -58,8 +70,8 @@ handleDelete('movies', 'id', 'delete_movies_id', 'quanlyphim.php', $conn);
     <th>Trạng thái</th>
     <th></th>
     </tr>
-    </thead>
-    <tbody>';
+    </thead>';
+    echo '<tbody>';
     
     while ($movieDetails = mysqli_fetch_assoc($results)) {
         echo "<tr>

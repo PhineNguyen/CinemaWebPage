@@ -33,7 +33,15 @@ if ($page < 1) $page = 1;
 
 $offset = ($page - 1) * $limit;
 
-$total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM showtimes");
+
+// Xử lý tìm kiếm lịch chiếu
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$where = '1';
+if ($search !== '') {
+    $search_sql = mysqli_real_escape_string($conn, $search);
+    $where = "movies.title LIKE '%$search_sql%' OR rooms.room_number LIKE '%$search_sql%' OR showtimes.show_date LIKE '%$search_sql%'";
+}
+$total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM showtimes JOIN movies ON showtimes.movie_id = movies.id JOIN rooms ON showtimes.room_id = rooms.id WHERE $where");
 $total_row = mysqli_fetch_assoc($total_result);
 $total_records = $total_row['total'];
 $total_pages = ceil($total_records / $limit);
@@ -50,14 +58,20 @@ $sql = "SELECT
 FROM showtimes
 JOIN movies ON showtimes.movie_id = movies.id
 JOIN rooms ON showtimes.room_id = rooms.id
+WHERE $where
 LIMIT $offset, $limit";
 
 $results = mysqli_query($conn, $sql);
 
 if ($results && mysqli_num_rows($results) > 0) {
     echo '<main class="main-content">';
-    echo '<div class="buttons">';
-    echo '<button id="btn4"><i class="fa-solid fa-plus"></i><span> Thêm </span></button>';
+    // Form tìm kiếm lịch chiếu và nút thêm
+    echo '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">';
+    echo '<form method="get" class="search-form" style="margin:0;">';
+    echo '<input type="text" name="search" placeholder="Tìm kiếm theo tên phim, phòng, ngày chiếu..." value="' . (isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '') . '" style="padding:6px 12px; width:260px;">';
+    echo '<button type="submit" style="padding:6px 16px; margin-left:8px;"><i class="fa fa-search"></i> Tìm kiếm</button>';
+    echo '</form>';
+    echo '<button id="btn4" style="padding:6px 16px;background:#ffc107;color:#212529;border:none;border-radius:4px;cursor:pointer;font-weight:600;"><i class="fa-solid fa-plus"></i><span> Thêm </span></button>';
     echo '</div>';
 
     echo '<table>';

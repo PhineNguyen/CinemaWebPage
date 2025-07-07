@@ -43,13 +43,29 @@ $total_pages_cinemas = ceil($total_records_cinemas / $limit_cinemas);
 if ($pages_cinemas > $total_pages_cinemas && $total_pages_cinemas > 0) $pages_cinemas = $total_pages_cinemas;
 
 $offset_cinemas = ($pages_cinemas - 1) * $limit_cinemas;
-$sqlClist = "SELECT id, ci_name, address, city, ci_status FROM cinemas LIMIT $offset_cinemas, $limit_cinemas";
+
+// Xử lý tìm kiếm rạp
+$search_cinema = isset($_GET['search_cinema']) ? trim($_GET['search_cinema']) : '';
+$where_cinema = '1';
+if ($search_cinema !== '') {
+    $search_sql = mysqli_real_escape_string($conn, $search_cinema);
+    $where_cinema = "ci_name LIKE '%$search_sql%' OR address LIKE '%$search_sql%' OR city LIKE '%$search_sql%'";
+}
+$sqlClist = "SELECT id, ci_name, address, city, ci_status FROM cinemas WHERE $where_cinema LIMIT $offset_cinemas, $limit_cinemas";
 $ciList = mysqli_query($conn, $sqlClist);
 
 if ($ciList && mysqli_num_rows($ciList) > 0) {
     echo '<h2>DANH SÁCH RẠP</h2>';
-    echo '<div class="buttons_cinemas">';
-    echo '<button class="btn-add-cinema"><i class="fa-solid fa-plus"></i><span> Thêm rạp</span></button>';
+    // Form tìm kiếm rạp và nút thêm
+    echo '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">';
+    echo '<form method="get" class="search-form" style="margin:0;">';
+    if (isset($_GET['search_room'])) {
+        echo '<input type="hidden" name="search_room" value="' . htmlspecialchars($_GET['search_room']) . '">';
+    }
+    echo '<input type="text" name="search_cinema" placeholder="Tìm kiếm theo tên rạp, địa chỉ, thành phố..." value="' . (isset($_GET['search_cinema']) ? htmlspecialchars($_GET['search_cinema']) : '') . '" style="padding:6px 12px; width:260px;">';
+    echo '<button type="submit" style="padding:6px 16px; margin-left:8px;"><i class="fa fa-search"></i> Tìm kiếm</button>';
+    echo '</form>';
+    echo '<button class="btn-add-cinema" style="padding:6px 16px;background:#ffc107;color:#212529;border:none;border-radius:4px;cursor:pointer;font-weight:600;"><i class="fa-solid fa-plus"></i><span> Thêm rạp</span></button>';
     echo '</div>';
     echo '<table>';
     echo '<thead>
@@ -72,9 +88,7 @@ if ($ciList && mysqli_num_rows($ciList) > 0) {
                 <td>{$row['ci_status']}</td>
                 <td>
                     <div class='action-buttons'>
-                        
                         <button class='btn-edit' id='edit3' data-id='{$row['id']}'><i class='fa-solid fa-pencil-alt'></i> Sửa</button>
-                        
                         <form method='post'>
                             <input type='hidden' name='delete_rap_id' value='{$row['id']}'>
                             <button type='submit' class='btn-delete'><i class='fa-solid fa-trash'></i> Xóa</button>
@@ -136,17 +150,34 @@ $total_pages_rooms = ceil($total_records_rooms / $limit_rooms);
 if ($pages_rooms > $total_pages_rooms && $total_pages_rooms > 0) $pages_rooms = $total_pages_rooms;
 
 $offset_rooms = ($pages_rooms - 1) * $limit_rooms;
+
+// Xử lý tìm kiếm phòng chiếu
+$search_room = isset($_GET['search_room']) ? trim($_GET['search_room']) : '';
+$where_room = '1';
+if ($search_room !== '') {
+    $search_sql = mysqli_real_escape_string($conn, $search_room);
+    $where_room = "rooms.room_number LIKE '%$search_sql%' OR cinemas.ci_name LIKE '%$search_sql%'";
+}
 $sqlRlist = "SELECT rooms.id AS room_id, rooms.room_number, rooms.room_status, rooms.total_seats, cinemas.ci_name AS cinema_name 
 FROM rooms 
 JOIN cinemas ON rooms.cinema_id = cinemas.id 
+WHERE $where_room
 ORDER BY rooms.id ASC 
 LIMIT $offset_rooms, $limit_rooms";
 $roomList = mysqli_query($conn, $sqlRlist);
 
 if ($roomList && mysqli_num_rows($roomList) > 0) {
     echo '<h2>DANH SÁCH PHÒNG CHIẾU</h2>';
-    echo '<div class="buttons_rooms">';
-    echo '<button class="btn-add-room"><i class="fa-solid fa-plus"></i><span> Thêm phòng</span></button>';
+    // Form tìm kiếm phòng chiếu và nút thêm
+    echo '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">';
+    echo '<form method="get" class="search-form" style="margin:0;">';
+    if (isset($_GET['search_cinema'])) {
+        echo '<input type="hidden" name="search_cinema" value="' . htmlspecialchars($_GET['search_cinema']) . '">';
+    }
+    echo '<input type="text" name="search_room" placeholder="Tìm kiếm theo tên phòng, tên rạp..." value="' . (isset($_GET['search_room']) ? htmlspecialchars($_GET['search_room']) : '') . '" style="padding:6px 12px; width:260px;">';
+    echo '<button type="submit" style="padding:6px 16px; margin-left:8px;"><i class="fa fa-search"></i> Tìm kiếm</button>';
+    echo '</form>';
+    echo '<button class="btn-add-room" style="padding:6px 16px;background:#ffc107;color:#212529;border:none;border-radius:4px;cursor:pointer;font-weight:600;"><i class="fa-solid fa-plus"></i><span> Thêm phòng</span></button>';
     echo '</div>';
     echo '<table>';
     echo '<thead>
