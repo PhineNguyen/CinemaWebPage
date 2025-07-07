@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 // Kiểm tra quyền truy cập
 if (!isset($_SESSION['user']) || $_SESSION['ro_lo'] !== 'admin') {

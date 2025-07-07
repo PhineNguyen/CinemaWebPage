@@ -104,7 +104,7 @@ $total_price = $_POST['total_price'] ?? 0;
                 LEFT JOIN 
                     food_variants fv_lon ON f.id = fv_lon.food_id AND fv_lon.size = 'Lớn'
                 LEFT JOIN 
-                    food_variants fv_nho ON f.id = fv_nho.food_id AND fv_nho.size = 'Nhỏ';";
+                    food_variants fv_nho ON f.id = fv_nho.food_id AND fv_nho.size = 'Nhỏ'";
       $result_nuoc = $conn->query($sql_nuoc);
 
       if ($result_nuoc->num_rows > 0) {

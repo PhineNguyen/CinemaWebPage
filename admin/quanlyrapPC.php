@@ -1,7 +1,7 @@
 <?php
 
 // Ngăn truy cập nếu chưa đăng nhập hoặc không phải admin
-session_start();
+
 if (!isset($_SESSION['user']) || $_SESSION['ro_lo'] !== 'admin') {
     exit();
 }

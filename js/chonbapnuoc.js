@@ -19,13 +19,13 @@ $(document).ready(function () {
 
         const $options = $item.next('.flavor-options');
 
-        const sizeLon = $options.find('input[type="checkbox"][value="lon"]:checked');
+        const sizeLon = $options.find('input[type="radio"][value="lon"]:checked');
         if (sizeLon.length) {
           const extra = parseInt(sizeLon.data('price')) || 0;
           total += extra * quantity;
         }
 
-        const sizeNho = $options.find('input[type="checkbox"][value="nho"]:checked');
+        const sizeNho = $options.find('input[type="radio"][value="nho"]:checked');
         if (sizeNho.length) {
           const name = $item.find('h3').text().trim();
           if (name === "Coca Cola") {
