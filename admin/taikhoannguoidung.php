@@ -30,7 +30,15 @@ $limit = 8;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($page < 1) $page = 1;
 
-$total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM users WHERE users.ro_lo = 'user'");
+
+// Xử lý tìm kiếm tài khoản
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$where = "users.ro_lo = 'user'";
+if ($search !== '') {
+    $search_sql = mysqli_real_escape_string($conn, $search);
+    $where .= " AND (users.user_name LIKE '%$search_sql%' OR users.email LIKE '%$search_sql%' OR users.phone_number LIKE '%$search_sql%')";
+}
+$total_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM users WHERE $where");
 $total_row = mysqli_fetch_assoc($total_result);
 $total_records = $total_row['total'];
 $total_page = ceil($total_records / $limit);
@@ -45,13 +53,19 @@ $sql = "SELECT
     users.ro_lo AS role,
     users.account_status AS status 
     FROM users 
-    WHERE users.ro_lo = 'user'
+    WHERE $where
     LIMIT $offset, $limit";
 
 $results = mysqli_query($conn, $sql);
 
 if ($results && mysqli_num_rows($results) > 0) {
     echo '<main class="main-content">';
+    // Form tìm kiếm tài khoản
+    echo '<form method="get" class="search-form" style="margin-bottom: 16px;">';
+    echo '<input type="text" name="search" placeholder="Tìm kiếm theo tên, email hoặc số điện thoại..." value="' . (isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '') . '" style="padding:6px 12px; width:260px;">';
+    echo '<button type="submit" style="padding:6px 16px; margin-left:8px;"><i class="fa fa-search"></i> Tìm kiếm</button>';
+    echo '</form>';
+
     echo '<table>';
     echo '<thead>
             <tr>
