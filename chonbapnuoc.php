@@ -81,7 +81,7 @@ $total_price = $_POST['total_price'] ?? 0;
                   </div>
               </div>
               <div class="flavor-options">
-                <label class="flavor-label"><input type="radio" name="bap_flavor" value="pho-mai"> Phô mai</label>
+                <label class="flavor-label"><input type="radio" name="bap_flavor" value="pho-mai" checked> Phô mai</label>
                 <label class="flavor-label"><input type="radio" name="bap_flavor" value="caramel"> Caramel</label>
                 <label class="flavor-label"><input type="radio" name="bap_flavor" value="bo"> Bơ</label>
                </div>';
@@ -125,8 +125,8 @@ $total_price = $_POST['total_price'] ?? 0;
                   </div>
               </div>
               <div class="flavor-options">
-                <label class="flavor-label"><input type="radio" name="size_flavor" value="Lớn" data-price="' . $row["size_lon_price"] . '"> Size lớn</label>
-                <label class="flavor-label"><input type="radio" name="size_flavor" value="Nhỏ" data-price="' . $row["size_nho_price"] . '"> Size nhỏ</label>
+                <label class="flavor-label"><input type="radio" name="size_flavor" value="lon" data-price="' . $row["size_lon_price"] . '"> Size lớn</label>
+                <label class="flavor-label"><input type="radio" name="size_flavor" value="nho" data-price="' . $row["size_nho_price"] . '"> Size nhỏ</label>
               </div>';
             }
       } else {
