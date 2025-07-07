@@ -10,7 +10,7 @@ include("header.php");
   <meta http-equiv="X-UA-Compatible" content="IE=edge">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trang chủ</title>
-  <link rel="stylesheet" href="CSS/Home.css" />
+  <link rel="stylesheet" href="CSS/Home.css?v=2">
 </head>
 <body>
 
@@ -66,7 +66,7 @@ if ($movies_act && mysqli_num_rows($movies_act) > 0) {
   echo '</section>';
 
   // Movie Poster dạng lưới 3 cột
-  echo '<div class="double-line-heading"><span>MOVIE SELECTION</span></div>';
+  echo '<div class="double-line-heading"><span>DANH SÁCH PHIM</span></div>';
   echo '<div class="movie-active">';
   foreach ($movies_active as $movie) {
     $id = $movie['id'];

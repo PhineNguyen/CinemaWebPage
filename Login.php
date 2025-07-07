@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $result->fetch_assoc();
 
         // So sánh mật khẩu (ở đây chưa dùng hash, nên so sánh chuỗi thường)
-        if ($password === $user['pass_word']) {
+        if (password_verify($password, $user['pass_word'])) {
             $_SESSION["user"] = $user;
 
             // Chuyển hướng nếu có redirect

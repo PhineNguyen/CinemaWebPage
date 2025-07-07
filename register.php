@@ -27,10 +27,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result && $result->num_rows > 0) {
             $error = "Email đã tồn tại.";
         } else {
+            // ✅ Mã hóa mật khẩu
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            
             // Thêm tài khoản mới
             $insertSql = "INSERT INTO users (user_name, email,phone_number, pass_word) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($insertSql);
-            $stmt->bind_param("ssss", $name, $email,$phonenumber, $password); // Gợi ý: nên mã hóa mật khẩu
+            $stmt->bind_param("ssss", $name,  $email,$phonenumber, $hashed_password); 
 
             if ($stmt->execute()) {
                 $success = "Đăng ký thành công! Bạn có thể <a href='login.php' style='color: lightgreen;'>đăng nhập</a>.";

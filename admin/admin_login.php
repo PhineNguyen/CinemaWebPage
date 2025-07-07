@@ -20,7 +20,7 @@
             if ($result && $result->num_rows == 1) {
                 $user = $result->fetch_assoc();
 
-                if ($password === $user['pass_word']) {
+                if (password_verify($password, $user['pass_word'])) {
                     // Lưu thông tin đăng nhập
                     $_SESSION["user"] = $user['id'];
                     $_SESSION["email"] = $user['email'];

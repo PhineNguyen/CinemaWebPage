@@ -20,7 +20,7 @@
     </div>
  
    <?php
-    if (isset($_SESSION['user'])) {
+    if (isset($_SESSION['user']) && is_array($_SESSION['user'])) {
       $username = htmlspecialchars($_SESSION['user']['user_name']);
       echo '
         <div class="admin-profile">
