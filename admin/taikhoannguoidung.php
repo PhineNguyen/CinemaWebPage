@@ -52,9 +52,6 @@ $results = mysqli_query($conn, $sql);
 
 if ($results && mysqli_num_rows($results) > 0) {
     echo '<main class="main-content">';
-    echo '<div class="buttons">';
-    echo '<button id="btn"><i class="fa-solid fa-plus"></i><span> Thêm </span></button>';
-    echo '</div>';
     echo '<table>';
     echo '<thead>
             <tr>
