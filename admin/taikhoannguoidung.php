@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['user']) || ($_SESSION['ro_lo'] !== 'admin' && $_SESSION['ro_lo'] !== 'employee')) {
+if (!isset($_SESSION['user']) || $_SESSION['ro_lo'] !== 'admin') {
     exit();
 }
 include('../connect.php');

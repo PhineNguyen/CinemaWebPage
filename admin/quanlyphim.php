@@ -2,10 +2,9 @@
 session_start();
 
 // Kiểm tra quyền truy cập
-if (!isset($_SESSION['user']) || ($_SESSION['ro_lo'] !== 'admin' && $_SESSION['ro_lo'] !== 'employee')) {
+if (!isset($_SESSION['user']) || $_SESSION['ro_lo'] !== 'admin') {
     exit();
 }
-
 include('../connect.php');
 include('header_admin.php');
 include('handle_delete.php');

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['user']) || !in_array($_SESSION['ro_lo'], ['admin', 'employee'])) {
+if (!isset($_SESSION['user']) || $_SESSION['ro_lo'] !== 'admin') {
     exit();
 }
 
@@ -63,7 +63,6 @@ if ($results && mysqli_num_rows($results) > 0) {
     echo '<table>';
     echo '<thead>
             <tr>
-                <th><input type="checkbox" id="checkAll"></th>
                 <th>Tên phim</th>
                 <th>Poster</th>
                 <th>Giá vé</th>
@@ -77,7 +76,6 @@ if ($results && mysqli_num_rows($results) > 0) {
 
     while ($row = mysqli_fetch_assoc($results)) {
         echo "<tr>
-                <td><input type='checkbox' class='checkItem'></td>
                 <td>" . htmlspecialchars($row['title']) . "</td>
                 <td><img src='" . htmlspecialchars($row['image_url']) . "' width='100'></td>
                 <td>" . number_format($row['ticket_price'], 0, ',', '.') . " VNĐ</td>

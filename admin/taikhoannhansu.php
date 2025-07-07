@@ -2,7 +2,7 @@
 session_start();
 
 // Kiểm tra nếu chưa đăng nhập hoặc không phải là admin
-if (!isset($_SESSION['user']) || ($_SESSION['ro_lo'] !== 'admin' && $_SESSION['ro_lo'] !== 'employee')) {
+if (!isset($_SESSION['user']) || $_SESSION['ro_lo'] !== 'admin') {
     exit();
 }
 
