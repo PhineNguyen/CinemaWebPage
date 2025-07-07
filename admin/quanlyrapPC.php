@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 // Ngăn truy cập nếu chưa đăng nhập hoặc không phải admin
 
 if (!isset($_SESSION['user']) || $_SESSION['ro_lo'] !== 'admin') {
